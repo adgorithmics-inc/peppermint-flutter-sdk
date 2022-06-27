@@ -13,7 +13,9 @@ and the Flutter guide for
 
 A flutter library to easily use Peppermint functionality.
 
-The most common usage of web3 wallet is to generate wallet address (public key) and private key. This library makes it easy to do it without much complexity to manually implement other web3 packages.
+The most common usage of Web3 Wallet is to generate wallet address (public key) and private key. Peppermint SDK makes it easy to do it without much complexity to manually implement other web3 packages. This package also store the keys safely using flutter_secure_storage.
+
+In future, this package is a bridge to use Peppermint’s functionality with ease.
 
 ## Features
 
@@ -23,10 +25,10 @@ The most common usage of web3 wallet is to generate wallet address (public key) 
 
 ## Usage
 
-Import  ```package:wallet_manager/wallet_manager.dart```, insantiate ```WalletManager```.
+Import  `package:peppermint_sdk/peppermint_sdk.dart`, instantiate `WalletManager`.
 
 ```dart
-import 'package:wallet_manager/wallet_manager.dart';    
+import 'package:peppermint_sdk/peppermint_sdk.dart';    
 
 WalletManager manager = WalletManager();  
 

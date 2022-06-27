@@ -1,4 +1,4 @@
-class Utils{
+class Utils {
   Utils._();
 
   /// Trim private key string.
