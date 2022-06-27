@@ -41,10 +41,10 @@ print('${keys.privateKey}');
 String walletAddress = await manager.restoreWallet('enter your private key here')
 
 // get current wallet address
-String walletAddress = await manager.getPublicKey();
+String publicKey = await manager.getPublicKey();
 
 // get current private key
-String walletAddress = await manager.getPrivateKey();
+String privateKey = await manager.getPrivateKey();
 
 
 ```
