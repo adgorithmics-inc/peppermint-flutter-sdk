@@ -32,8 +32,8 @@ class WalletManager {
   /// and private key. Private key is used to restore web3 wallet in all
   /// platform.
   Future<WalletKeys> createWallet(
-      {required String keyToSaveWallet,
-      required String keyToSavePrivateKey}) async {
+      {String keyToSaveWallet = 'walletAddress',
+      String keyToSavePrivateKey = 'privateKey'}) async {
     this.keyToSaveWallet = keyToSaveWallet;
     this.keyToSavePrivateKey = keyToSavePrivateKey;
 
