@@ -28,7 +28,8 @@ class WalletManager {
   /// and private key. Private key is used to restore web3 wallet in all
   /// platform.
   /// the 'key' parameter is optional, it is needed if you want to
-  /// save some wallet address and private key
+  /// save wallet by certain key. This enables you to have more than
+  /// 1 wallet within the app.
   Future<WalletKeys> createWallet({String? key}) async {
     var rng = math.Random.secure();
     EthPrivateKey priKey = EthPrivateKey.createRandom(rng);
@@ -47,7 +48,8 @@ class WalletManager {
   /// Returns wallet address (also known as public key)
   /// it can be used to generate wallet address from any web3 private key
   /// the 'key' parameter is optional, it is needed if you want to
-  /// save some wallet address and private key
+  /// save wallet by certain key. This enables you to have more than
+  /// 1 wallet within the app.
   Future<String> restoreWallet(String privateKey, {String? key}) async {
     /// Trim private key.
     ///
@@ -80,5 +82,9 @@ class WalletManager {
   Future<void> delete({String? key}) async {
     await storage.delete(key: '${key}privateKey');
     await storage.delete(key: '${key}walletAddress');
+  }
+
+  Future<void> deleteAllWallet() async {
+    await storage.deleteAll();
   }
 }
