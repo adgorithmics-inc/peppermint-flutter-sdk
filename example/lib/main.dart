@@ -31,7 +31,8 @@ class CreateWalletPage extends StatefulWidget {
 
 class _CreateWalletPageState extends State<CreateWalletPage> {
   late WalletManager _manager;
-  WalletKeys? _walletKeys;
+  String? _privateKey;
+  String? _walletAddress;
 
   @override
   void initState() {
@@ -40,8 +41,38 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   }
 
   _generateWallet() async {
-    _walletKeys = await _manager.createWallet();
+    await _manager.createWallet(
+      keyToSavePrivateKey: 'keyToSavePrivateKey',
+      keyToSaveWallet: 'keyToSaveWallet',
+    );
+    _getPrivateKey();
+    _getPublicKey();
+  }
+
+  _getPrivateKey() async {
+    _privateKey = await _manager.getPrivateKey();
     setState(() {});
+  }
+
+  _getPublicKey() async {
+    _walletAddress = await _manager.getPublicKey();
+    setState(() {});
+  }
+
+  _deleteAll() async {
+    await _manager.deleteAll();
+    _getPrivateKey();
+    _getPublicKey();
+  }
+
+  _deletePrivateKey() async {
+    await _manager.deletePrivateKey();
+    _getPrivateKey();
+  }
+
+  _deletePublicKey() async {
+    await _manager.deletePublicKey();
+    _getPublicKey();
   }
 
   @override
@@ -62,22 +93,44 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('Your public key / wallet address'),
-            Text(_walletKeys?.publicKey ?? ''),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(_walletAddress ?? ''),
+                ),
+                if (_walletAddress != null)
+                  IconButton(
+                    onPressed: _deletePublicKey,
+                    icon: const Icon(Icons.delete_rounded),
+                  ),
+              ],
+            ),
             const SizedBox(height: 16.0),
             const Text('Your private key'),
-            InkWell(
-              onTap: () {
-                FlutterClipboard.copy(_walletKeys?.privateKey ?? '').then(
-                  (value) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Private key copied!'),
-                      ),
-                    );
-                  },
-                );
-              },
-              child: Text(_walletKeys?.privateKey ?? ''),
+            Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      FlutterClipboard.copy(_privateKey ?? '').then(
+                        (value) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Private key copied!'),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Text(_privateKey ?? ''),
+                  ),
+                ),
+                if (_privateKey != null)
+                  IconButton(
+                    onPressed: _deletePrivateKey,
+                    icon: const Icon(Icons.delete_rounded),
+                  ),
+              ],
             ),
             const SizedBox(height: 16.0),
             InkWell(
@@ -93,6 +146,23 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
                 ),
               ),
             ),
+            if (_privateKey != null || _walletAddress != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: InkWell(
+                  onTap: _deleteAll,
+                  child: Container(
+                    width: double.infinity,
+                    height: 44.0,
+                    color: Colors.red,
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Delete Wallet',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),

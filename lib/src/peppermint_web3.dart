@@ -22,12 +22,21 @@ class WalletManager {
   /// See documentation https://pub.dev/packages/flutter_secure_storage
   final storage = const FlutterSecureStorage();
 
+  /// Key variables for save private key and wallet address data to storage
+  String keyToSavePrivateKey = 'privateKey';
+  String keyToSaveWallet = 'walletAddress';
+
   /// Create new wallet.
   ///
   /// Returns web3 wallet address (also known as public key)
   /// and private key. Private key is used to restore web3 wallet in all
   /// platform.
-  Future<WalletKeys> createWallet() async {
+  Future<WalletKeys> createWallet(
+      {required String keyToSaveWallet,
+      required String keyToSavePrivateKey}) async {
+    this.keyToSaveWallet = keyToSaveWallet;
+    this.keyToSavePrivateKey = keyToSavePrivateKey;
+
     var rng = math.Random.secure();
     EthPrivateKey priKey = EthPrivateKey.createRandom(rng);
 
@@ -35,8 +44,8 @@ class WalletManager {
     privateKey = Utils.getPrettyPrivateKey(privateKey);
     String walletAddress = priKey.address.hexEip55;
 
-    await storage.write(key: "walletAddress", value: walletAddress);
-    await storage.write(key: "privateKey", value: privateKey);
+    await storage.write(key: this.keyToSaveWallet, value: walletAddress);
+    await storage.write(key: this.keyToSavePrivateKey, value: privateKey);
     return WalletKeys(privateKey, walletAddress);
   }
 
@@ -53,17 +62,29 @@ class WalletManager {
 
     EthPrivateKey priKey = EthPrivateKey.fromHex(trimmedKey);
     String walletAddress = priKey.address.hexEip55;
-    await storage.write(key: "walletAddress", value: walletAddress);
+    await storage.write(key: keyToSaveWallet, value: walletAddress);
     await storage.write(
-        key: "privateKey", value: bytesToHex(priKey.privateKey));
+        key: keyToSavePrivateKey, value: bytesToHex(priKey.privateKey));
     return walletAddress;
   }
 
   Future<String?> getPrivateKey() async {
-    return await storage.read(key: 'privateKey');
+    return await storage.read(key: keyToSavePrivateKey);
   }
 
   Future<String?> getPublicKey() async {
-    return await storage.read(key: 'walletAddress');
+    return await storage.read(key: keyToSaveWallet);
+  }
+
+  Future<void> deleteAll() async {
+    return await storage.deleteAll();
+  }
+
+  Future<void> deletePrivateKey() async {
+    return await storage.delete(key: keyToSavePrivateKey);
+  }
+
+  Future<void> deletePublicKey() async {
+    return await storage.delete(key: keyToSaveWallet);
   }
 }
