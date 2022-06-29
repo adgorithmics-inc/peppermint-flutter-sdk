@@ -40,7 +40,13 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   }
 
   _generateWallet() async {
-    _walletKeys = await _manager.createWallet();
+    _walletKeys = await _manager.createWallet(key: "wallet1");
+    setState(() {});
+  }
+
+  _deleteWallet() async {
+    await _manager.delete(key: "wallet1");
+    _walletKeys = null;
     setState(() {});
   }
 
@@ -93,6 +99,23 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
                 ),
               ),
             ),
+            if (_walletKeys != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: InkWell(
+                  onTap: _deleteWallet,
+                  child: Container(
+                    width: double.infinity,
+                    height: 44.0,
+                    color: Colors.red,
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Delete Wallet',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),

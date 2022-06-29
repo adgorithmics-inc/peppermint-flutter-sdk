@@ -27,7 +27,10 @@ class WalletManager {
   /// Returns web3 wallet address (also known as public key)
   /// and private key. Private key is used to restore web3 wallet in all
   /// platform.
-  Future<WalletKeys> createWallet() async {
+  /// the 'key' parameter is optional, it is needed if you want to
+  /// save wallet by certain key. This enables you to have more than
+  /// 1 wallet within the app.
+  Future<WalletKeys> createWallet({String? key}) async {
     var rng = math.Random.secure();
     EthPrivateKey priKey = EthPrivateKey.createRandom(rng);
 
@@ -35,8 +38,8 @@ class WalletManager {
     privateKey = Utils.getPrettyPrivateKey(privateKey);
     String walletAddress = priKey.address.hexEip55;
 
-    await storage.write(key: "walletAddress", value: walletAddress);
-    await storage.write(key: "privateKey", value: privateKey);
+    await storage.write(key: '${key}walletAddress', value: walletAddress);
+    await storage.write(key: '${key}privateKey', value: privateKey);
     return WalletKeys(privateKey, walletAddress);
   }
 
@@ -44,7 +47,10 @@ class WalletManager {
   ///
   /// Returns wallet address (also known as public key)
   /// it can be used to generate wallet address from any web3 private key
-  Future<String> restoreWallet(String privateKey) async {
+  /// the 'key' parameter is optional, it is needed if you want to
+  /// save wallet by certain key. This enables you to have more than
+  /// 1 wallet within the app.
+  Future<String> restoreWallet(String privateKey, {String? key}) async {
     /// Trim private key.
     ///
     /// Because there is some cases where web3dart package includes hex (00)
@@ -53,17 +59,32 @@ class WalletManager {
 
     EthPrivateKey priKey = EthPrivateKey.fromHex(trimmedKey);
     String walletAddress = priKey.address.hexEip55;
-    await storage.write(key: "walletAddress", value: walletAddress);
+    await storage.write(key: '${key}walletAddress', value: walletAddress);
     await storage.write(
-        key: "privateKey", value: bytesToHex(priKey.privateKey));
+        key: '${key}privateKey', value: bytesToHex(priKey.privateKey));
     return walletAddress;
   }
 
-  Future<String?> getPrivateKey() async {
-    return await storage.read(key: 'privateKey');
+  /// the 'key' parameter is optional, it is needed if you want to
+  /// get private key based on that key
+  Future<String?> getPrivateKey({String? key}) async {
+    return await storage.read(key: '${key}privateKey');
   }
 
-  Future<String?> getPublicKey() async {
-    return await storage.read(key: 'walletAddress');
+  /// the 'key' parameter is optional, it is needed if you want to
+  /// get wallet address based on that key
+  Future<String?> getPublicKey({String? key}) async {
+    return await storage.read(key: '${key}walletAddress');
+  }
+
+  /// the 'key' parameter is optional, it is needed if you want to
+  /// delete private key and wallet address based on that key
+  Future<void> delete({String? key}) async {
+    await storage.delete(key: '${key}privateKey');
+    await storage.delete(key: '${key}walletAddress');
+  }
+
+  Future<void> deleteAllWallet() async {
+    await storage.deleteAll();
   }
 }
