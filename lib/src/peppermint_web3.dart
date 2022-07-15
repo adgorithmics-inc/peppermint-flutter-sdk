@@ -87,4 +87,10 @@ class WalletManager {
   Future<void> deleteAllWallet() async {
     await storage.deleteAll();
   }
+
+  /// As we would have multiple wallet,
+  /// This function is to check if we have any wallet regardless the key.
+  Future<bool> hasAnyWallet() async {
+    return (await storage.readAll()).isNotEmpty;
+  }
 }
