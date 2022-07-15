@@ -37,6 +37,9 @@ WalletKeys keys = manager.createWallet();
 print('${keys.publicKey}');
 print('${keys.privateKey}');
 
+// generate new wallet with key
+WalletKeys keys = manager.createWallet(key: "wallet1");
+
 // generate wallet from existing private key
 String walletAddress = await manager.restoreWallet('enter your private key here')
 
@@ -46,7 +49,13 @@ String publicKey = await manager.getPublicKey();
 // get current private key
 String privateKey = await manager.getPrivateKey();
 
+// delete all wallet
+await deleteAllWallet();
+
+// check if has any wallet
+bool hasWallet = await manager.hasAnyWallet();
+
 
 ```
 
-This library manage only 1 private key and public key per device.
+This library is able to manage multiple private key and public key per device.

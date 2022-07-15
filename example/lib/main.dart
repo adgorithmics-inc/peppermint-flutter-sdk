@@ -32,6 +32,7 @@ class CreateWalletPage extends StatefulWidget {
 class _CreateWalletPageState extends State<CreateWalletPage> {
   late WalletManager _manager;
   WalletKeys? _walletKeys;
+  bool hasWallet = false;
 
   @override
   void initState() {
@@ -41,12 +42,14 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
 
   _generateWallet() async {
     _walletKeys = await _manager.createWallet(key: "wallet1");
+    hasWallet = await _manager.hasAnyWallet();
     setState(() {});
   }
 
   _deleteWallet() async {
     await _manager.delete(key: "wallet1");
     _walletKeys = null;
+    hasWallet = await _manager.hasAnyWallet();
     setState(() {});
   }
 
@@ -67,6 +70,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text('I have wallet? $hasWallet'),
             const Text('Your public key / wallet address'),
             Text(_walletKeys?.publicKey ?? ''),
             const SizedBox(height: 16.0),
