@@ -93,4 +93,7 @@ class WalletManager {
   Future<bool> hasAnyWallet() async {
     return (await storage.readAll()).isNotEmpty;
   }
+
+  /// Migrate null-key wallet to desired-key wallet and remove null-key wallet
+
 }
