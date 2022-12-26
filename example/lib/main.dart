@@ -1,4 +1,6 @@
 import 'package:clipboard/clipboard.dart';
+import 'package:example/button.dart';
+import 'package:example/pick_media_view.dart';
 import 'package:flutter/material.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
@@ -65,7 +67,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
         tooltip: 'Restore wallet',
         child: const Icon(Icons.restore),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -120,6 +122,11 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
                   ),
                 ),
               ),
+            const SizedBox(height: 32.0),
+            MyButton(
+                text: 'Pick Media',
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (builder) => const PickMediaView())))
           ],
         ),
       ),

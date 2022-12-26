@@ -12,6 +12,11 @@ dependencies:
     sdk: flutter
   web3dart: ^2.3.5
   flutter_secure_storage: ^5.0.2
+  cached_network_image: ^3.2.0
+  file_picker: ^4.6.1
+  path_provider: ^2.0.9
+  image_crop: ^0.4.0
+
 
 dev_dependencies:
   test: ^1.17.0
@@ -24,8 +29,8 @@ dev_dependencies:
 flutter:
 
   # To add assets to your package, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+   - assets/images/
   #   - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see
