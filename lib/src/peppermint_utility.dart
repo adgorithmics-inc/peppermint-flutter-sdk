@@ -72,4 +72,14 @@ class PeppermintUtility {
     }
     return null;
   }
+
+  static Future<File?> getVideoFromGallery(context) async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.video,
+    );
+    if (result != null) {
+      return File(result.files.single.path!);
+    }
+    return null;
+  }
 }
