@@ -6,8 +6,8 @@ import 'package:path/path.dart' as path;
 import 'package:peppermint_sdk/src/peppermint_constants.dart';
 import 'package:peppermint_sdk/src/widgets/image_crop_view.dart';
 
-class Utils {
-  Utils._();
+class PeppermintUtility {
+  PeppermintUtility._();
 
   /// Trim private key string.
   /// This is used because web3dart package sometimes create unwanted 00
@@ -41,8 +41,8 @@ class Utils {
       allowedExtensions: PeppermintConstants.fileTypes,
     );
     if (result != null) {
-      String fileType =
-          Utils.getFileType(path.extension(result.files.single.path!));
+      String fileType = PeppermintUtility.getFileType(
+          path.extension(result.files.single.path!));
       if (fileType == 'image') {
         /// Crop square image
 
@@ -55,6 +55,20 @@ class Utils {
       } else {
         return File(result.files.single.path!);
       }
+    }
+    return null;
+  }
+
+  static Future<File?> getImageFromGallery(context) async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+    );
+    if (result != null) {
+      File? cropped = await Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) => ImageCropView(File(result.files.single.path!))));
+      return cropped;
     }
     return null;
   }

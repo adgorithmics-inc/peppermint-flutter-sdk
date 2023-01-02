@@ -4,7 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:web3dart/crypto.dart';
 import 'package:web3dart/web3dart.dart';
 
-import 'utils.dart';
+import 'peppermint_utility.dart';
 
 /// WalletKeys
 /// A class to get the value of private key and public key directly after
@@ -35,7 +35,7 @@ class WalletManager {
     EthPrivateKey priKey = EthPrivateKey.createRandom(rng);
 
     String privateKey = bytesToHex(priKey.privateKey, include0x: false);
-    privateKey = Utils.getPrettyPrivateKey(privateKey);
+    privateKey = PeppermintUtility.getPrettyPrivateKey(privateKey);
     String walletAddress = priKey.address.hexEip55;
 
     await storage.write(key: '${key}walletAddress', value: walletAddress);
@@ -55,7 +55,7 @@ class WalletManager {
     ///
     /// Because there is some cases where web3dart package includes hex (00)
     /// in the beginning of the String.
-    String trimmedKey = Utils.getPrettyPrivateKey(privateKey);
+    String trimmedKey = PeppermintUtility.getPrettyPrivateKey(privateKey);
 
     EthPrivateKey priKey = EthPrivateKey.fromHex(trimmedKey);
     String walletAddress = priKey.address.hexEip55;

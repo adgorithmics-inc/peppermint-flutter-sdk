@@ -14,7 +14,7 @@ class _PickMediaViewState extends State<PickMediaView> {
       appBar: AppBar(title: Text('Pick Media'),),
       body: Column(
         children: [
-
+          
         ],
       ),
     );
