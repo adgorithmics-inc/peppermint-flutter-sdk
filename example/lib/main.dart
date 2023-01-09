@@ -125,8 +125,10 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             const SizedBox(height: 32.0),
             MyButton(
                 text: 'Pick Media',
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (builder) => const PickMediaView())))
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => const PickMediaView())))
           ],
         ),
       ),

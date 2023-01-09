@@ -11,11 +11,11 @@ class _PickMediaViewState extends State<PickMediaView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Pick Media'),),
+      appBar: AppBar(
+        title: const Text('Pick Media'),
+      ),
       body: Column(
-        children: const [
-          
-        ],
+        children: const [],
       ),
     );
   }
