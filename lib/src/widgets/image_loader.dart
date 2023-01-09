@@ -41,7 +41,7 @@ class VImageLoader extends StatelessWidget {
         height: height,
         fit: boxFit,
         placeholder: (context, url) =>
-            loading ?? const Loading(),
+            loading ?? const PeppermintLoading(),
         errorWidget: (context, url, error) => SizedBox(
           width: width,
           height: height,

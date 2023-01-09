@@ -61,7 +61,7 @@ class _ImageCropViewState extends State<ImageCropView> {
             onPressed: () => _cropImage(),
           ),
         ),
-        if (loading) const Loading(),
+        if (loading) const PeppermintLoading(),
       ],
     );
   }
