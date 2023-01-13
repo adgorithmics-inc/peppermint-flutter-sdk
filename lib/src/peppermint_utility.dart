@@ -6,6 +6,8 @@ import 'package:path/path.dart' as path;
 import 'package:peppermint_sdk/src/peppermint_constants.dart';
 import 'package:peppermint_sdk/src/widgets/image_crop_view.dart';
 
+import 'widgets/camera_view.dart';
+
 class PeppermintUtility {
   PeppermintUtility._();
 
@@ -79,6 +81,15 @@ class PeppermintUtility {
     );
     if (result != null) {
       return File(result.files.single.path!);
+    }
+    return null;
+  }
+
+  static Future<File?> getImageFromCamera(context) async {
+    File? file = await Navigator.push(
+        context, MaterialPageRoute(builder: (_) => const CameraView()));
+    if (file != null) {
+      return file;
     }
     return null;
   }
