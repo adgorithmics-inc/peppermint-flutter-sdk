@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
+import 'package:peppermint_sdk/peppermint_sdk.dart';
 import 'package:peppermint_sdk/src/peppermint_constants.dart';
 import 'package:peppermint_sdk/src/widgets/image_crop_view.dart';
 import 'package:scan/scan.dart';
@@ -38,7 +38,7 @@ class PeppermintUtility {
     }
   }
 
-  static Future<File?> getMediaFromExplorer(context) async {
+  static Future<File?> getMediaFromExplorer() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: PeppermintConstants.fileTypes,
@@ -49,11 +49,8 @@ class PeppermintUtility {
       if (fileType == 'image') {
         /// Crop square image
 
-        File? cropped = await Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) =>
-                    ImageCropView(File(result.files.single.path!))));
+        File? cropped =
+            await Get.to(() => ImageCropView(File(result.files.single.path!)));
         return cropped;
       } else {
         return File(result.files.single.path!);
@@ -62,21 +59,20 @@ class PeppermintUtility {
     return null;
   }
 
-  static Future<File?> getImageFromGallery(context) async {
+  static Future<File?> getImageFromGallery() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
     );
     if (result != null) {
-      File? cropped = await Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (_) => ImageCropView(File(result.files.single.path!))));
+      File? cropped =
+          await Get.to(() => ImageCropView(File(result.files.single.path!)));
+
       return cropped;
     }
     return null;
   }
 
-  static Future<File?> getVideoFromGallery(context) async {
+  static Future<File?> getVideoFromGallery() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.video,
     );
@@ -86,9 +82,8 @@ class PeppermintUtility {
     return null;
   }
 
-  static Future<File?> getImageFromCamera(context) async {
-    File? file = await Navigator.push(
-        context, MaterialPageRoute(builder: (_) => const CameraView()));
+  static Future<File?> getImageFromCamera() async {
+    File? file = await Get.to(() => const CameraView());
     if (file != null) {
       return file;
     }
