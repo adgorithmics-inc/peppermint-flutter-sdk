@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 import 'package:peppermint_sdk/src/peppermint_constants.dart';
 import 'package:peppermint_sdk/src/widgets/image_crop_view.dart';
+import 'package:scan/scan.dart';
 
 import 'widgets/camera_view.dart';
 
@@ -90,6 +91,20 @@ class PeppermintUtility {
         context, MaterialPageRoute(builder: (_) => const CameraView()));
     if (file != null) {
       return file;
+    }
+    return null;
+  }
+
+  static Future<String?> getQRFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+    );
+    if (result != null) {
+      String? value = await Scan.parse(result.files.single.path!);
+      if (value == null) {
+        return 'We could not detect your QR in this image';
+      }
+      return value;
     }
     return null;
   }
