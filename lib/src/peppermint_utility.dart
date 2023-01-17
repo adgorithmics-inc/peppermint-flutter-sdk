@@ -23,6 +23,7 @@ class PeppermintUtility {
     return privateKey;
   }
 
+  /// Get file type based on extension
   static String getFileType(String extension) {
     extension = extension.toLowerCase();
     switch (extension) {
@@ -37,6 +38,7 @@ class PeppermintUtility {
     }
   }
 
+  /// Open file explorer and select media
   static Future<File?> getMediaFromExplorer() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -58,6 +60,7 @@ class PeppermintUtility {
     return null;
   }
 
+  /// Get image from gallery
   static Future<File?> getImageFromGallery() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
@@ -71,6 +74,7 @@ class PeppermintUtility {
     return null;
   }
 
+  /// Get video from gallery
   static Future<File?> getVideoFromGallery() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.video,
@@ -81,6 +85,7 @@ class PeppermintUtility {
     return null;
   }
 
+  /// Get image from camera, it is cropped square and go to image editor first
   static Future<File?> getImageFromCamera() async {
     File? file = await Get.to(() => const CameraView());
     if (file != null) {

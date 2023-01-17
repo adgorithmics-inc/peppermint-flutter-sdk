@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_editor_plus/data/layer.dart';
 import 'package:image_editor_plus/image_editor_plus.dart';
 import 'package:image_editor_plus/modules/colors_picker.dart';
@@ -27,7 +26,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
         appBar: AppBar(
           actions: <Widget>[
             IconButton(
-              icon: Icon(FontAwesomeIcons.alignLeft,
+              icon: Icon(Icons.format_align_left,
                   color: align == TextAlign.left
                       ? Colors.white
                       : Colors.white.withAlpha(80)),
@@ -38,7 +37,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
               },
             ),
             IconButton(
-              icon: Icon(FontAwesomeIcons.alignCenter,
+              icon: Icon(Icons.format_align_center,
                   color: align == TextAlign.center
                       ? Colors.white
                       : Colors.white.withAlpha(80)),
@@ -49,7 +48,7 @@ class _TextEditorImageState extends State<TextEditorImage> {
               },
             ),
             IconButton(
-              icon: Icon(FontAwesomeIcons.alignRight,
+              icon: Icon(Icons.format_align_right,
                   color: align == TextAlign.right
                       ? Colors.white
                       : Colors.white.withAlpha(80)),

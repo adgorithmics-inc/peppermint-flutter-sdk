@@ -6,7 +6,6 @@ import 'package:colorfilter_generator/colorfilter_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hand_signature/signature.dart';
 import 'package:image_editor/image_editor.dart' as image_editor;
@@ -501,7 +500,7 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                   },
                 ),
                 BottomButton(
-                  icon: FontAwesomeIcons.faceSmile,
+                  icon: Icons.emoji_emotions_outlined,
                   text: 'Emoji',
                   onTap: () async {
                     EmojiLayerData? layer = await showModalBottomSheet(
