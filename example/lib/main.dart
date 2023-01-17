@@ -1,5 +1,4 @@
 import 'package:clipboard/clipboard.dart';
-import 'package:example/button.dart';
 import 'package:example/pick_media_view.dart';
 import 'package:flutter/material.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
@@ -35,6 +34,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   late WalletManager _manager;
   WalletKeys? _walletKeys;
   bool hasWallet = false;
+  String? qrCode;
 
   @override
   void initState() {
@@ -52,6 +52,15 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     await _manager.delete(key: "wallet1");
     _walletKeys = null;
     hasWallet = await _manager.hasAnyWallet();
+    setState(() {});
+  }
+
+  _getQRFile() async {
+    qrCode = await PeppermintUtility.getQRFile();
+    if (qrCode == PeppermintConstants.cantDetect) {
+      Popup.error(qrCode!);
+      qrCode = null;
+    }
     setState(() {});
   }
 
@@ -92,19 +101,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
               child: Text(_walletKeys?.privateKey ?? ''),
             ),
             const SizedBox(height: 16.0),
-            InkWell(
-              onTap: _generateWallet,
-              child: Container(
-                width: double.infinity,
-                height: 44.0,
-                color: Colors.blue,
-                alignment: Alignment.center,
-                child: const Text(
-                  'Generate new Wallet',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
+            MyButton(text: 'Generate new Wallet', onTap: _generateWallet),
             if (_walletKeys != null)
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
@@ -122,13 +119,17 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
                   ),
                 ),
               ),
-            const SizedBox(height: 32.0),
+            const SizedBox(height: 16.0),
             MyButton(
                 text: 'Pick Media',
                 onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (builder) => const PickMediaView())))
+                        builder: (builder) => const PickMediaView()))),
+            const SizedBox(height: 16.0),
+            MyButton(text: 'Select QR', onTap: _getQRFile),
+            const SizedBox(height: 16.0),
+            Text('Code of your QR file ${qrCode ?? ''}'),
           ],
         ),
       ),

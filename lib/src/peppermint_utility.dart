@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:peppermint_sdk/peppermint_sdk.dart';
-import 'package:peppermint_sdk/src/peppermint_constants.dart';
 import 'package:peppermint_sdk/src/widgets/image_crop_view.dart';
 import 'package:scan/scan.dart';
 
@@ -97,7 +96,7 @@ class PeppermintUtility {
     if (result != null) {
       String? value = await Scan.parse(result.files.single.path!);
       if (value == null) {
-        return 'We could not detect your QR in this image';
+        return PeppermintConstants.cantDetect;
       }
       return value;
     }
