@@ -59,11 +59,12 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   }
 
   _getQRFile() async {
-    QRCode result = await PeppermintUtility.getQRFile();
-    if (!result.success) {
-      Popup.error(result.errorMessage!);
-    }
+    QRResult result = await PeppermintUtility.getQRFile();
     qrCode = result.result;
+    if (!result.success) {
+      Popup.error(result.result!);
+      qrCode = null;
+    }
     setState(() {});
   }
 

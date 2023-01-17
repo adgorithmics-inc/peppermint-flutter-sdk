@@ -89,20 +89,19 @@ class PeppermintUtility {
     return null;
   }
 
-  static Future<QRCode> getQRFile() async {
+  static Future<QRResult> getQRFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
     );
     if (result != null) {
       String? value = await Scan.parse(result.files.single.path!);
       if (value == null) {
-        return QRCode(
+        return QRResult(
             success: false,
-            result: null,
-            errorMessage: 'We could not detect your QR in this image');
+            result: 'We could not detect your QR in this image');
       }
-      return QRCode(success: true, result: value);
+      return QRResult(success: true, result: value);
     }
-    return QRCode(success: true);
+    return QRResult(success: true);
   }
 }

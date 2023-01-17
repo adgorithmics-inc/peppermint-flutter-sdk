@@ -5,7 +5,7 @@ export 'src/models/comment/comment.dart';
 export 'src/models/nft/nft.dart';
 export 'src/models/notification/notif.dart';
 export 'src/models/profile/profile.dart';
-export 'src/models/qr/qr_code.dart';
+export 'src/models/qr/qr_result.dart';
 export 'src/peppermint_web3.dart';
 export 'src/peppermint_utility.dart';
 export 'src/widgets/image_loader.dart';
