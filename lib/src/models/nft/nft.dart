@@ -44,6 +44,7 @@ class Nft {
     supported = json['supported'] ?? false;
     social = json['social'] != null ? Social.fromJson(json['social']) : null;
     media = json['media'] != null ? Media.fromJson(json['media']) : null;
+    promoted = json['promoted'] ?? false;
   }
 
   String? id;
@@ -67,6 +68,7 @@ class Nft {
   String? description;
   NftOwner? user;
   late bool liked = false;
+  late bool promoted = false;
   late bool supported = false;
   Social? social;
   Media? media;
@@ -98,6 +100,7 @@ class Nft {
     map['contract_metadata_url'] = contractMetadataUrl;
     map['created_on'] = createdOn?.toIso8601String();
     map['updated_on'] = updatedOn;
+    map['promoted'] = promoted;
     return map;
   }
 }
