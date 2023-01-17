@@ -3,6 +3,9 @@ import 'package:example/pick_media_view.dart';
 import 'package:flutter/material.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
+import 'button.dart';
+import 'popup.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -31,6 +34,7 @@ class CreateWalletPage extends StatefulWidget {
 }
 
 class _CreateWalletPageState extends State<CreateWalletPage> {
+  String cantDetect = 'We could not detect your QR in this image';
   late WalletManager _manager;
   WalletKeys? _walletKeys;
   bool hasWallet = false;
@@ -57,7 +61,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
 
   _getQRFile() async {
     qrCode = await PeppermintUtility.getQRFile();
-    if (qrCode == PeppermintConstants.cantDetect) {
+    if (qrCode == cantDetect) {
       Popup.error(qrCode!);
       qrCode = null;
     }
