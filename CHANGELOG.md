@@ -1,3 +1,8 @@
+## 0.1.0
+* Core libraries
+* MediaGram widget
+* Media picker utilities
+
 ## 0.0.5
 
 * Give the ability to check if it has any wallet regardless the keys.
