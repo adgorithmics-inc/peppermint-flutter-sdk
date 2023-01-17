@@ -6,7 +6,6 @@ import 'package:peppermint_sdk/peppermint_sdk.dart';
 import 'package:peppermint_sdk/src/peppermint_constants.dart';
 import 'package:peppermint_sdk/src/widgets/image_crop_view.dart';
 import 'package:scan/scan.dart';
-
 import 'widgets/camera_view.dart';
 
 class PeppermintUtility {
@@ -90,17 +89,20 @@ class PeppermintUtility {
     return null;
   }
 
-  static Future<String?> getQRFile() async {
+  static Future<QRCode> getQRFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
     );
     if (result != null) {
       String? value = await Scan.parse(result.files.single.path!);
       if (value == null) {
-        return PeppermintConstants.cantDetect;
+        return QRCode(
+            success: false,
+            result: null,
+            errorMessage: 'We could not detect your QR in this image');
       }
-      return value;
+      return QRCode(success: true, result: value);
     }
-    return null;
+    return QRCode(success: true);
   }
 }

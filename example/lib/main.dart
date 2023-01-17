@@ -34,7 +34,6 @@ class CreateWalletPage extends StatefulWidget {
 }
 
 class _CreateWalletPageState extends State<CreateWalletPage> {
-  String cantDetect = 'We could not detect your QR in this image';
   late WalletManager _manager;
   WalletKeys? _walletKeys;
   bool hasWallet = false;
@@ -60,11 +59,11 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   }
 
   _getQRFile() async {
-    qrCode = await PeppermintUtility.getQRFile();
-    if (qrCode == cantDetect) {
-      Popup.error(qrCode!);
-      qrCode = null;
+    QRCode result = await PeppermintUtility.getQRFile();
+    if (!result.success) {
+      Popup.error(result.errorMessage!);
     }
+    qrCode = result.result;
     setState(() {});
   }
 
