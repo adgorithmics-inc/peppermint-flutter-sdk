@@ -141,7 +141,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             const SizedBox(height: 16.0),
             Text('Code of your QR file ${qrCode ?? ''}'),
             const SizedBox(height: 16.0),
-            MyButton(text: 'Select QR', onTap: _scanQR),
+            MyButton(text: 'Scan QR', onTap: _scanQR),
             const SizedBox(height: 16.0),
             Text('Scanner result ${scanResult ?? ''}'),
           ],
