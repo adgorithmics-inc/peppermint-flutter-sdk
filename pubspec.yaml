@@ -29,6 +29,7 @@ dependencies:
   web3dart: ^2.3.5
   image_editor_plus: ^0.1.8
   scan: ^1.6.0
+  mobile_scanner: ^2.1.0
 
 
 dev_dependencies:
