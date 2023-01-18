@@ -38,6 +38,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   WalletKeys? _walletKeys;
   bool hasWallet = false;
   String? qrCode;
+  String? scanResult;
 
   @override
   void initState() {
@@ -65,6 +66,11 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
       Popup.error(result.result!);
       qrCode = null;
     }
+    setState(() {});
+  }
+
+  _scanQR() async {
+    scanResult = await PeppermintUtility.scanQR();
     setState(() {});
   }
 
@@ -134,6 +140,10 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             MyButton(text: 'Select QR', onTap: _getQRFile),
             const SizedBox(height: 16.0),
             Text('Code of your QR file ${qrCode ?? ''}'),
+            const SizedBox(height: 16.0),
+            MyButton(text: 'Scan QR', onTap: _scanQR),
+            const SizedBox(height: 16.0),
+            Text('Scanner result ${scanResult ?? ''}'),
           ],
         ),
       ),
