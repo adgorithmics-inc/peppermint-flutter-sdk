@@ -88,7 +88,6 @@ class PeppermintUtility {
     File? image;
     File? file = await Get.to(() => const CameraView());
     if (file != null) {
-      Get.back(result: file);
       Uint8List imageData = file.readAsBytesSync();
       image = await Get.to(
         () => ImageEditor(
