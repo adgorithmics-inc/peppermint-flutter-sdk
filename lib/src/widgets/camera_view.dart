@@ -1,13 +1,11 @@
 import 'dart:io';
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 import 'loading.dart';
-import 'photo_filters/image_editor.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -76,27 +74,19 @@ class _CameraViewState extends State<CameraView> {
       File newFile = await File(result).writeAsBytes(
         img.encodeJpg(orientedImage),
       );
-      Uint8List imageData = newFile.readAsBytesSync();
-      Get.back(
-          result: await Get.to(() => ImageEditor(
-                image: imageData,
-                savePath: file.path,
-                allowCamera: true,
-                allowGallery: true,
-              )));
+      Get.back(result: newFile);
     });
   }
 
   Future<XFile?> takePicture() async {
-    final CameraController? cameraController = camera;
-    if (cameraController == null || !cameraController.value.isInitialized) {
+    if (!camera.value.isInitialized) {
       return null;
     }
-    if (cameraController.value.isTakingPicture) {
+    if (camera.value.isTakingPicture) {
       return null;
     }
     try {
-      XFile file = await cameraController.takePicture();
+      XFile file = await camera.takePicture();
       return file;
     } on CameraException {
       return null;
