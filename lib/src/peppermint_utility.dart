@@ -1,12 +1,15 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 import 'package:peppermint_sdk/src/peppermint_constants.dart';
 import 'package:peppermint_sdk/src/widgets/image_crop_view.dart';
-
+import 'package:scan/scan.dart';
 import 'widgets/camera_view.dart';
+import 'widgets/photo_filters/image_editor.dart';
+import 'widgets/scanner_view.dart';
 
 class PeppermintUtility {
   PeppermintUtility._();
@@ -87,10 +90,40 @@ class PeppermintUtility {
 
   /// Get image from camera, it is cropped square and go to image editor first
   static Future<File?> getImageFromCamera() async {
+    File? image;
     File? file = await Get.to(() => const CameraView());
     if (file != null) {
-      return file;
+      Uint8List imageData = file.readAsBytesSync();
+      image = await Get.to(
+        () => ImageEditor(
+          image: imageData,
+          savePath: file.path,
+          allowCamera: true,
+          allowGallery: true,
+        ),
+      );
     }
-    return null;
+    return image;
+  }
+
+  static Future<QRResult> getQRFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+    );
+    if (result != null) {
+      String? value = await Scan.parse(result.files.single.path!);
+      if (value == null) {
+        return QRResult(
+            success: false,
+            result: 'We could not detect your QR in this image');
+      }
+      return QRResult(success: true, result: value);
+    }
+    return QRResult(success: true);
+  }
+
+  static Future<String?> scanQR() async {
+    String? result = await Get.to(() => const ScannerView());
+    return result;
   }
 }

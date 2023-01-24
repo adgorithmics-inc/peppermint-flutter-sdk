@@ -702,6 +702,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  mobile_scanner:
+    dependency: transitive
+    description:
+      name: mobile_scanner
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   model_viewer_plus:
     dependency: transitive
     description:
@@ -933,6 +940,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.7"
+  scan:
+    dependency: transitive
+    description:
+      name: scan
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.6.0"
   screenshot:
     dependency: transitive
     description:
