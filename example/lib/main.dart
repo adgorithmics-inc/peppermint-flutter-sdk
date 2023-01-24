@@ -39,6 +39,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   bool hasWallet = false;
   String? qrCode;
   String? scanResult;
+  String? contractName;
 
   @override
   void initState() {
@@ -71,6 +72,11 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
 
   _scanQR() async {
     scanResult = await PeppermintUtility.scanQR();
+    setState(() {});
+  }
+
+  _generateContractName() {
+    contractName = PeppermintUtility.generateContractName();
     setState(() {});
   }
 
@@ -144,6 +150,14 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             MyButton(text: 'Scan QR', onTap: _scanQR),
             const SizedBox(height: 16.0),
             Text('Scanner result ${scanResult ?? ''}'),
+            const SizedBox(height: 16.0),
+            MyButton(text: 'generate', onTap: _generateContractName),
+            const SizedBox(height: 16.0),
+            Text(
+              contractName ??
+                  'Click button "generate" to get random contract name',
+              textAlign: TextAlign.center,
+            )
           ],
         ),
       ),

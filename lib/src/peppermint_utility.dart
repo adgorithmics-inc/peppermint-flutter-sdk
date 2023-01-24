@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
@@ -125,5 +126,16 @@ class PeppermintUtility {
   static Future<String?> scanQR() async {
     String? result = await Get.to(() => const ScannerView());
     return result;
+  }
+
+  /// Generate random name for new contract.
+  static String generateContractName() {
+    String name =
+        '${PeppermintConstants.adjectives[Random().nextInt(PeppermintConstants.adjectives.length)].capitalizeFirst} ${PeppermintConstants.animals[Random().nextInt(PeppermintConstants.animals.length)].capitalizeFirst}';
+    if (name.length > 32) {
+      name = name.substring(0, 32);
+    }
+
+    return name;
   }
 }
