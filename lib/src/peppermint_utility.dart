@@ -107,6 +107,7 @@ class PeppermintUtility {
     return image;
   }
 
+  /// Scan QR from image uploaded.
   static Future<QRResult> getQRFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
@@ -123,6 +124,7 @@ class PeppermintUtility {
     return QRResult(success: true);
   }
 
+  /// Scan QR using device camera.
   static Future<String?> scanQR() async {
     String? result = await Get.to(() => const ScannerView());
     return result;
