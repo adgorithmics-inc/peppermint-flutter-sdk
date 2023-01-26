@@ -48,12 +48,14 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     super.initState();
   }
 
+  /// Generate a wallet with name "wallet1".
   _generateWallet() async {
     _walletKeys = await _manager.createWallet(key: "wallet1");
     hasWallet = await _manager.hasAnyWallet();
     setState(() {});
   }
 
+  /// Delete a wallet with name "wallet1".
   _deleteWallet() async {
     await _manager.delete(key: "wallet1");
     _walletKeys = null;
@@ -61,6 +63,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     setState(() {});
   }
 
+  /// Scan QR from image uploaded.
   _getQRFile() async {
     QRResult result = await PeppermintUtility.getQRFile();
     qrCode = result.result;
@@ -79,6 +82,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     setState(() {});
   }
 
+  /// Generate new random contract name.
   _generateContractName() {
     contractName = PeppermintUtility.generateContractName();
     setState(() {});
@@ -187,6 +191,7 @@ class _RestoreWalletPageState extends State<RestoreWalletPage> {
     super.initState();
   }
 
+  /// For restoring a wallet with private key.
   void _restoreWallet() async {
     walletAddress = await manager.restoreWallet(controller.text);
     setState(() {});
