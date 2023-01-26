@@ -1,5 +1,6 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:example/pick_media_view.dart';
+import 'package:example/scanner_view.dart';
 import 'package:flutter/material.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
@@ -70,8 +71,11 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     setState(() {});
   }
 
+  /// Scan QR using device camera.
+  /// for scan QR, try to call NFTScanner
+  /// you can open ScannerView to see the example
   _scanQR() async {
-    scanResult = await PeppermintUtility.scanQR();
+    scanResult = await Get.to(() => const ScannerView());
     setState(() {});
   }
 

@@ -10,7 +10,6 @@ import 'package:peppermint_sdk/src/widgets/image_crop_view.dart';
 import 'package:scan/scan.dart';
 import 'widgets/camera_view.dart';
 import 'widgets/photo_filters/image_editor.dart';
-import 'widgets/scanner_view.dart';
 
 class PeppermintUtility {
   PeppermintUtility._();
@@ -122,12 +121,6 @@ class PeppermintUtility {
       return QRResult(success: true, result: value);
     }
     return QRResult(success: true);
-  }
-
-  /// Scan QR using device camera.
-  static Future<String?> scanQR() async {
-    String? result = await Get.to(() => const ScannerView());
-    return result;
   }
 
   /// Generate random name for new contract.
