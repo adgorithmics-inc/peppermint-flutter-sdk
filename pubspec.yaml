@@ -37,6 +37,7 @@ dependencies:
   video_player: ^2.4.9
   visibility_detector: ^0.3.3
   web3dart: ^2.3.5
+  url_launcher: ^6.1.2
 
 dev_dependencies:
   test: ^1.17.0

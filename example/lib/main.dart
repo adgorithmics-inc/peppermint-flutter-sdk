@@ -41,6 +41,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   String? qrCode;
   String? scanResult;
   String? contractName;
+  TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
@@ -72,6 +73,14 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
       qrCode = null;
     }
     setState(() {});
+  }
+
+  /// Launch Url via browser.
+  _launchBrowser() async {
+    bool result = await PeppermintUtility.launchBrowser(controller.text);
+    if (result != true) {
+      Popup.error('Could not launch ${controller.text}');
+    }
   }
 
   /// Scan QR using device camera.
@@ -165,7 +174,16 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
               contractName ??
                   'Click button "generate" to get random contract name',
               textAlign: TextAlign.center,
-            )
+            ),
+            const SizedBox(height: 16.0),
+            TextFormField(
+              controller: controller,
+              decoration: const InputDecoration(
+                hintText: 'insert url to launch here',
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            MyButton(text: 'Launch Url', onTap: _launchBrowser),
           ],
         ),
       ),
