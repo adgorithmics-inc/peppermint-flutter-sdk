@@ -5,6 +5,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:peppermint_sdk/src/widgets/loading.dart';
 
+/// Image loader using CachedNetworkImage for url.
+/// you can use url/uint8list/asset/file data type,
+/// and will return an Image data type.
 class VImageLoader extends StatelessWidget {
   const VImageLoader({
     Key? key,

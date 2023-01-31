@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// This page is a collection of many example of functions.
 class CreateWalletPage extends StatefulWidget {
   const CreateWalletPage({Key? key}) : super(key: key);
 
@@ -191,6 +192,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   }
 }
 
+/// This page is for restoring a wallet with private key.
 class RestoreWalletPage extends StatefulWidget {
   const RestoreWalletPage({Key? key}) : super(key: key);
 

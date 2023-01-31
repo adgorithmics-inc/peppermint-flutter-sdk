@@ -9,6 +9,7 @@ import 'loading.dart';
 
 List<CameraDescription> cameras = [];
 
+/// Camera widget, you can access it from class PeppermintUtility.
 class CameraView extends StatefulWidget {
   const CameraView({Key? key}) : super(key: key);
 
@@ -28,11 +29,13 @@ class _CameraViewState extends State<CameraView> {
     super.initState();
   }
 
+  /// check the list of available camera.
   init() async {
     cameras = await availableCameras();
     selectCamera();
   }
 
+  /// Trigger dispose camera after it is removed from widget tree.
   @override
   void dispose() {
     disposeCamera();
@@ -63,6 +66,10 @@ class _CameraViewState extends State<CameraView> {
     selectCamera();
   }
 
+  /// Take an Image from camera and then
+  /// crop it, also read it as a byte and will
+  /// Returns a Future<Uint8List> that completes
+  /// with the list of bytes that is the contents of the file.
   void onTakePictureButtonPressed() async {
     takePicture().then((XFile? file) async {
       if (file == null) return;
@@ -78,6 +85,7 @@ class _CameraViewState extends State<CameraView> {
     });
   }
 
+  /// Take a picture with device camera
   Future<XFile?> takePicture() async {
     if (!camera.value.isInitialized) {
       return null;
@@ -93,6 +101,8 @@ class _CameraViewState extends State<CameraView> {
     }
   }
 
+  /// Crop an image after picture taken by camera
+  /// and return as a File path
   Future<String> cropSquare(String srcFilePath) async {
     var bytes = await File(srcFilePath).readAsBytes();
     img.Image? src = img.decodeImage(bytes);
