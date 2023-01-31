@@ -1,5 +1,6 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:example/pick_media_view.dart';
+import 'package:example/scanner_view.dart';
 import 'package:flutter/material.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// This page is a collection of many example of functions.
 class CreateWalletPage extends StatefulWidget {
   const CreateWalletPage({Key? key}) : super(key: key);
 
@@ -39,6 +41,8 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   bool hasWallet = false;
   String? qrCode;
   String? scanResult;
+  String? contractName;
+  TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
@@ -46,12 +50,14 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     super.initState();
   }
 
+  /// Generate a wallet with name "wallet1".
   _generateWallet() async {
     _walletKeys = await _manager.createWallet(key: "wallet1");
     hasWallet = await _manager.hasAnyWallet();
     setState(() {});
   }
 
+  /// Delete a wallet with name "wallet1".
   _deleteWallet() async {
     await _manager.delete(key: "wallet1");
     _walletKeys = null;
@@ -59,6 +65,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     setState(() {});
   }
 
+  /// Scan QR from image uploaded.
   _getQRFile() async {
     QRResult result = await PeppermintUtility.getQRFile();
     qrCode = result.result;
@@ -69,8 +76,25 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     setState(() {});
   }
 
+  /// Launch Url via browser.
+  _launchBrowser() async {
+    bool result = await PeppermintUtility.launchBrowser(controller.text);
+    if (result != true) {
+      Popup.error('Could not launch ${controller.text}');
+    }
+  }
+
+  /// Scan QR using device camera.
+  /// for scan QR, try to call NFTScanner
+  /// you can open ScannerView to see the example
   _scanQR() async {
-    scanResult = await PeppermintUtility.scanQR();
+    scanResult = await Get.to(() => const ScannerView());
+    setState(() {});
+  }
+
+  /// Generate new random contract name.
+  _generateContractName() {
+    contractName = PeppermintUtility.generateContractName();
     setState(() {});
   }
 
@@ -144,6 +168,23 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             MyButton(text: 'Scan QR', onTap: _scanQR),
             const SizedBox(height: 16.0),
             Text('Scanner result ${scanResult ?? ''}'),
+            const SizedBox(height: 16.0),
+            MyButton(text: 'generate', onTap: _generateContractName),
+            const SizedBox(height: 16.0),
+            Text(
+              contractName ??
+                  'Click button "generate" to get random contract name',
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16.0),
+            TextFormField(
+              controller: controller,
+              decoration: const InputDecoration(
+                hintText: 'insert url to launch here',
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            MyButton(text: 'Launch Url', onTap: _launchBrowser),
           ],
         ),
       ),
@@ -151,6 +192,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   }
 }
 
+/// This page is for restoring a wallet with private key.
 class RestoreWalletPage extends StatefulWidget {
   const RestoreWalletPage({Key? key}) : super(key: key);
 
@@ -169,6 +211,7 @@ class _RestoreWalletPageState extends State<RestoreWalletPage> {
     super.initState();
   }
 
+  /// For restoring a wallet with private key.
   void _restoreWallet() async {
     walletAddress = await manager.restoreWallet(controller.text);
     setState(() {});
