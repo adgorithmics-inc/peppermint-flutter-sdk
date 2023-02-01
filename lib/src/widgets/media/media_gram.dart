@@ -8,7 +8,6 @@ import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../peppermint_sdk.dart';
-import '../loading.dart';
 import 'media_controller.dart';
 
 Color cardBg = const Color(0xff181A26);

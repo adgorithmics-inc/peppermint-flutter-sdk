@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'loading.dart';
 
+/// Loading widget, use while waiting for response, process etc.
 class Popup {
   Popup._();
 
