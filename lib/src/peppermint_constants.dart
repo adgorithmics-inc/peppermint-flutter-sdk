@@ -1,3 +1,5 @@
+/// this class are contains all the constants
+/// that has been used all over the sdk.
 class PeppermintConstants {
   PeppermintConstants._();
 

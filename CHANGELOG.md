@@ -1,4 +1,10 @@
+## 0.1.1
+
+* Launchurl with browser.
+* Generate new random contract name.
+
 ## 0.1.0
+
 * Core libraries
 * MediaGram widget
 * Media picker utilities
