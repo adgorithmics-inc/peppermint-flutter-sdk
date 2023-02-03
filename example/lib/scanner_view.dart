@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
+/// Scanner widget example
+/// for scan QR, try to call NFTScanner
 class ScannerView extends StatefulWidget {
   const ScannerView({Key? key}) : super(key: key);
 
