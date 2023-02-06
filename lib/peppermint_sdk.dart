@@ -16,4 +16,3 @@ export 'package:flutter_secure_storage/flutter_secure_storage.dart';
 export 'package:lottie/lottie.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'src/widgets/nft_scanner.dart';
-export 'src/widgets/loading.dart';
