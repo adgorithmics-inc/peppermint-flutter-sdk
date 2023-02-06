@@ -1,4 +1,5 @@
 import 'package:clipboard/clipboard.dart';
+import 'package:example/nft_view.dart';
 import 'package:example/pick_media_view.dart';
 import 'package:example/scanner_view.dart';
 import 'package:flutter/material.dart';
@@ -98,6 +99,12 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     setState(() {});
   }
 
+  /// Go to NftView page.
+  void _goToNftExample(context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const NftView()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,6 +192,10 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             ),
             const SizedBox(height: 16.0),
             MyButton(text: 'Launch Url', onTap: _launchBrowser),
+            const SizedBox(height: 16.0),
+            MyButton(
+                text: 'NFT view example',
+                onTap: () => _goToNftExample(context)),
           ],
         ),
       ),
