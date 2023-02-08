@@ -2,6 +2,8 @@
 
 * Launchurl with browser.
 * Generate new random contract name.
+* Create new wallet.
+* Bound existing/new Wallet.
 
 ## 0.1.0
 

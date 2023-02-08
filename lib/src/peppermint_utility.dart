@@ -65,17 +65,22 @@ class PeppermintUtility {
   }
 
   /// Get image from gallery
-  static Future<File?> getImageFromGallery() async {
+  static Future<File?> getImageFromGallery({bool squareCrop = true}) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
     );
-    if (result != null) {
-      File? cropped =
-          await Get.to(() => ImageCropView(File(result.files.single.path!)));
+    File? file;
 
-      return cropped;
+    if (result != null) {
+      if (squareCrop) {
+        File? cropped =
+            await Get.to(() => ImageCropView(File(result.files.single.path!)));
+        file = cropped;
+      } else {
+        file = File(result.files.single.path!);
+      }
     }
-    return null;
+    return file;
   }
 
   /// Get video from gallery
@@ -90,19 +95,21 @@ class PeppermintUtility {
   }
 
   /// Get image from camera, it is cropped square and go to image editor first
-  static Future<File?> getImageFromCamera() async {
+  static Future<File?> getImageFromCamera({bool edit = true}) async {
     File? image;
     File? file = await Get.to(() => const CameraView());
     if (file != null) {
-      Uint8List imageData = file.readAsBytesSync();
-      image = await Get.to(
-        () => ImageEditor(
-          image: imageData,
-          savePath: file.path,
-          allowCamera: true,
-          allowGallery: true,
-        ),
-      );
+      if (edit) {
+        Uint8List imageData = file.readAsBytesSync();
+        image = await Get.to(
+          () => ImageEditor(
+            image: imageData,
+            savePath: file.path,
+            allowCamera: true,
+            allowGallery: true,
+          ),
+        );
+      }
     }
     return image;
   }
