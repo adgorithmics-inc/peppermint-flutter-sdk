@@ -46,6 +46,7 @@ class _CameraViewState extends State<CameraView> {
     await camera.dispose();
   }
 
+  /// Select front or back camera
   selectCamera() {
     selectedCamera = selectedCamera == 1 ? 0 : 1;
     camera = CameraController(

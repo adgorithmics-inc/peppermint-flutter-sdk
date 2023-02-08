@@ -43,6 +43,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   String? qrCode;
   String? scanResult;
   String? contractName;
+  String? walletAddress;
   TextEditingController controller = TextEditingController();
 
   @override
@@ -64,6 +65,21 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     _walletKeys = null;
     hasWallet = await _manager.hasAnyWallet();
     setState(() {});
+  }
+
+  /// Init wallet
+  /// Will check existing wallet before creating new one
+  _initWallet() async {
+    _manager.initWallet((addressWallet) {
+      walletAddress = addressWallet;
+    }, key: 'test1@example.com', onFirstWallet: () {});
+    setState(() {});
+  }
+
+  /// Bound wallet
+  /// Check existing wallet, if there is, will restore wallet.
+  _boundWallet() async {
+    _manager.boundWallet('test1@example.com');
   }
 
   /// Scan QR from image uploaded.
@@ -196,6 +212,15 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             MyButton(
                 text: 'NFT view example',
                 onTap: () => _goToNftExample(context)),
+            const SizedBox(height: 16.0),
+            Text(
+              'Your wallet address \n\n${walletAddress ?? ''}\n',
+              textAlign: TextAlign.center,
+            ),
+            MyButton(text: 'Init wallet', onTap: _initWallet),
+            const SizedBox(height: 16.0),
+            MyButton(text: 'Bound wallet', onTap: _boundWallet),
+            const SizedBox(height: 16.0),
           ],
         ),
       ),

@@ -65,6 +65,46 @@ class WalletManager {
     return walletAddress;
   }
 
+
+  /// Bound wallet
+  /// Check existing wallet, if there is, will restore wallet.
+  void boundWallet(String? username) async {
+    bool hasExistingWallet = (await getPublicKey(key: username)) != null;
+    if (!hasExistingWallet) {
+      await restoreWallet((await getPrivateKey(key: 'null'))!, key: username);
+      delete(key: 'null');
+    } else {
+      return initWallet(
+        (walletAddress) {
+          return walletAddress;
+        },
+        key: username,
+        onFirstWallet: () {},
+      );
+    }
+  }
+
+  /// Init wallet
+  /// Check existing wallet before creating new one
+  /// Callback onFirstWallet
+  void initWallet(Function(String?) onWalletCreated,
+      {required String? key, required Function() onFirstWallet}) async {
+    bool walletExist = await hasAnyWallet();
+
+    if (!walletExist) onFirstWallet;
+
+    bool hasWallet = (await getPublicKey(key: key)) != null;
+
+    if (!hasWallet) {
+      WalletKeys _walletKeys = await createWallet(key: key);
+      final walletAddress = _walletKeys.publicKey;
+      onWalletCreated(walletAddress);
+    } else {
+      final walletAddress = await getPublicKey(key: key);
+      onWalletCreated(walletAddress);
+    }
+  }
+
   /// the 'key' parameter is optional, it is needed if you want to
   /// get private key based on that key
   Future<String?> getPrivateKey({String? key}) async {
