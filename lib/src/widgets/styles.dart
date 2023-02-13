@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// Style theme that use for the SDK.
 class Styles {
   static ThemeData imageEditorTheme = ThemeData(
     scaffoldBackgroundColor: Colors.black,

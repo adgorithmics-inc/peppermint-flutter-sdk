@@ -1,10 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_crop/image_crop.dart';
-
 import 'loading.dart';
 
+/// Image crop view
+/// Cropping Image uploaded from galery
 class ImageCropView extends StatefulWidget {
   final File file;
 

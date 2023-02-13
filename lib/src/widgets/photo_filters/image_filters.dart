@@ -7,10 +7,11 @@ import 'package:image/image.dart' as img;
 import 'package:image_editor_plus/image_editor_plus.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:screenshot/screenshot.dart';
-
 import '../popup.dart';
 import '../styles.dart';
 
+/// Image filter for ImageEditor.
+/// Use for add filter, emoticon.
 class VImageFilters extends StatefulWidget {
   final Uint8List image;
   final bool useCache;
