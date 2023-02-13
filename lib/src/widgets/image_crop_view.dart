@@ -4,7 +4,8 @@ import 'package:image_crop/image_crop.dart';
 import 'loading.dart';
 
 /// Image crop view
-/// Cropping Image uploaded from galery
+/// Cropping Image to square crop uploaded from galery.
+/// The ratio will be the image to be uploaded as an nft
 class ImageCropView extends StatefulWidget {
   final File file;
 
