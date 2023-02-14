@@ -10,6 +10,8 @@ class TextEditorImage extends StatefulWidget {
   _TextEditorImageState createState() => _TextEditorImageState();
 }
 
+/// Image filter for ImageEditor.
+/// Use for add text into the image.
 class _TextEditorImageState extends State<TextEditorImage> {
   TextEditingController name = TextEditingController();
   Color currentColor = Colors.black;

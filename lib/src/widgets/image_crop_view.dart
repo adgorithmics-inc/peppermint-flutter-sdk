@@ -1,10 +1,11 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_crop/image_crop.dart';
-
 import 'loading.dart';
 
+/// Image crop view
+/// Cropping image to square.
+/// Square or 1:1 ratio is required as most common ratio for NFT.
 class ImageCropView extends StatefulWidget {
   final File file;
 

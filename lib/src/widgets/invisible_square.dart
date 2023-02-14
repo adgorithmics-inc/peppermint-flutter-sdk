@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// Frame scanner view widget for NFTScanner
 class InvisibleSquare extends StatelessWidget {
   final double size;
   final double borderRadius;

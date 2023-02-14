@@ -32,6 +32,8 @@ Map<String, String> _translations = {};
 String i18n(String sourceString) =>
     _translations[sourceString.toLowerCase()] ?? sourceString;
 
+/// Image editor that is use for editing image from camera.
+/// See the example on class PeppermintUtility.
 class ImageEditor extends StatelessWidget {
   final Uint8List image;
   final String? savePath;
