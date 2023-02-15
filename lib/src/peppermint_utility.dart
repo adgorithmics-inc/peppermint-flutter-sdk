@@ -43,25 +43,27 @@ class PeppermintUtility {
   }
 
   /// Open file explorer and select media
-  static Future<File?> getMediaFromExplorer() async {
+  static Future<File?> getMediaFromExplorer({bool squareCrop = true}) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: PeppermintConstants.fileTypes,
     );
+    File? file;
     if (result != null) {
       String fileType = PeppermintUtility.getFileType(
           path.extension(result.files.single.path!));
       if (fileType == 'image') {
         /// Crop square image
-
-        File? cropped =
-            await Get.to(() => ImageCropView(File(result.files.single.path!)));
-        return cropped;
-      } else {
-        return File(result.files.single.path!);
+        if (squareCrop) {
+          File? cropped = await Get.to(
+              () => ImageCropView(File(result.files.single.path!)));
+          file = cropped;
+        } else {
+          file = File(result.files.single.path!);
+        }
       }
     }
-    return null;
+    return file;
   }
 
   /// Get image from gallery
@@ -96,22 +98,21 @@ class PeppermintUtility {
 
   /// Get image from camera, it is cropped square and go to image editor first
   static Future<File?> getImageFromCamera({bool edit = true}) async {
-    File? image;
     File? file = await Get.to(() => const CameraView());
     if (file != null) {
       if (edit) {
         Uint8List imageData = file.readAsBytesSync();
-        image = await Get.to(
+        file = await Get.to(
           () => ImageEditor(
             image: imageData,
-            savePath: file.path,
+            savePath: file!.path,
             allowCamera: true,
             allowGallery: true,
           ),
         );
       }
     }
-    return image;
+    return file;
   }
 
   /// Scan QR from image uploaded.
