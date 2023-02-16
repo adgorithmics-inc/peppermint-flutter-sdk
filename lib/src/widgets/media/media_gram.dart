@@ -13,6 +13,9 @@ import 'media_controller.dart';
 
 Color cardBg = const Color(0xff181A26);
 
+/// Widget that will show all the media,
+/// such as video, image, audio, and 3d from Url or file type.
+/// You can see the example on UtilitiesPage and NftView class.
 class MediaGram extends StatelessWidget {
   final Nft? data;
   final bool mix;
