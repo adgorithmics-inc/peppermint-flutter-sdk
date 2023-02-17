@@ -1,4 +1,12 @@
+## 0.1.1
+
+* New utility to Launchurl with browser.
+* New utility to Generate new random contract name.
+* Better handler to create new wallet.
+* Bound existing/new Wallet.
+
 ## 0.1.0
+
 * Core libraries
 * MediaGram widget
 * Media picker utilities

@@ -19,13 +19,25 @@ In future, this package is a bridge to use Peppermint’s functionality with eas
 
 ## Features
 
-1. Generate wallet address (public key)  and private key
+1. Generate wallet address (public key) and private key
 2. Get current wallet address
 3. Get current private key
+4. Generate random contract name
+5. Bound existing/new wallet
+6. Delete wallet
+7. Pick media file from device
+8. Get image from camera
+9. Launch Url
+10. Scan QR code from camera
+11. Image editor
 
 ## Usage
 
 Import  `package:peppermint_sdk/peppermint_sdk.dart`, instantiate `WalletManager`.
+
+You can see the full example in WalletPage class on `peppermint-flutter-sdk/example/lib/wallet_page.dart`.
+
+Wallet function:
 
 ```dart
 import 'package:peppermint_sdk/peppermint_sdk.dart';    
@@ -55,7 +67,47 @@ await deleteAllWallet();
 // check if has any wallet
 bool hasWallet = await manager.hasAnyWallet();
 
+// generate contract name
+String contractName = PeppermintUtility.generateContractName();
+
 
 ```
+
+You can see the full example in UtilitiesPage class on `peppermint-flutter-sdk/example/lib/utilities_page.dart`.
+
+Utilities function:
+
+```dart
+
+import 'package:peppermint_sdk/peppermint_sdk.dart';
+
+// Scan QR from image uploaded.
+QRResult result = await PeppermintUtility.getQRFile();
+qrCode = result.result;
+
+//Launch Url via browser.
+bool result = await PeppermintUtility.launchBrowser('https://peppermintwallet.com/');
+
+// Scan QR using device camera.
+String? scanResult = await Get.to(() => const ScannerView());
+
+// Upload image from camera.
+// You can set edit to false or true to apply the editor
+File? file = await PeppermintUtility.getImageFromCamera(edit: true);
+
+// Upload image from Galery.
+// You can set squareCrop to false or true to apply the squareCrop
+File? file = await PeppermintUtility.getImageFromGallery(squareCrop: true);
+
+// Upload media from explorer.
+// You can set edit to false or true to apply the squareCrop
+File? file = await PeppermintUtility.getMediaFromExplorer(squareCrop: true);
+
+// Upload video from Galery.
+File? file = await PeppermintUtility.getVideoFromGallery();
+
+```
+
+
 
 This library is able to manage multiple private key and public key per device.

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'button.dart';
 
+/// Pop-up widget to show error.
 class Popup {
   Popup._();
 

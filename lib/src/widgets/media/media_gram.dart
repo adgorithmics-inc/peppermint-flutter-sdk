@@ -3,16 +3,19 @@ import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
+import 'package:peppermint_sdk/src/widgets/loading.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../peppermint_sdk.dart';
-import '../loading.dart';
 import 'media_controller.dart';
 
 Color cardBg = const Color(0xff181A26);
 
+/// Widget that will show all the media,
+/// such as video, image, audio, and 3d from Url or file type.
+/// You can see the example on UtilitiesPage and NftView class.
 class MediaGram extends StatelessWidget {
   final Nft? data;
   final bool mix;

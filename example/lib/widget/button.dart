@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Universal button widget for the project.
 class MyButton extends StatelessWidget {
   final String text;
   final Function() onTap;
