@@ -26,11 +26,10 @@ In future, this package is a bridge to use Peppermint’s functionality with eas
 5. Bound existing/new wallet
 6. Delete wallet
 7. Pick media file from device
-8. Upload image from camera
+8. Get image from camera
 9. Launch Url
-10. Scan QR code from camera scanner
-11. Scan QR from image uploaded.
-12. Image editor
+10. Scan QR code from camera
+11. Image editor
 
 ## Usage
 

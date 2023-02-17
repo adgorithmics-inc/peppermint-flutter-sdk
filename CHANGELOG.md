@@ -1,11 +1,9 @@
 ## 0.1.1
 
-* Launchurl with browser.
-* Generate new random contract name.
-* Create new wallet.
-* Delete wallet.
+* New utility to Launchurl with browser.
+* New utility to Generate new random contract name.
+* Better handler to create new wallet.
 * Bound existing/new Wallet.
-* Revamp example app also add documentation.
 
 ## 0.1.0
 
