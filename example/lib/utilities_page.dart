@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:example/widget/button.dart';
-import 'package:example/widget/pick_media_view.dart';
 import 'package:example/widget/popup.dart';
 import 'package:example/widget/scanner_view.dart';
 import 'package:flutter/material.dart';
@@ -100,13 +99,6 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              MyButton(
-                  text: 'Pick Media',
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (builder) => const PickMediaView()))),
-              const SizedBox(height: 16.0),
               MyButton(text: 'Select QR', onTap: _getQRFile),
               const SizedBox(height: 16.0),
               Text('Code of your QR file ${qrCode ?? ''}'),

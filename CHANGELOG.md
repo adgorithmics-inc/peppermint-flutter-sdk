@@ -3,7 +3,9 @@
 * Launchurl with browser.
 * Generate new random contract name.
 * Create new wallet.
+* Delete wallet.
 * Bound existing/new Wallet.
+* Revamp example app also add documentation.
 
 ## 0.1.0
 
