@@ -65,7 +65,6 @@ class WalletManager {
     return walletAddress;
   }
 
-
   /// Bound wallet
   /// Check existing wallet, if there is, will restore wallet.
   void boundWallet(String? username) async {
@@ -91,7 +90,7 @@ class WalletManager {
       {required String? key, required Function() onFirstWallet}) async {
     bool walletExist = await hasAnyWallet();
 
-    if (!walletExist) onFirstWallet;
+    if (!walletExist) onFirstWallet();
 
     bool hasWallet = (await getPublicKey(key: key)) != null;
 
