@@ -1,3 +1,7 @@
+## 0.1.2
+
+* Fix bug where onFirstWallet function on wallet created is not called properly.
+
 ## 0.1.1
 
 * New utility to Launchurl with browser.
