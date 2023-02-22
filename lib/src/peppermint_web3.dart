@@ -89,15 +89,13 @@ class WalletManager {
   void initWallet(Function(String?) onWalletCreated,
       {required String? key, required Function() onFirstWallet}) async {
     bool walletExist = await hasAnyWallet();
-
-    if (!walletExist) onFirstWallet();
-
     bool hasWallet = (await getPublicKey(key: key)) != null;
 
     if (!hasWallet) {
       WalletKeys _walletKeys = await createWallet(key: key);
       final walletAddress = _walletKeys.publicKey;
       onWalletCreated(walletAddress);
+      if (!walletExist) onFirstWallet();
     } else {
       final walletAddress = await getPublicKey(key: key);
       onWalletCreated(walletAddress);
