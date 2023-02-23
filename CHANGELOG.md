@@ -1,3 +1,7 @@
+## 0.1.3
+
+* Change boundWallet function to future void on WalletManager class.
+
 ## 0.1.2
 
 * Fix bug where onFirstWallet function on wallet created is not called properly.

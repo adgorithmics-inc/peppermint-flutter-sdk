@@ -67,7 +67,7 @@ class WalletManager {
 
   /// Bound wallet
   /// Check existing wallet, if there is, will restore wallet.
-  void boundWallet(String? username) async {
+  Future<void> boundWallet(String? username) async {
     bool hasExistingWallet = (await getPublicKey(key: username)) != null;
     if (!hasExistingWallet) {
       await restoreWallet((await getPrivateKey(key: 'null'))!, key: username);
