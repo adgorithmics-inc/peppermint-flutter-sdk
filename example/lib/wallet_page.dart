@@ -54,7 +54,8 @@ class _WalletPageState extends State<WalletPage> {
   /// Bound wallet
   /// Check existing wallet, if there is, will restore wallet.
   _boundWallet() async {
-    _manager.boundWallet('test1@example.com');
+    await _manager.boundWallet('test1@example.com');
+    walletAddress = await _manager.getPublicKey(key: 'test1@example.com');
   }
 
   /// Generate new random contract name.
