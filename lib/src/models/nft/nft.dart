@@ -39,7 +39,6 @@ class Nft {
     updatedOn = json['updated_on'] == null
         ? null
         : DateTime.parse('${json['updated_on']}+0000').toLocal();
-    ;
     openSeaUrl = json['opensea_url'];
     description = json['description'];
     user = json['user'] != null ? NftOwner.fromJson(json['user']) : null;
