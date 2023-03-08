@@ -36,7 +36,9 @@ class Nft {
     createdOn = json['creation_on'] == null
         ? null
         : DateTime.parse('${json['creation_on']}+0000').toLocal();
-    updatedOn = json['updated_on'];
+    updatedOn = json['updated_on'] == null
+        ? null
+        : DateTime.parse('${json['updated_on']}+0000').toLocal();
     openSeaUrl = json['opensea_url'];
     description = json['description'];
     user = json['user'] != null ? NftOwner.fromJson(json['user']) : null;
@@ -45,6 +47,9 @@ class Nft {
     social = json['social'] != null ? Social.fromJson(json['social']) : null;
     media = json['media'] != null ? Media.fromJson(json['media']) : null;
     promoted = json['promoted'] ?? false;
+    promotedOn = json['promoted_on'] == null
+        ? null
+        : DateTime.parse('${json['promoted_on']}+0000').toLocal();
   }
 
   String? id;
@@ -63,7 +68,7 @@ class Nft {
   String? tokenMetadataUrl;
   String? contractMetadataUrl;
   DateTime? createdOn;
-  String? updatedOn;
+  DateTime? updatedOn;
   String? openSeaUrl;
   String? description;
   NftOwner? user;
@@ -72,6 +77,7 @@ class Nft {
   late bool supported = false;
   Social? social;
   Media? media;
+  DateTime? promotedOn;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -87,6 +93,12 @@ class Nft {
     if (network != null) {
       map['network'] = network?.toJson();
     }
+    if (social != null) {
+      map['social'] = social?.toJson();
+    }
+    if (media != null) {
+      map['media'] = media?.toJson();
+    }
     map['attributes'] = attributes;
     map['metadata_attributes'] =
         metadataAttributes.map((v) => v.toJson()).toList();
@@ -99,8 +111,10 @@ class Nft {
     map['token_metadata_url'] = tokenMetadataUrl;
     map['contract_metadata_url'] = contractMetadataUrl;
     map['created_on'] = createdOn?.toIso8601String();
-    map['updated_on'] = updatedOn;
+    map['updated_on'] = updatedOn?.toIso8601String();
     map['promoted'] = promoted;
+    map['promoted_on'] = promotedOn?.toIso8601String();
+
     return map;
   }
 }
