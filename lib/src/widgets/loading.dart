@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 /// Loading widget
 /// That is use all over the SDK.
 class PeppermintLoading extends StatelessWidget {

@@ -65,7 +65,6 @@ class WalletManager {
     return walletAddress;
   }
 
-
   /// Bound wallet
   /// Check existing wallet, if there is, will restore wallet.
   void boundWallet(String? username) async {
