@@ -1,8 +1,12 @@
+## 0.1.2
+
+* Fix bug where onFirstWallet function on wallet created is not called properly.
+
 ## 0.1.1
 
-* Launchurl with browser.
-* Generate new random contract name.
-* Create new wallet.
+* New utility to Launchurl with browser.
+* New utility to Generate new random contract name.
+* Better handler to create new wallet.
 * Bound existing/new Wallet.
 
 ## 0.1.0
