@@ -52,15 +52,13 @@ class PeppermintUtility {
     if (result != null) {
       String fileType = PeppermintUtility.getFileType(
           path.extension(result.files.single.path!));
-      if (fileType == 'image') {
-        /// Crop square image
-        if (squareCrop) {
-          File? cropped = await Get.to(
-              () => ImageCropView(File(result.files.single.path!)));
-          file = cropped;
-        } else {
-          file = File(result.files.single.path!);
-        }
+      if (fileType == 'image' && squareCrop) {
+        File? cropped = await Get.to(
+          () => ImageCropView(File(result.files.single.path!)),
+        );
+        file = cropped;
+      } else {
+        file = File(result.files.single.path!);
       }
     }
     return file;
@@ -75,8 +73,9 @@ class PeppermintUtility {
 
     if (result != null) {
       if (squareCrop) {
-        File? cropped =
-            await Get.to(() => ImageCropView(File(result.files.single.path!)));
+        File? cropped = await Get.to(
+          () => ImageCropView(File(result.files.single.path!)),
+        );
         file = cropped;
       } else {
         file = File(result.files.single.path!);

@@ -1,6 +1,6 @@
 name: peppermint_sdk
 description: A flutter plugin that let you easily create and manage web3 wallet and support funcitionality of Peppermint
-version: 0.1.3
+version: 0.1.4
 homepage: https://github.com/adgorithmics-inc/peppermint-flutter-sdk
 
 environment:
