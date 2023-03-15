@@ -1,7 +1,12 @@
+## 0.1.4
+
+* Bug fix on the file picker function from the explorer 
+
 ## 0.1.3
 
 * Change boundWallet function to future void on WalletManager class.
 * Add promoted_on in NFT attribute
+
 ## 0.1.2
 
 * Fix bug where onFirstWallet function on wallet created is not called properly.
