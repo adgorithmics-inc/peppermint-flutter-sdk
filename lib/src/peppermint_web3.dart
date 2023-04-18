@@ -86,7 +86,7 @@ class WalletManager {
   /// Init wallet
   /// Check existing wallet before creating new one
   /// Callback onFirstWallet
-  void initWallet(Function(String?) onWalletCreated,
+  Future<void> initWallet(Function(String?) onWalletCreated,
       {required String? key, required Function() onFirstWallet}) async {
     bool walletExist = await hasAnyWallet();
     bool hasWallet = (await getPublicKey(key: key)) != null;
