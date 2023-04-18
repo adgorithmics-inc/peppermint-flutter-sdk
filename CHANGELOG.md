@@ -1,6 +1,10 @@
+## 0.1.5
+
+* Change initWallet function to future void on WalletManager class.
+
 ## 0.1.4
 
-* Bug fix on the file picker function from the explorer 
+* Bug fix on the file picker function from the explorer
 
 ## 0.1.3
 
