@@ -56,8 +56,7 @@ class PeppermintUtility {
       if (fileType == 'image' && squareCrop) {
         String? croppedFilePath =
             await cropImageWidget(result.files.single.path!);
-        String path = croppedFilePath ?? result.files.single.path!;
-        file = File(path);
+        file = croppedFilePath != null ? File(croppedFilePath) : null;
       } else {
         file = File(result.files.single.path!);
       }
@@ -75,8 +74,7 @@ class PeppermintUtility {
       if (squareCrop) {
         String? croppedFilePath =
             await cropImageWidget(result.files.single.path!);
-        String path = croppedFilePath ?? result.files.single.path!;
-        file = File(path);
+        file = croppedFilePath != null ? File(croppedFilePath) : null;
       } else {
         file = File(result.files.single.path!);
       }
@@ -167,22 +165,17 @@ class PeppermintUtility {
   static Future<String?> cropImageWidget(String path) async {
     CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: path,
-      aspectRatioPresets: [
-        CropAspectRatioPreset.square,
-        CropAspectRatioPreset.ratio3x2,
-        CropAspectRatioPreset.original,
-        CropAspectRatioPreset.ratio4x3,
-        CropAspectRatioPreset.ratio16x9
-      ],
+      aspectRatioPresets: [CropAspectRatioPreset.square],
       uiSettings: [
         AndroidUiSettings(
             toolbarTitle: 'Cropper',
             toolbarColor: Colors.blue,
             toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false),
+            initAspectRatio: CropAspectRatioPreset.square,
+            lockAspectRatio: true),
         IOSUiSettings(
           title: 'Cropper',
+          aspectRatioLockEnabled: true,
         ),
       ],
     );
