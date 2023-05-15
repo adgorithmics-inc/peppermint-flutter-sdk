@@ -1,3 +1,7 @@
+## 0.1.6
+
+* Update the image cropper.
+
 ## 0.1.5
 
 * Change initWallet function to future void on WalletManager class.

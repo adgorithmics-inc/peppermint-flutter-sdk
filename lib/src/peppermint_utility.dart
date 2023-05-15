@@ -3,10 +3,11 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:path/path.dart' as path;
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 import 'package:peppermint_sdk/src/peppermint_constants.dart';
-import 'package:peppermint_sdk/src/widgets/image_crop_view.dart';
 import 'package:scan/scan.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'widgets/camera_view.dart';
@@ -53,10 +54,9 @@ class PeppermintUtility {
       String fileType = PeppermintUtility.getFileType(
           path.extension(result.files.single.path!));
       if (fileType == 'image' && squareCrop) {
-        File? cropped = await Get.to(
-          () => ImageCropView(File(result.files.single.path!)),
-        );
-        file = cropped;
+        String? croppedFilePath =
+            await cropImageWidget(result.files.single.path!);
+        file = croppedFilePath != null ? File(croppedFilePath) : null;
       } else {
         file = File(result.files.single.path!);
       }
@@ -70,13 +70,11 @@ class PeppermintUtility {
       type: FileType.image,
     );
     File? file;
-
     if (result != null) {
       if (squareCrop) {
-        File? cropped = await Get.to(
-          () => ImageCropView(File(result.files.single.path!)),
-        );
-        file = cropped;
+        String? croppedFilePath =
+            await cropImageWidget(result.files.single.path!);
+        file = croppedFilePath != null ? File(croppedFilePath) : null;
       } else {
         file = File(result.files.single.path!);
       }
@@ -162,5 +160,25 @@ class PeppermintUtility {
     }
 
     return name;
+  }
+
+  static Future<String?> cropImageWidget(String path) async {
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
+      sourcePath: path,
+      aspectRatioPresets: [CropAspectRatioPreset.square],
+      uiSettings: [
+        AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.blue,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.square,
+            lockAspectRatio: true),
+        IOSUiSettings(
+          title: 'Cropper',
+          aspectRatioLockEnabled: true,
+        ),
+      ],
+    );
+    return croppedFile?.path;
   }
 }

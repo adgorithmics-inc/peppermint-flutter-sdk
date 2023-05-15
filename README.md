@@ -31,6 +31,29 @@ In future, this package is a bridge to use Peppermint’s functionality with eas
 10. Scan QR code from camera
 11. Image editor
 
+## How to install
+
+### Android
+
+- Add UCropActivity into your AndroidManifest.xml
+
+```xml
+
+<activity
+    android:name="com.yalantis.ucrop.UCropActivity"
+    android:screenOrientation="portrait"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+```
+
+Note:
+
+From v1.2.0, you need to migrate your android project to v2 embedding ([detail](https://github.com/flutter/flutter/wiki/Upgrading-pre-1.12-Android-projects))
+
+### iOS
+
+- No configuration required
+
 ## Usage
 
 Import  `package:peppermint_sdk/peppermint_sdk.dart`, instantiate `WalletManager`.
