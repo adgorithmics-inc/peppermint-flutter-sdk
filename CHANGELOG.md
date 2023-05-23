@@ -1,3 +1,7 @@
+## 0.1.7
+
+* Update contract model class.
+
 ## 0.1.6
 
 * Update the image cropper.
