@@ -1,3 +1,7 @@
+## 0.1.8
+
+* Add a contract model class in the export class.
+
 ## 0.1.7
 
 * Update contract model class.
