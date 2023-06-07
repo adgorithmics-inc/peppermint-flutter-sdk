@@ -1,4 +1,5 @@
 import 'package:example/utilities_page.dart';
+import 'package:example/wallet_connect_page.dart';
 import 'package:example/wallet_page.dart';
 import 'package:example/widget/button.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +62,15 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const WalletPage()));
+                }),
+            const SizedBox(height: 16.0),
+            MyButton(
+                text: 'Wallet Connect Example Page',
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const WalletConnectPage()));
                 }),
             const SizedBox(height: 16.0),
           ],

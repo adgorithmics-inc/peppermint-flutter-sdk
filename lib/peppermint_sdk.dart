@@ -9,6 +9,7 @@ export 'src/models/profile/profile.dart';
 export 'src/models/qr/qr_result.dart';
 export 'src/peppermint_web3.dart';
 export 'src/peppermint_utility.dart';
+export 'src/peppermint_connect.dart';
 export 'src/widgets/image_loader.dart';
 export 'src/widgets/media/media_gram.dart';
 export 'package:get/get.dart';

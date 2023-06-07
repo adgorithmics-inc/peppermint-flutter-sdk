@@ -131,6 +131,16 @@ File? file = await PeppermintUtility.getVideoFromGallery();
 
 ```
 
+You can see the full example in WalletConnectPage class on `peppermint-flutter-sdk/example/lib/wallet_connect_page.dart`.
+
+Utilities function:
+
+```dart
+
+import 'package:peppermint_sdk/peppermint_sdk.dart';
+
+```
+
 
 
 This library is able to manage multiple private key and public key per device.
