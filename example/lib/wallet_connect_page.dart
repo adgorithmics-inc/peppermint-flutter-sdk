@@ -34,6 +34,7 @@ class _WalletConnectPageState extends State<WalletConnectPage> {
     _walletKeys = await _wManager.createWallet(key: "wallet1");
   }
 
+  /// Create instance of Wallet connect client and define callbacks
   initWalletConnect() async {
     _attributes = await _wcManager.initWalletConnect(
       maticRpcUri: maticRpcUri,
