@@ -38,8 +38,9 @@ dependencies:
   web3dart: ^2.3.5
   url_launcher: ^6.1.2
   image_cropper: ^3.0.2
-  wallet_connect: 1.0.4
+  wallet_connect: ^1.0.4
   eth_sig_util: ^0.0.3
+  http: ^0.13.5
 
 dev_dependencies:
   test: ^1.17.0
