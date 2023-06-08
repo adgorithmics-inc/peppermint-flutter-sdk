@@ -17,7 +17,7 @@ class _WalletConnectPageState extends State<WalletConnectPage> {
   late WalletManager _wManager;
   WCAttributes? _attributes;
   WalletKeys? _walletKeys;
-  String maticRpcUri =
+  String rpcUri =
       'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161';
 
   @override
@@ -37,7 +37,7 @@ class _WalletConnectPageState extends State<WalletConnectPage> {
   /// Create instance of Wallet connect client and define callbacks
   initWalletConnect() async {
     _attributes = await _wcManager.initWalletConnect(
-      maticRpcUri: maticRpcUri,
+      rpcUri: rpcUri,
       onDisconnect: _onSessionClosed,
       onEthSendTransaction: _onSendTransaction,
       onEthSign: _onSign,

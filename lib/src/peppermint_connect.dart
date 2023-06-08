@@ -36,7 +36,7 @@ class WalletConnectManager {
   /// - onEthSign: A callback invoked when an Ethereum transaction signing request is received.
   /// - onEthSignTransaction: A callback invoked when an Ethereum transaction signing request is received.
   /// - onEthSendTransaction: A callback invoked when an Ethereum transaction sending request is received.
-  /// - maticRpcUri: The RPC URI for the blockchain service provider to be used.
+  /// - rpcUri: RPC URI for any EVM chain that is supported by peppermint.
   ///
   /// Return:
   /// This function returns a Future<WCAttributes> that contains a WCAttributes object
@@ -50,7 +50,7 @@ class WalletConnectManager {
     EthSign? onEthSign,
     EthTransaction? onEthSignTransaction,
     EthTransaction? onEthSendTransaction,
-    required String maticRpcUri,
+    required String rpcUri,
   }) async {
     WCClient _wcClient = WCClient(
       onSessionRequest: onSessionRequest,
@@ -61,7 +61,7 @@ class WalletConnectManager {
       onEthSendTransaction: onEthSendTransaction,
     );
     Web3Client _web3client = Web3Client(
-      maticRpcUri,
+      rpcUri,
       http.Client(),
     );
     String? sessionSaved = await storage.read(key: 'session');
