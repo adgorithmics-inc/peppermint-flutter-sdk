@@ -99,6 +99,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  buffer:
+    dependency: transitive
+    description:
+      name: buffer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   build:
     dependency: transitive
     description:
@@ -281,6 +288,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.2"
+  cryptography:
+    dependency: transitive
+    description:
+      name: cryptography
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.5.0"
   csslib:
     dependency: transitive
     description:
@@ -309,6 +323,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.8"
+  equatable:
+    dependency: transitive
+    description:
+      name: equatable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.5"
+  eth_sig_util:
+    dependency: transitive
+    description:
+      name: eth_sig_util
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.9"
   extended_image:
     dependency: transitive
     description:
@@ -499,6 +527,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.0+1"
+  hex:
+    dependency: transitive
+    description:
+      name: hex
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   html:
     dependency: transitive
     description:
@@ -512,7 +547,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.4"
+    version: "0.13.5"
   http_client_helper:
     dependency: transitive
     description:
@@ -652,7 +687,7 @@ packages:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.5.0"
+    version: "4.8.0"
   json_rpc_2:
     dependency: transitive
     description:
@@ -717,7 +752,7 @@ packages:
     source: hosted
     version: "1.0.4"
   mobile_scanner:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: mobile_scanner
       url: "https://pub.dartlang.org"
@@ -855,7 +890,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.1.7"
+    version: "0.1.9"
   permission_handler:
     dependency: transitive
     description:
@@ -1225,6 +1260,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.3"
+  wallet_connect:
+    dependency: transitive
+    description:
+      name: wallet_connect
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   watcher:
     dependency: transitive
     description:
@@ -1239,6 +1281,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.5"
+  web_socket_channel:
+    dependency: transitive
+    description:
+      name: web_socket_channel
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.4.0"
   webview_flutter:
     dependency: transitive
     description:
