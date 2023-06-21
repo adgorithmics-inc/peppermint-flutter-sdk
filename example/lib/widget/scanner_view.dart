@@ -26,7 +26,6 @@ class _ScannerViewState extends State<ScannerView> {
         }
         if (result == value) return;
         result = value;
-        Get.log('SCAAAAAAAAN');
         Get.back(result: result);
       }),
     );
