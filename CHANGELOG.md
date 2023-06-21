@@ -1,6 +1,6 @@
 ## 1.0.0
 
-* Update Flutter version to 3.10.
+* Update dependencies versions to support Flutter 3.10.
 
 ## 0.1.9
 
