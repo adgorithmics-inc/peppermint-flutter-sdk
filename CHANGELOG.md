@@ -1,4 +1,4 @@
-## 0.1.10
+## 1.0.0
 
 * Update Flutter version to 3.10.
 
