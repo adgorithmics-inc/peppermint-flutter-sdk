@@ -137,7 +137,8 @@ class ImageGram extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: SvgPicture.asset(
                   'assets/icons/cube.svg',
-                  color: Colors.white,
+                  colorFilter:
+                      const ColorFilter.mode(Colors.white, BlendMode.color),
                   width: isLeaderBoard3D ? 7.0 : 24.0,
                 ),
               ),
@@ -165,7 +166,7 @@ class VideoGram extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _VideoGramState createState() => _VideoGramState();
+  State<VideoGram> createState() => _VideoGramState();
 }
 
 class _VideoGramState extends State<VideoGram> {
@@ -310,7 +311,7 @@ class AudioWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AudioWidgetState createState() => _AudioWidgetState();
+  State<AudioWidget> createState() => _AudioWidgetState();
 }
 
 class _AudioWidgetState extends State<AudioWidget> {

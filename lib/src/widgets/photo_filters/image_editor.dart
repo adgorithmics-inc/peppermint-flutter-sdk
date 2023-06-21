@@ -83,7 +83,7 @@ class SingleImageEditor extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SingleImageEditorState createState() => _SingleImageEditorState();
+  State<SingleImageEditor> createState() => _SingleImageEditorState();
 }
 
 class _SingleImageEditorState extends State<SingleImageEditor> {
@@ -482,14 +482,9 @@ class _SingleImageEditorState extends State<SingleImageEditor> {
                     var data = await screenshotController.capture(
                         pixelRatio: pixelRatio);
                     Popup.pop();
-                    Uint8List? editedImage = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => VImageFilters(
+                    Uint8List? editedImage = await Get.to(() => VImageFilters(
                           image: data!,
-                        ),
-                      ),
-                    );
+                        ));
                     if (editedImage == null) return;
                     removedLayers.clear();
                     undoLayers.clear();
@@ -721,7 +716,7 @@ class _ImageEditorDrawingState extends State<ImageEditorDrawing> {
               onPressed: () async {
                 if (control.paths.isEmpty) return Navigator.pop(context);
                 var data = await control.toImage(color: currentColor);
-                return Navigator.pop(context, data!.buffer.asUint8List());
+                return Get.back(result: data!.buffer.asUint8List());
               },
             ).paddingSymmetric(horizontal: 8),
           ],

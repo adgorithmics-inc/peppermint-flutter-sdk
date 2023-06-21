@@ -23,7 +23,7 @@ class VImageFilters extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _VImageFiltersState createState() => _VImageFiltersState();
+  State<VImageFilters> createState() => _VImageFiltersState();
 }
 
 class _VImageFiltersState extends State<VImageFilters> {
@@ -54,7 +54,7 @@ class _VImageFiltersState extends State<VImageFilters> {
                 Popup.loading();
                 var data = await screenshotController.capture();
                 Popup.pop();
-                Navigator.pop(context, data);
+                Get.back(result: data);
               },
             ).paddingSymmetric(horizontal: 8),
           ],
