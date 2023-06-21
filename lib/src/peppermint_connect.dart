@@ -52,7 +52,7 @@ class WalletConnectManager {
     EthTransaction? onEthSendTransaction,
     required String rpcUri,
   }) async {
-    WCClient _wcClient = WCClient(
+    WCClient wcClient = WCClient(
       onSessionRequest: onSessionRequest,
       onFailure: onFailure,
       onDisconnect: onDisconnect,
@@ -60,18 +60,18 @@ class WalletConnectManager {
       onEthSignTransaction: onEthSignTransaction,
       onEthSendTransaction: onEthSendTransaction,
     );
-    Web3Client _web3client = Web3Client(
+    Web3Client web3client = Web3Client(
       rpcUri,
       http.Client(),
     );
     String? sessionSaved = await storage.read(key: 'session');
-    WCSessionStore? _sessionStore = sessionSaved != null
+    WCSessionStore? sessionStore = sessionSaved != null
         ? WCSessionStore.fromJson(jsonDecode(sessionSaved))
         : null;
-    if (_sessionStore != null) {
-      _wcClient.connectFromSessionStore(_sessionStore);
+    if (sessionStore != null) {
+      wcClient.connectFromSessionStore(sessionStore);
     }
-    return WCAttributes(_wcClient, _sessionStore, _web3client);
+    return WCAttributes(wcClient, sessionStore, web3client);
   }
 
   /// Connect New Session
@@ -197,7 +197,7 @@ class WalletConnectManager {
     } else {
       final creds = EthPrivateKey.fromHex(privateKey);
       final encodedMessage = hexToBytes(ethereumSignMessage.data!);
-      final signedData = await creds.signPersonalMessage(encodedMessage);
+      final signedData = creds.signPersonalMessageToUint8List(encodedMessage);
       signedDataHex = bytesToHex(signedData, include0x: true);
     }
     attributes.wcClient.approveRequest<String>(

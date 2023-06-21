@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 class Styles {
   static ThemeData imageEditorTheme = ThemeData(
     scaffoldBackgroundColor: Colors.black,
-    backgroundColor: Colors.black,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.black87,
       iconTheme: IconThemeData(color: Colors.white),
@@ -22,5 +21,6 @@ class Styles {
     textTheme: const TextTheme(
       bodyMedium: TextStyle(color: Colors.white),
     ),
+    colorScheme: const ColorScheme.light(background: Colors.black),
   );
 }
