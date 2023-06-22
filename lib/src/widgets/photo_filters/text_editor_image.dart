@@ -7,7 +7,7 @@ class TextEditorImage extends StatefulWidget {
   const TextEditorImage({Key? key}) : super(key: key);
 
   @override
-  _TextEditorImageState createState() => _TextEditorImageState();
+  State<TextEditorImage> createState() => _TextEditorImageState();
 }
 
 /// Image filter for ImageEditor.

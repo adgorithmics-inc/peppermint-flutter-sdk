@@ -2,7 +2,7 @@
 echo "Reformatting Flutter code..."
 
 # Reformat Flutter code using the flutter format command
-flutter format . &
+dart format . &
 
 # Wait for the flutter format command to complete
 wait $!

@@ -1,9 +1,6 @@
 import 'package:example/widget/popup.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
-
-import 'widget/scanner.dart';
 
 class WalletConnectPage extends StatefulWidget {
   const WalletConnectPage({Key? key}) : super(key: key);
@@ -380,7 +377,8 @@ class _WalletConnectPageState extends State<WalletConnectPage> {
               ),
             MenuItem(
               onTap: () async {
-                String result = await Get.to(const WalletConnectScanView());
+                String result =
+                    await Get.to(() => const WalletConnectScanView());
                 _attributes =
                     _wcManager.connectNewSession(result, _attributes!);
               },
@@ -449,36 +447,23 @@ class WalletConnectScanView extends StatefulWidget {
 }
 
 class _WalletConnectScanViewState extends State<WalletConnectScanView> {
-  final MobileScannerController controller = MobileScannerController();
+  String result = '';
 
   @override
   Widget build(BuildContext context) {
-    String result = '';
     return Scaffold(
-      appBar: AppBar(
-        title: AppBar(title: const Text('Scanner')),
-      ),
+      appBar: AppBar(title: const Text('Scanner')),
       body: Center(
-        child: Scanner(
-          scanner: MobileScanner(
-            controller: controller,
-            allowDuplicates: false,
-            fit: BoxFit.contain,
-            onDetect: (barcode, args) {
-              if (barcode.rawValue != null) {
-                result = barcode.rawValue ?? '';
-                Get.back(result: result);
-              }
-            },
-          ),
-        ),
+        child: NFTScanner(onDetect: (barcode) async {
+          String value = '';
+          for (final item in barcode.barcodes) {
+            value = item.rawValue ?? '';
+          }
+          if (result == value) return;
+          result = value;
+          Get.back(result: result);
+        }),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
   }
 }

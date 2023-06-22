@@ -1,3 +1,7 @@
+## 1.0.0
+
+* Update dependencies versions to support Flutter 3.10.
+
 ## 0.1.9
 
 * New wallet connect feature.
