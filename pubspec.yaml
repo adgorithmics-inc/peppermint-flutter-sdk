@@ -38,10 +38,13 @@ dependencies:
   web3dart: ^2.3.5
   url_launcher: ^6.1.2
   image_cropper: ^3.0.2
+  http: ^0.13.5
 
 dev_dependencies:
   test: ^1.17.0
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.0
+  build_runner: ^2.2.0 # Create Mock
+  mockito: ^5.3.2 # Create Mock
 
 # flutter pub publish --dry-run
 

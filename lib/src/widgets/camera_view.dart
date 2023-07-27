@@ -200,9 +200,9 @@ class _CameraViewState extends State<CameraView> {
                   child: SizedBox(
                     height: size.width,
                     width: size.width,
-                    child: Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
+                      children: [
                         Divider(color: Colors.white60, height: 5, thickness: 1),
                         Divider(color: Colors.white60, height: 5, thickness: 1),
                       ],
@@ -214,9 +214,9 @@ class _CameraViewState extends State<CameraView> {
                   child: SizedBox(
                     height: size.width,
                     width: size.width,
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
+                      children: [
                         VerticalDivider(
                           color: Colors.white60,
                           width: 5,
