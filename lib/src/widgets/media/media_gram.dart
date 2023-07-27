@@ -165,7 +165,7 @@ class VideoGram extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _VideoGramState createState() => _VideoGramState();
+  State<VideoGram> createState() => _VideoGramState();
 }
 
 class _VideoGramState extends State<VideoGram> {
@@ -310,7 +310,7 @@ class AudioWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AudioWidgetState createState() => _AudioWidgetState();
+  State<AudioWidget> createState() => _AudioWidgetState();
 }
 
 class _AudioWidgetState extends State<AudioWidget> {

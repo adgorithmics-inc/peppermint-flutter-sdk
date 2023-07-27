@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:colorfilter_generator/colorfilter_generator.dart';
 import 'package:colorfilter_generator/presets.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,7 @@ class VImageFilters extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _VImageFiltersState createState() => _VImageFiltersState();
+  State<VImageFilters> createState() => _VImageFiltersState();
 }
 
 class _VImageFiltersState extends State<VImageFilters> {

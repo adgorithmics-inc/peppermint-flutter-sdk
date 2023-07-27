@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'dart:io';
 import 'dart:math' as math;
@@ -83,7 +85,7 @@ class SingleImageEditor extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SingleImageEditorState createState() => _SingleImageEditorState();
+  State<SingleImageEditor> createState() => _SingleImageEditorState();
 }
 
 class _SingleImageEditorState extends State<SingleImageEditor> {
