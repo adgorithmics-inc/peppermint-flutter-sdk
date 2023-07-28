@@ -2,7 +2,7 @@ import 'package:example/utilities_page.dart';
 import 'package:example/wallet_page.dart';
 import 'package:example/widget/button.dart';
 import 'package:flutter/material.dart';
-import 'package:peppermint_sdk/peppermint_sdk.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());

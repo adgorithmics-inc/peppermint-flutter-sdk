@@ -37,6 +37,7 @@ dependencies:
   peppermint_sdk:
     path: ../
   clipboard: ^0.1.3
+  get:
 
 dev_dependencies:
   flutter_test:

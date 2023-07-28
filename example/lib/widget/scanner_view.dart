@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
 /// Scanner widget example
