@@ -1,6 +1,7 @@
 ## 0.2.0
 
 * Chatbot SDK
+* Breaking & resolvable changes. Peppermint SDK is not exporting referenced packages anymore.
 ## 0.1.7
 
 * Update contract model class.

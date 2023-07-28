@@ -7,10 +7,11 @@ import 'package:peppermint_sdk/src/chatbot/models/chat_message_response.dart';
 import 'package:peppermint_sdk/src/chatbot/repo/chatbot_repo.dart';
 
 import '../../../helper/test_helper.mocks.dart';
+import '../json/get_messages_json.dart';
 import '../json/message_reply.dart';
 
 void main() {
-  group('Mock Chatbot API', () {
+  group('Mock Chatbot Repo', () {
     late MockClient mockClient;
     late ChatbotRepo chatbotRepo;
     late MockChatLocalDataSource mockChatLocalDataSource;
@@ -30,7 +31,7 @@ void main() {
       );
     });
 
-    group('Send chat', () {
+    group('Send Chat', () {
       String prompt = 'hi';
 
       test('send chat success', () async {
@@ -69,6 +70,48 @@ void main() {
         );
 
         final result = await chatbotRepo.sendMessage(prompt);
+        String? error = result.getErrorOrNull();
+        expect(error, isA<String>());
+        expect(error, chatbotRepo.noConversation);
+      });
+    });
+
+    group('Get Messages', () {
+      test('get messages success', () async {
+        when(mockChatLocalDataSource.getConversationId()).thenAnswer(
+          (realInvocation) async {
+            return conversationId;
+          },
+        );
+
+        when(mockClient.get(
+          Uri.https(
+            baseUrl,
+            chatbotRepo.messagesUrl,
+            {
+              'chatbot': chatBotId,
+              'conversation': conversationId,
+            },
+          ),
+        )).thenAnswer((realInvocation) async {
+          return Future.value(
+              Response(json.encode(GetMessagesJson().data), 200));
+        });
+
+        final result = await chatbotRepo.getMessages();
+        ChatMessageResponse? data = result.getDataOrNull();
+        expect(data, isA<ChatMessageResponse>());
+        expect(data?.results?.length, GetMessagesJson().data['results'].length);
+      });
+
+      test('get messages fail: no conversation id saved', () async {
+        when(mockChatLocalDataSource.getConversationId()).thenAnswer(
+          (realInvocation) async {
+            return null;
+          },
+        );
+
+        final result = await chatbotRepo.getMessages();
         String? error = result.getErrorOrNull();
         expect(error, isA<String>());
         expect(error, chatbotRepo.noConversation);
