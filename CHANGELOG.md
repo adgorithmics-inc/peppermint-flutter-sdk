@@ -1,3 +1,6 @@
+## 0.2.0
+
+* Chatbot SDK
 ## 0.1.7
 
 * Update contract model class.

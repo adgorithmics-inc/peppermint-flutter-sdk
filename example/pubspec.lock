@@ -974,7 +974,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.1.7"
+    version: "0.2.0"
   permission_handler:
     dependency: transitive
     description:
@@ -1486,4 +1486,4 @@ packages:
     version: "2.0.0"
 sdks:
   dart: ">=3.0.0-0 <4.0.0"
-  flutter: ">=3.3.0"
+  flutter: ">=3.10.5"
