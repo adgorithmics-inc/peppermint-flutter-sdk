@@ -16,6 +16,7 @@ void main() {
     late MockChatLocalDataSource mockChatLocalDataSource;
     const baseUrl = '';
     const chatBotId = 'botId';
+    String conversationId = 'testConversationId';
 
     setUp(() {
       mockClient = MockClient();
@@ -31,7 +32,6 @@ void main() {
 
     group('Send chat', () {
       String prompt = 'hi';
-      String conversationId = 'testConversationId';
 
       test('send chat success', () async {
         when(mockChatLocalDataSource.getConversationId()).thenAnswer(
@@ -51,13 +51,14 @@ void main() {
             'prompt': prompt,
           },
         )).thenAnswer((realInvocation) async {
-          return Future.value(Response(json.encode(MessageReply.json), 200));
+          return Future.value(
+              Response(json.encode(MessageReplyJson.json), 200));
         });
 
         final result = await chatbotRepo.sendMessage(prompt);
         ChatMessage? data = result.getDataOrNull();
         expect(data, isA<ChatMessage>());
-        expect(data?.content, MessageReply.json['content']);
+        expect(data?.content, MessageReplyJson.json['content']);
       });
 
       test('send chat fail: no conversation id saved', () async {

@@ -2,13 +2,6 @@
 //
 //     final chatbotModel = chatbotModelFromJson(jsonString);
 
-import 'dart:convert';
-
-ChatbotModel chatbotModelFromJson(String str) =>
-    ChatbotModel.fromJson(json.decode(str));
-
-String chatbotModelToJson(ChatbotModel data) => json.encode(data.toJson());
-
 class ChatbotModel {
   DateTime? title;
   String? id;

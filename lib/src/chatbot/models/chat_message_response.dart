@@ -2,14 +2,6 @@
 //
 //     final chatMessageResponse = chatMessageResponseFromJson(jsonString);
 
-import 'dart:convert';
-
-ChatMessageResponse chatMessageResponseFromJson(String str) =>
-    ChatMessageResponse.fromJson(json.decode(str));
-
-String chatMessageResponseToJson(ChatMessageResponse data) =>
-    json.encode(data.toJson());
-
 class ChatMessageResponse {
   dynamic next;
   dynamic previous;

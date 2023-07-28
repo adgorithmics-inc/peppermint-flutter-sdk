@@ -387,6 +387,21 @@ class MockChatbotRepo extends _i1.Mock implements _i9.ChatbotRepo {
         ),
       ) as _i3.ChatLocalDataSource);
   @override
+  String get sendChatUrl => (super.noSuchMethod(
+        Invocation.getter(#sendChatUrl),
+        returnValue: '',
+      ) as String);
+  @override
+  String get messagesUrl => (super.noSuchMethod(
+        Invocation.getter(#messagesUrl),
+        returnValue: '',
+      ) as String);
+  @override
+  String get noConversation => (super.noSuchMethod(
+        Invocation.getter(#noConversation),
+        returnValue: '',
+      ) as String);
+  @override
   _i6.Future<_i4.Resource<_i10.ChatMessage>> sendMessage(String? prompt) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -434,6 +449,23 @@ class MockChatbotRepo extends _i1.Mock implements _i9.ChatbotRepo {
           ),
         )),
       ) as _i6.Future<_i4.Resource<_i11.ChatbotModel>>);
+  @override
+  _i6.Future<String?> getSavedConversationId() => (super.noSuchMethod(
+        Invocation.method(
+          #getSavedConversationId,
+          [],
+        ),
+        returnValue: _i6.Future<String?>.value(),
+      ) as _i6.Future<String?>);
+  @override
+  _i6.Future<void> saveConversationId(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #saveConversationId,
+          [id],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }
 
 /// A class which mocks [ChatLocalDataSource].

@@ -29,7 +29,7 @@ class ChatbotRepo {
 
   /// Returned response is chat from AI to reply your sent message
   Future<Resource<ChatMessage>> sendMessage(String prompt) async {
-    String? conversationId = await dataSource.getConversationId();
+    String? conversationId = await getSavedConversationId();
     if (conversationId == null) {
       return noConversation.toResourceFailure();
     }
@@ -55,7 +55,7 @@ class ChatbotRepo {
 
   /// Get message history in single conversation id
   Future<Resource<ChatMessageResponse>> getMessages() async {
-    String? conversationId = await dataSource.getConversationId();
+    String? conversationId = await getSavedConversationId();
     if (conversationId == null) {
       return noConversation.toResourceFailure();
     }
@@ -91,10 +91,18 @@ class ChatbotRepo {
         },
       );
       ChatbotModel data = ChatbotModel.fromJson(json.decode(response.body));
-      dataSource.setConversationId(data.id!);
+      saveConversationId(data.id!);
       return data.toResourceSuccess();
     } catch (e) {
       return '$e'.toResourceFailure();
     }
+  }
+
+  Future<String?> getSavedConversationId() async {
+    return await dataSource.getConversationId();
+  }
+
+  Future<void> saveConversationId(String id) async {
+    return await dataSource.setConversationId(id);
   }
 }

@@ -1,4 +1,4 @@
-class MessageReply {
+class MessageReplyJson {
   static Map<String, dynamic> json = {
     "id": "64c0bbfb3b7750000196dc2e",
     "created_on": "2023-07-26T06:23:55.443274",

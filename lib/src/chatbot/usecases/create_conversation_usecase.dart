@@ -9,7 +9,8 @@ class CreateConversationUsecase {
   CreateConversationUsecase(this._chatbotRepo);
 
   Future<Resource<ChatMessageResponse>> invoke() async {
-    String? conversationId = await _chatbotRepo.dataSource.getConversationId();
+    String? conversationId = await _chatbotRepo.getSavedConversationId();
+
     if (conversationId == null) {
       final result = await _chatbotRepo.createConversation();
       String? error = result.getErrorOrNull();
