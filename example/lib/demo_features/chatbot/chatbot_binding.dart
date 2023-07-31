@@ -1,4 +1,3 @@
-import 'package:example/api/api.dart';
 import 'package:get/get.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 import 'package:http/http.dart';
@@ -14,7 +13,6 @@ class ChatbotBinding extends Bindings {
         dataSource: ChatLocalDataSource(),
       ),
     );
-    Get.lazyPut<WalletClient>(() => WalletClient());
     Get.lazyPut(() => CreateConversationUsecase(Get.find()));
     Get.lazyPut(() => GetMessagesUsecase(Get.find()));
     Get.lazyPut(() => SendMessageUsecase(Get.find()));
