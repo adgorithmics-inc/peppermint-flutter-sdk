@@ -3,6 +3,7 @@ import 'package:example/widget/button.dart';
 import 'package:example/widget/popup.dart';
 import 'package:example/widget/scanner_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
 /// Utilites page.

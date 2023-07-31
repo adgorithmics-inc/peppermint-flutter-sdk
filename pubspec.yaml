@@ -1,17 +1,17 @@
 name: peppermint_sdk
 description: A flutter plugin that let you easily create and manage web3 wallet and support funcitionality of Peppermint
-version: 1.0.0
+version: 0.2.0
 homepage: https://github.com/adgorithmics-inc/peppermint-flutter-sdk
 
 environment:
-  sdk: ">=2.16.1 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: ">=2.18.6 <3.0.0"
+  flutter: ">=3.10.5"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  audioplayers: ^4.1.0
+  audioplayers: ^5.0.0
   cached_network_image: ^3.2.0
   camera: ^0.10.1
   colorfilter_generator: ^0.0.8
@@ -27,7 +27,7 @@ dependencies:
   lottie: ^2.2.0
   mobile_scanner: ^3.2.0
   model_viewer_plus: ^1.3.3
-  nb_utils: ^5.0.8
+  nb_utils: ^6.0.0
   path: ^1.0.1
   path_provider: ^2.0.9
   scan: ^1.6.0
@@ -43,8 +43,12 @@ dependencies:
   http: ^0.13.5
 
 dev_dependencies:
-  test: ^1.17.0
-  flutter_lints: ^2.0.1
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.2.0 # Create Mock
+  mockito: ^5.3.2 # Create Mock
+  analyzer: ^5.13.0
 
 # flutter pub publish --dry-run
 

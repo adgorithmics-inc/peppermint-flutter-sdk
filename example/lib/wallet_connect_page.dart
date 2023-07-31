@@ -1,5 +1,6 @@
 import 'package:example/widget/popup.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
 class WalletConnectPage extends StatefulWidget {

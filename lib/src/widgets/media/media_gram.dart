@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:peppermint_sdk/src/widgets/loading.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -187,7 +190,7 @@ class _VideoGramState extends State<VideoGram> {
       _controller = file != null
           ? VideoPlayerController.file(file!,
               videoPlayerOptions: VideoPlayerOptions(mixWithOthers: widget.mix))
-          : VideoPlayerController.network(widget.url!);
+          : VideoPlayerController.networkUrl(Uri.parse(widget.url!));
       _controller.setLooping(true);
       _initializeVideoPlayerFuture = _controller.initialize().then((_) async {
         await _controller.setVolume(mediaController.mute.value ? 0.0 : 100.0);

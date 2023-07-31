@@ -1,3 +1,7 @@
+## 0.2.0
+
+* Chatbot SDK
+* Breaking & resolvable changes. Peppermint SDK is not exporting referenced packages anymore.
 ## 1.0.0
 
 * Update dependencies versions to support Flutter 3.10.

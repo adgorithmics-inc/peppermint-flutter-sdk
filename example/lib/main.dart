@@ -1,9 +1,12 @@
-import 'package:example/utilities_page.dart';
+import 'package:example/demo_features/chatbot/chatbot_binding.dart';
+import 'package:example/demo_features/chatbot/chatbot_view.dart';
+import 'package:example/demo_utilities/utilities_page.dart';
 import 'package:example/wallet_connect_page.dart';
-import 'package:example/wallet_page.dart';
+import 'package:example/demo_utilities/wallet_page.dart';
+import 'package:example/routes.dart';
 import 'package:example/widget/button.dart';
 import 'package:flutter/material.dart';
-import 'package:peppermint_sdk/peppermint_sdk.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +23,25 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const CreateWalletPage(),
+      getPages: [
+        GetPage(
+          name: Routes.main,
+          page: () => const CreateWalletPage(),
+        ),
+        GetPage(
+          name: Routes.utilities,
+          page: () => const UtilitiesPage(),
+        ),
+        GetPage(
+          name: Routes.widgets,
+          page: () => const WalletPage(),
+        ),
+        GetPage(
+          name: Routes.chatbot,
+          page: () => const ChatbotView(),
+          binding: ChatbotBinding(),
+        ),
+      ],
     );
   }
 }
@@ -49,21 +70,20 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             MyButton(
                 text: 'Utility Example Page',
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const UtilitiesPage()));
+                  Get.toNamed(Routes.utilities);
                 }),
             const SizedBox(height: 16.0),
             MyButton(
                 text: 'Wallet Example Page',
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const WalletPage()));
+                  Get.toNamed(Routes.widgets);
                 }),
             const SizedBox(height: 16.0),
+            MyButton(
+                text: 'Chatbot Example Page',
+                onTap: () {
+                  Get.toNamed(Routes.chatbot);
+                }),
             MyButton(
                 text: 'Wallet Connect Example Page',
                 onTap: () {
