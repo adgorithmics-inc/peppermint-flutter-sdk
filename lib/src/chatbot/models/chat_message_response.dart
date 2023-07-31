@@ -8,7 +8,7 @@ class ChatMessageResponse {
   int? showingFrom;
   int? showingTo;
   int? count;
-  List<ChatMessage>? results;
+  List<ChatMessage> results = [];
 
   ChatMessageResponse({
     this.next,
@@ -16,7 +16,7 @@ class ChatMessageResponse {
     this.showingFrom,
     this.showingTo,
     this.count,
-    this.results,
+    required this.results,
   });
 
   factory ChatMessageResponse.fromJson(Map<String, dynamic> json) =>
@@ -38,9 +38,7 @@ class ChatMessageResponse {
         "showing_from": showingFrom,
         "showing_to": showingTo,
         "count": count,
-        "results": results == null
-            ? []
-            : List<dynamic>.from(results!.map((x) => x.toJson())),
+        "results": List<dynamic>.from(results.map((x) => x.toJson())),
       };
 }
 

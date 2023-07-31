@@ -43,7 +43,7 @@ class ChatbotRepo {
         body: {
           'chatbot': _chatBotId,
           'conversation': conversationId,
-          'prompt': prompt,
+          'prompt': prompt.trim(),
         },
       );
       ChatMessage data = ChatMessage.fromJson(json.decode(response.body));

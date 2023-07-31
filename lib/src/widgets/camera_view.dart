@@ -112,10 +112,10 @@ class _CameraViewState extends State<CameraView> {
     int offsetY = (src.height - min(src.width, src.height)) ~/ 2;
     img.Image destImage = img.copyCrop(
       src,
-      offsetX,
-      offsetY,
-      cropSize,
-      cropSize,
+      x: offsetX,
+      y: offsetY,
+      width: cropSize,
+      height: cropSize,
     );
     if (selectedCamera == 1) destImage = img.flipHorizontal(destImage);
     var jpg = img.encodeJpg(destImage);

@@ -5,7 +5,7 @@ import 'invisible_square.dart';
 
 /// Scanner widget, using MobileScanner Package to scan QR Code.
 class NFTScanner extends StatelessWidget {
-  final Function(Barcode, MobileScannerArguments?) onDetect;
+  final Function(BarcodeCapture?) onDetect;
 
   const NFTScanner({
     Key? key,
@@ -17,7 +17,7 @@ class NFTScanner extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        MobileScanner(allowDuplicates: false, onDetect: onDetect),
+        MobileScanner(onDetect: onDetect),
         AspectRatio(
             aspectRatio: 1.0,
             child: Padding(

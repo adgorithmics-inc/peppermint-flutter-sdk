@@ -18,11 +18,13 @@ class _ScannerViewState extends State<ScannerView> {
       appBar: AppBar(
         title: const Text('Scan'),
       ),
-      body: NFTScanner(onDetect: (barcode, args) async {
-        if (barcode.rawValue != null) {
-          Get.back(result: barcode.rawValue);
-        }
-      }),
+      body: NFTScanner(
+        onDetect: (barcode) async {
+          if (barcode?.barcodes != null) {
+            Get.back(result: barcode?.barcodes[0].displayValue);
+          }
+        },
+      ),
     );
   }
 }
