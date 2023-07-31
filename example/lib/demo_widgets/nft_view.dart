@@ -15,6 +15,7 @@ class NftView extends StatefulWidget {
 
 class _NftViewState extends State<NftView> {
   List<Nft> data = [];
+  List<Contract?> contract = [];
 
   @override
   void initState() {
@@ -30,6 +31,7 @@ class _NftViewState extends State<NftView> {
         List<Nft>.from(jsonDecode.map((model) => Nft.fromJson(model)));
     setState(() {
       data.addAll(posts);
+      contract.addAll(data.map((e) => e.contract));
     });
   }
 
@@ -50,8 +52,14 @@ class _NftViewState extends State<NftView> {
           itemCount: 5,
           shrinkWrap: true,
           itemBuilder: ((context, index) {
-            return MediaGram(
-              data: data[index],
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MediaGram(
+                  data: data[index],
+                ),
+                Text('${data[index].name}\nContract: ${contract[index]?.id}')
+              ],
             );
           })),
     );

@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 
 import 'invisible_square.dart';
 
-/// Scanner widget, using MobileScanner Package to scan QR Code.
-class NFTScanner extends StatelessWidget {
-  final Function(BarcodeCapture) onDetect;
-  final MobileScannerController? controller;
+class Scanner extends StatelessWidget {
+  final Widget scanner;
 
-  const NFTScanner({Key? key, required this.onDetect, this.controller})
-      : super(key: key);
+  const Scanner({required this.scanner, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.center,
       children: [
-        MobileScanner(controller: controller, onDetect: onDetect),
+        scanner,
         AspectRatio(
             aspectRatio: 1.0,
             child: Padding(

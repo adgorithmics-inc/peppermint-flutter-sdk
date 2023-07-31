@@ -56,7 +56,7 @@ class _VImageFiltersState extends State<VImageFilters> {
                 Popup.loading();
                 var data = await screenshotController.capture();
                 Popup.pop();
-                Navigator.pop(context, data);
+                Get.back(result: data);
               },
             ).paddingSymmetric(horizontal: 8),
           ],

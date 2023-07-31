@@ -12,19 +12,23 @@ class ScannerView extends StatefulWidget {
 }
 
 class _ScannerViewState extends State<ScannerView> {
+  String result = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Scan'),
       ),
-      body: NFTScanner(
-        onDetect: (barcode) async {
-          if (barcode?.barcodes != null) {
-            Get.back(result: barcode?.barcodes[0].displayValue);
-          }
-        },
-      ),
+      body: NFTScanner(onDetect: (barcode) async {
+        String value = '';
+        for (final item in barcode.barcodes) {
+          value = item.rawValue ?? '';
+        }
+        if (result == value) return;
+        result = value;
+        Get.back(result: result);
+      }),
     );
   }
 }

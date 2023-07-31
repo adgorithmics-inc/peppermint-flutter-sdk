@@ -2,6 +2,18 @@
 
 * Chatbot SDK
 * Breaking & resolvable changes. Peppermint SDK is not exporting referenced packages anymore.
+## 1.0.0
+
+* Update dependencies versions to support Flutter 3.10.
+
+## 0.1.9
+
+* New wallet connect feature.
+
+## 0.1.8
+
+* Add a contract model class in the export class.
+
 ## 0.1.7
 
 * Update contract model class.

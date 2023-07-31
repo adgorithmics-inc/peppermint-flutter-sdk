@@ -21,5 +21,6 @@ class Styles {
     textTheme: const TextTheme(
       bodyMedium: TextStyle(color: Colors.white),
     ),
+    colorScheme: const ColorScheme.light(background: Colors.black),
   );
 }

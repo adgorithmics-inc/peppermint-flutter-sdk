@@ -1,6 +1,7 @@
 import 'package:example/demo_features/chatbot/chatbot_binding.dart';
 import 'package:example/demo_features/chatbot/chatbot_view.dart';
 import 'package:example/demo_utilities/utilities_page.dart';
+import 'package:example/wallet_connect_page.dart';
 import 'package:example/demo_utilities/wallet_page.dart';
 import 'package:example/routes.dart';
 import 'package:example/widget/button.dart';
@@ -83,6 +84,15 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
                 onTap: () {
                   Get.toNamed(Routes.chatbot);
                 }),
+            MyButton(
+                text: 'Wallet Connect Example Page',
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const WalletConnectPage()));
+                }),
+            const SizedBox(height: 16.0),
           ],
         ),
       ),

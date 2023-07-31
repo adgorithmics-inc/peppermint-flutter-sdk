@@ -95,6 +95,7 @@ String contractName = PeppermintUtility.generateContractName();
 
 
 ```
+This library is able to manage multiple private key and public key per device.
 
 You can see the full example in UtilitiesPage class on `peppermint-flutter-sdk/example/lib/utilities_page.dart`.
 
@@ -131,6 +132,86 @@ File? file = await PeppermintUtility.getVideoFromGallery();
 
 ```
 
+You can see the full example in WalletConnectPage class on `peppermint-flutter-sdk/example/lib/wallet_connect_page.dart`.
 
+Wallet Connect function:
 
-This library is able to manage multiple private key and public key per device.
+```dart
+
+import 'package:peppermint_sdk/peppermint_sdk.dart';
+
+WCAttributes attributes = await WalletConnectManager().initWalletConnect(
+    maticRpcUri: maticRpcUri, //The RPC URI for the blockchain service provider to be used.
+    onDisconnect: (code, reason) {
+      // Respond to disconnect callback
+    },
+    onFailure: (error) {
+      // Respond to connection failure callback
+    },
+    onSessionRequest: (id, peerMeta) {
+      // Respond to connection request callback
+    },
+    onEthSign: (id, message) {
+      // Respond to personal_sign or eth_sign or eth_signTypedData request callback
+    },
+    onEthSendTransaction: (id, tx) {
+      // Respond to eth_sendTransaction request callback
+    },
+    onEthSignTransaction: (id, tx) {
+      // Respond to eth_signTransaction request callback
+    },
+);
+
+// Create WCSession object from wc: uri.
+// Create WCPeerMeta object containing metadata for your app.
+// Connect to a new session.
+attributes = WalletConnectManager().connectNewSession(result, attributes);
+
+// Approve a session connection request.
+attributes = _wcManager.approveSession(
+    attributes: attributes,
+    chainId: 5,
+    rpcNetwork: 'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+    walletAddress: walletAddress,
+);
+
+// Approve a sign request
+attributes = await _wcManager.confirmSign(
+    attributes: attributes,
+    id: id,
+    ethereumSignMessage: ethereumSignMessage,
+    privateKey: walletAddress,
+);
+
+// Approve a sign transaction request
+attributes = await _wcManager.confirmSignTransaction(
+    attributes: attributes,
+    id: id,
+    ethereumTransaction: ethereumTransaction,
+    privateKey: walletAddress,
+);
+
+// Approve a send transaction request
+attributes = await _wcManager.confirmSendTransaction(
+    attributes: attributes,
+    id: id,
+    ethereumTransaction: ethereumTransaction,
+    privateKey: walletAddress,
+);
+
+// Get Gas Price
+BigInt gasPrice = await _wcManager.getGasPrice(
+    attributes: attributes,
+    ethereumTransaction: ethereumTransaction,
+);
+
+// Reject a session connection request.
+attributes.wcClient.rejectSession();
+
+// Reject any of the requests above by specifying request id
+attributes.wcClient.rejectRequest(id: id);
+
+// Permanently close a connected session
+attributes.wcClient.killSession();
+
+```

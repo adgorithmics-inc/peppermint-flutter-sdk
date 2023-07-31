@@ -141,7 +141,7 @@ class ImageGram extends StatelessWidget {
                 child: SvgPicture.asset(
                   'assets/icons/cube.svg',
                   colorFilter:
-                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                      const ColorFilter.mode(Colors.white, BlendMode.color),
                   width: isLeaderBoard3D ? 7.0 : 24.0,
                 ),
               ),
