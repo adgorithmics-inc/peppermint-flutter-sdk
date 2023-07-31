@@ -1,4 +1,4 @@
-import '../../resource.dart';
+import '../../../resource.dart';
 import '../models/chat_message_response.dart';
 import '../repo/chatbot_repo.dart';
 

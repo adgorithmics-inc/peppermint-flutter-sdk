@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:peppermint_sdk/src/chatbot/models/chatbot_model.dart';
+import 'package:peppermint_sdk/src/peppermint_functionalities/chatbot/models/chatbot_model.dart';
 
-import '../../resource.dart';
+import '../../../resource.dart';
 import '../data_source/chat_local_data_source.dart';
 import '../models/chat_message_response.dart';
 

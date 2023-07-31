@@ -1,4 +1,4 @@
-import 'package:peppermint_sdk/src/chatbot/repo/chatbot_repo.dart';
+import 'package:peppermint_sdk/src/peppermint_functionalities/chatbot/repo/chatbot_repo.dart';
 import 'package:peppermint_sdk/src/resource.dart';
 
 import '../models/chat_message_response.dart';

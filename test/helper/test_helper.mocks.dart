@@ -10,17 +10,19 @@ import 'dart:typed_data' as _i8;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i5;
 import 'package:http/http.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:peppermint_sdk/src/chatbot/data_source/chat_local_data_source.dart'
+import 'package:peppermint_sdk/src/peppermint_functionalities/chatbot/data_source/chat_local_data_source.dart'
     as _i3;
-import 'package:peppermint_sdk/src/chatbot/models/chat_message_response.dart'
+import 'package:peppermint_sdk/src/peppermint_functionalities/chatbot/models/chat_message_response.dart'
     as _i10;
-import 'package:peppermint_sdk/src/chatbot/models/chatbot_model.dart' as _i11;
-import 'package:peppermint_sdk/src/chatbot/repo/chatbot_repo.dart' as _i9;
-import 'package:peppermint_sdk/src/chatbot/usecases/create_conversation_usecase.dart'
+import 'package:peppermint_sdk/src/peppermint_functionalities/chatbot/models/chatbot_model.dart'
+    as _i11;
+import 'package:peppermint_sdk/src/peppermint_functionalities/chatbot/repo/chatbot_repo.dart'
+    as _i9;
+import 'package:peppermint_sdk/src/peppermint_functionalities/chatbot/usecases/create_conversation_usecase.dart'
     as _i12;
-import 'package:peppermint_sdk/src/chatbot/usecases/get_messages_usecase.dart'
+import 'package:peppermint_sdk/src/peppermint_functionalities/chatbot/usecases/get_messages_usecase.dart'
     as _i13;
-import 'package:peppermint_sdk/src/chatbot/usecases/send_message_usecase.dart'
+import 'package:peppermint_sdk/src/peppermint_functionalities/chatbot/usecases/send_message_usecase.dart'
     as _i14;
 import 'package:peppermint_sdk/src/resource.dart' as _i4;
 

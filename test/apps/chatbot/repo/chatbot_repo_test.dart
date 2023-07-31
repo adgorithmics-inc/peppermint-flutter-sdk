@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:mockito/mockito.dart';
-import 'package:peppermint_sdk/src/chatbot/models/chat_message_response.dart';
-import 'package:peppermint_sdk/src/chatbot/repo/chatbot_repo.dart';
+import 'package:peppermint_sdk/src/peppermint_functionalities/chatbot/models/chat_message_response.dart';
+import 'package:peppermint_sdk/src/peppermint_functionalities/chatbot/repo/chatbot_repo.dart';
 
 import '../../../helper/test_helper.mocks.dart';
 import '../json/get_messages_json.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:peppermint_sdk/src/chatbot/usecases/create_conversation_usecase.dart';
+import 'package:peppermint_sdk/src/peppermint_functionalities/chatbot/usecases/create_conversation_usecase.dart';
 import '../../../helper/test_helper.mocks.dart';
 import 'package:peppermint_sdk/src/resource.dart';
 
