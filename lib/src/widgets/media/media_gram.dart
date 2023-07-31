@@ -140,7 +140,8 @@ class ImageGram extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: SvgPicture.asset(
                   'assets/icons/cube.svg',
-                  color: Colors.white,
+                  colorFilter:
+                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                   width: isLeaderBoard3D ? 7.0 : 24.0,
                 ),
               ),
@@ -189,7 +190,7 @@ class _VideoGramState extends State<VideoGram> {
       _controller = file != null
           ? VideoPlayerController.file(file!,
               videoPlayerOptions: VideoPlayerOptions(mixWithOthers: widget.mix))
-          : VideoPlayerController.network(widget.url!);
+          : VideoPlayerController.networkUrl(Uri.parse(widget.url!));
       _controller.setLooping(true);
       _initializeVideoPlayerFuture = _controller.initialize().then((_) async {
         await _controller.setVolume(mediaController.mute.value ? 0.0 : 100.0);

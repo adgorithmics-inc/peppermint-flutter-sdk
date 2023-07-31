@@ -101,7 +101,7 @@ void main() {
         final result = await chatbotRepo.getMessages();
         ChatMessageResponse? data = result.getDataOrNull();
         expect(data, isA<ChatMessageResponse>());
-        expect(data?.results?.length, GetMessagesJson().data['results'].length);
+        expect(data?.results.length, GetMessagesJson().data['results'].length);
       });
 
       test('get messages fail: no conversation id saved', () async {
