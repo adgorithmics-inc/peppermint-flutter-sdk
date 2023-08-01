@@ -6,4 +6,5 @@ class Routes {
   static const String widgets = '/widgets';
 
   static const String chatbot = '/chatbot';
+  static const String nftView = '/nftView';
 }

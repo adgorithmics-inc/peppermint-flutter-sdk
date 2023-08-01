@@ -23,3 +23,7 @@ export 'src/peppermint_functionalities/chatbot/models/chat_message_response.dart
 export 'src/peppermint_functionalities/chatbot/models/chatbot_model.dart';
 export 'src/peppermint_functionalities/chatbot/data_source/chat_local_data_source.dart';
 export 'src/peppermint_functionalities/chatbot/controller/chatbot_controller.dart';
+export 'package:peppermint_sdk/src/peppermint_functionalities/nft/repo/nft_repo.dart';
+export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/get_nft_usecase.dart';
+export 'package:peppermint_sdk/src/api/error_handler.dart';
+export 'package:peppermint_sdk/src/peppermint_functionalities/base/base_controller.dart';
