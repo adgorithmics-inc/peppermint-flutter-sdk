@@ -3,24 +3,21 @@ import 'package:peppermint_sdk/peppermint_sdk.dart';
 import 'package:peppermint_sdk/src/api/api_list_response.dart';
 
 class NftRepo {
-  final GetConnect _walletClient;
+  final GetConnect _getClient;
   final ErrorHandlers _errorHandler;
-  final String _baseUrl;
 
   NftRepo({
     required walletClient,
     required errorHandler,
-    required baseUrl,
-  })  : _walletClient = walletClient,
-        _baseUrl = baseUrl,
+  })  : _getClient = walletClient,
         _errorHandler = errorHandler;
 
   String token = '/api/v2/tokens/';
 
   Future<Resource<ApiListResponse<Nft>>> getNftList(
       {required int page, required String owner}) async {
-    Response response = await _walletClient.get(
-      '$_baseUrl$token',
+    Response response = await _getClient.get(
+      token,
       query: {
         'owner': owner,
         'page': '$page',

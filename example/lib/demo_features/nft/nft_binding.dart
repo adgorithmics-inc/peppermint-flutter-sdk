@@ -1,3 +1,4 @@
+import 'package:example/api/api.dart';
 import 'package:example/demo_features/nft/nft_controller.dart';
 import 'package:get/get.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
@@ -7,8 +8,7 @@ class NftBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<NftRepo>(
       () => NftRepo(
-        walletClient: GetConnect(),
-        baseUrl: 'https://peppermint-api.dev',
+        walletClient: Get.put(WalletClient()),
         errorHandler: ErrorHandlers(
             wrong: 'Something went wrong',
             forbidden: 'Forbidden request',
@@ -20,6 +20,7 @@ class NftBinding extends Bindings {
 
     Get.lazyPut<NftController>(() => NftController(
           getNftListUseCase: Get.find(),
+          walletManager: WalletManager(),
         ));
   }
 }
