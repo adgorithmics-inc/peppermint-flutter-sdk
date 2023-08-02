@@ -26,4 +26,3 @@ export 'src/peppermint_functionalities/chatbot/controller/chatbot_controller.dar
 export 'package:peppermint_sdk/src/peppermint_functionalities/nft/repo/nft_repo.dart';
 export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/get_nft_usecase.dart';
 export 'package:peppermint_sdk/src/api/error_handler.dart';
-export 'package:peppermint_sdk/src/peppermint_functionalities/base/base_controller.dart';

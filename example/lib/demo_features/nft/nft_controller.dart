@@ -1,3 +1,4 @@
+import 'package:example/base/base_controller.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
 class NftController extends BaseListController {
