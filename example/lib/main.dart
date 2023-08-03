@@ -1,6 +1,7 @@
 import 'package:example/demo_features/chatbot/chatbot_binding.dart';
 import 'package:example/demo_features/chatbot/chatbot_view.dart';
 import 'package:example/demo_features/nft/nft_binding.dart';
+import 'package:example/demo_features/nft/nft_detail_page.dart';
 import 'package:example/demo_features/nft/nft_list_view.dart';
 import 'package:example/demo_utilities/utilities_page.dart';
 import 'package:example/wallet_connect_page.dart';
@@ -47,6 +48,10 @@ class MyApp extends StatelessWidget {
           name: Routes.nftView,
           page: () => const NftViewList(),
           binding: NftBinding(),
+        ),
+        GetPage(
+          name: Routes.nftViewDetail,
+          page: () => const NftDetailPage(),
         ),
       ],
     );

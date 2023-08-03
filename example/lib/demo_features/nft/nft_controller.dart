@@ -1,18 +1,26 @@
 import 'package:example/base/base_controller.dart';
+import 'package:example/routes.dart';
+import 'package:example/widget/popup.dart';
+import 'package:get/get.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
 class NftController extends BaseListController {
   final GetNftListUseCase _getNftListUseCase;
+  final LaunchNftUseCase _launchNftUseCase;
+
   final WalletManager _manager;
 
   NftController(
       {required GetNftListUseCase getNftListUseCase,
-      required WalletManager walletManager})
+      required WalletManager walletManager,
+      required LaunchNftUseCase launchNftUseCase})
       : _getNftListUseCase = getNftListUseCase,
+        _launchNftUseCase = launchNftUseCase,
         _manager = walletManager;
 
   List<Nft> listNft = [];
   String? walletAddress;
+  Nft? detailData;
 
   init() async {
     loading = true;
@@ -46,6 +54,23 @@ class NftController extends BaseListController {
     update();
 
     super.getData();
+  }
+
+  void launchNft(String id) async {
+    Popup.loading();
+    final resource = await _launchNftUseCase.invoke(
+      id: id,
+    );
+    Popup.pop();
+    resource.when(onSuccess: (onSuccess) {
+      detailData = onSuccess;
+      Get.toNamed(
+        Routes.nftViewDetail,
+      );
+    }, onFailure: (onFailure) {
+      Popup.error(onFailure);
+      return;
+    });
   }
 
   @override

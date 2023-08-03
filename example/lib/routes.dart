@@ -7,4 +7,5 @@ class Routes {
 
   static const String chatbot = '/chatbot';
   static const String nftView = '/nftView';
+  static const String nftViewDetail = '/nftViewDetail';
 }

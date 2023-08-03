@@ -1,4 +1,5 @@
 import 'package:example/demo_features/nft/nft_controller.dart';
+import 'package:example/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
@@ -18,7 +19,21 @@ class NftViewList extends GetView<NftController> {
               itemCount: controller.listNft.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return MediaGram(data: nftController.listNft[index]);
+                return Column(
+                  children: [
+                    MediaGram(data: nftController.listNft[index]),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    MyButton(
+                      text: "Launch Nft",
+                      onTap: () {
+                        nftController
+                            .launchNft(nftController.listNft[index].id!);
+                      },
+                    )
+                  ],
+                );
               },
               separatorBuilder: (context, index) {
                 return const Divider(
