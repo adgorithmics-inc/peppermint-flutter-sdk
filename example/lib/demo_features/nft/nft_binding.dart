@@ -18,7 +18,6 @@ class NftBinding extends Bindings {
     );
     Get.lazyPut(() => GetNftListUseCase(Get.find()));
     Get.lazyPut(() => TokenDetailUsecase(Get.find()));
-    Get.lazyPut(() => GetFreeNftUseCase(Get.find()));
     Get.lazyPut(() => ExchangeCodeUseCase(Get.find()));
 
     Get.lazyPut<NftController>(() => NftController(
