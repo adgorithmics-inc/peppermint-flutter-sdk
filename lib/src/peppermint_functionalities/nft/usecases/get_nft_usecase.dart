@@ -9,9 +9,8 @@ class GetNftListUseCase {
   GetNftListUseCase(this._nftRepo);
 
   Future<Resource<ApiListResponse<Nft>>> invoke({
-    required int page,
-    required String owner,
+    required Map<String, String> query,
   }) async {
-    return _nftRepo.getNftList(page: page, owner: owner);
+    return _nftRepo.getNft(query: query);
   }
 }
