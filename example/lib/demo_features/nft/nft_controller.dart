@@ -6,14 +6,14 @@ import 'package:peppermint_sdk/peppermint_sdk.dart';
 
 class NftController extends BaseListController {
   final GetNftListUseCase _getNftListUseCase;
-  final LaunchNftUseCase _launchNftUseCase;
+  final TokenDetailUsecase _launchNftUseCase;
 
   final WalletManager _manager;
 
   NftController(
       {required GetNftListUseCase getNftListUseCase,
       required WalletManager walletManager,
-      required LaunchNftUseCase launchNftUseCase})
+      required TokenDetailUsecase launchNftUseCase})
       : _getNftListUseCase = getNftListUseCase,
         _launchNftUseCase = launchNftUseCase,
         _manager = walletManager;
@@ -39,8 +39,11 @@ class NftController extends BaseListController {
     loading = true;
     error = '';
     final resource = await _getNftListUseCase.invoke(
-      page: page,
-      owner: walletAddress!,
+      query: {
+        'owner': walletAddress!,
+        'page': '$page',
+        'status': 'minted, pending',
+      },
     );
 
     resource.when(onSuccess: (onSuccess) {
