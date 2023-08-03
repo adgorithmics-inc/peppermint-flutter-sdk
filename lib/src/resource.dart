@@ -9,8 +9,8 @@ abstract class Resource<T1> {
   /// [onFailure] called when the Resource is a ResourceFailure.
   /// Exposes the wrapped [Error].
   R when<R>(
-      {required R Function(T1) onSuccess,
-      required R Function(String) onFailure}) {
+      {required R Function(T1 data) onSuccess,
+      required R Function(String errorMessage) onFailure}) {
     if (this is ResourceSuccess<T1>) {
       return onSuccess(getDataOrThrow());
     } else if (this is ResourceFailure<T1>) {
@@ -19,6 +19,15 @@ abstract class Resource<T1> {
       throw ArgumentError('Invalid sealed class instance');
     }
   }
+
+  /// Quick helper method to check if Resource has data.
+  bool get hasData => getDataOrNull() != null;
+
+  /// Returns data.
+  /// Use [getDataOrNull] if you're unsure if it's a success.
+  /// Use [getDataOrThrow] if you need direct throw exception.
+  /// When you call this, make sure you've secured it with [hasData]
+  T1 get data => (this as ResourceSuccess<T1>).data;
 
   /// helper method to get the data from a Resource.
   /// returns null if the Resource is a ResourceFailure.
@@ -38,6 +47,15 @@ abstract class Resource<T1> {
     throw ArgumentError(
         'getDataOrThrow // The Resource is not a ResourceSuccess');
   }
+
+  /// Quick helper method to check if Resource has error.
+  bool get hasError => getErrorOrNull() != null;
+
+  /// Returns data.
+  /// Use [getErrorOrNull] if you're unsure if it's a success.
+  /// Use [getErrorOrThrow] if you need direct throw exception.
+  /// When you call this, make sure you've secured it with [hasError]
+  String get error => (this as ResourceFailure<T1>).error;
 
   /// helper method to get an exception from a Resource.
   /// returns null if the Resource is a ResourceSuccess.
@@ -71,6 +89,7 @@ abstract class Resource<T1> {
 /// A wrapper over the data returned by the mobile backend. Signifies a successful
 /// scenario.
 class ResourceSuccess<T1> extends Resource<T1> {
+  @override
   final T1 data;
 
   ResourceSuccess(this.data);
@@ -79,6 +98,7 @@ class ResourceSuccess<T1> extends Resource<T1> {
 /// A wrapper over an error thrown by the mobile backend. Signifies that something
 /// went wrong when executing the operation.
 class ResourceFailure<T1> extends Resource<T1> {
+  @override
   final String error;
 
   ResourceFailure(this.error);

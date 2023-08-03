@@ -16,11 +16,18 @@ class NftRepo {
   String token = '/api/v2/tokens/';
   String exchange = '/api/v2/tokens/exchange/';
 
-  Future<Resource<ApiListResponse<Nft>>> getNft(
-      {required Map<String, String> query}) async {
+  Future<Resource<ApiListResponse<Nft>>> getOwnedToken({
+    required String walletAddress,
+    required int page,
+    String? status,
+  }) async {
     Response response = await _getClient.get(
       token,
-      query: query,
+      query: {
+        'owner': walletAddress,
+        'page': '$page',
+        'status': status,
+      },
     );
     if (response.status.hasError) {
       return _errorHandler.errorHandler(response).toResourceFailure();
@@ -33,7 +40,7 @@ class NftRepo {
     return res.toResourceSuccess();
   }
 
-  Future<Resource<Nft>> generateNft({
+  Future<Resource<Nft>> getTokenDetail({
     required String? id,
   }) async {
     Response response = await _getClient.get(
@@ -50,10 +57,13 @@ class NftRepo {
     required String? code,
     required String? walletAddress,
   }) async {
-    Response response = await _getClient.post(exchange, {
-      'code': code,
-      'owner': walletAddress,
-    });
+    Response response = await _getClient.post(
+      exchange,
+      {
+        'code': code,
+        'owner': walletAddress,
+      },
+    );
     if (response.status.hasError) {
       return _errorHandler.errorHandler(response).toResourceFailure();
     }

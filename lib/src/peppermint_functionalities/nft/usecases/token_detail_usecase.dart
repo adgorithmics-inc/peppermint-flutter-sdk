@@ -10,6 +10,6 @@ class TokenDetailUsecase {
   Future<Resource<Nft>> invoke({
     required String? id,
   }) async {
-    return _nftRepo.generateNft(id: id);
+    return _nftRepo.getTokenDetail(id: id);
   }
 }

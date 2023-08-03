@@ -34,16 +34,16 @@ class NftController extends BaseListController {
     getData();
   }
 
+  /// Wallet address is marked as not nullable because the condition is handled
+  /// beforehand.
   @override
   void getData() async {
     loading = true;
     error = '';
     final resource = await _getNftListUseCase.invoke(
-      query: {
-        'owner': walletAddress!,
-        'page': '$page',
-        'status': 'minted, pending',
-      },
+      page: page,
+      walletAddress: walletAddress!,
+      status: 'minted, pending',
     );
 
     resource.when(onSuccess: (onSuccess) {

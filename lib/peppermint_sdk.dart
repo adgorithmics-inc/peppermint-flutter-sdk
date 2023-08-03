@@ -15,17 +15,8 @@ export 'src/widgets/media/media_gram.dart';
 export 'src/widgets/nft_scanner.dart';
 export 'src/resource.dart';
 
-export 'src/peppermint_functionalities/chatbot/repo/chatbot_repo.dart';
-export 'src/peppermint_functionalities/chatbot/usecases/create_conversation_usecase.dart';
-export 'src/peppermint_functionalities/chatbot/usecases/get_messages_usecase.dart';
-export 'src/peppermint_functionalities/chatbot/usecases/send_message_usecase.dart';
-export 'src/peppermint_functionalities/chatbot/models/chat_message_response.dart';
-export 'src/peppermint_functionalities/chatbot/models/chatbot_model.dart';
-export 'src/peppermint_functionalities/chatbot/data_source/chat_local_data_source.dart';
-export 'src/peppermint_functionalities/chatbot/controller/chatbot_controller.dart';
 export 'package:peppermint_sdk/src/peppermint_functionalities/nft/repo/nft_repo.dart';
-export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/get_nft_usecase.dart';
+export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/get_nft_list_usecase.dart';
 export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/exchange_code_usecase.dart';
-export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/get_free_nft_usecase.dart';
 export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/token_detail_usecase.dart';
 export 'package:peppermint_sdk/src/api/error_handler.dart';
