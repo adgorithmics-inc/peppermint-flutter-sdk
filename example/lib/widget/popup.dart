@@ -118,4 +118,20 @@ class Popup {
       ),
     );
   }
+
+  static void loading({bool dismissable = false}) {
+    Get.dialog(
+        WillPopScope(
+          onWillPop: () async {
+            return false;
+          },
+          child: const Center(
+              child: CircularProgressIndicator(color: Colors.black)),
+        ),
+        barrierDismissible: dismissable);
+  }
+
+  static void pop() {
+    Get.back();
+  }
 }

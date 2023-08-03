@@ -25,4 +25,7 @@ export 'src/peppermint_functionalities/chatbot/data_source/chat_local_data_sourc
 export 'src/peppermint_functionalities/chatbot/controller/chatbot_controller.dart';
 export 'package:peppermint_sdk/src/peppermint_functionalities/nft/repo/nft_repo.dart';
 export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/get_nft_usecase.dart';
+export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/exchange_code_usecase.dart';
+export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/get_free_nft_usecase.dart';
+export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/token_detail_usecase.dart';
 export 'package:peppermint_sdk/src/api/error_handler.dart';
