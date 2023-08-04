@@ -3,6 +3,8 @@ import 'package:peppermint_sdk/peppermint_sdk.dart';
 import 'package:peppermint_sdk/src/api/api_list_response.dart';
 import 'package:peppermint_sdk/src/api/api_response.dart';
 
+/// This class contains all the function
+/// to get data from the API.
 class NftRepo {
   final GetConnect _getClient;
   final ErrorHandlers _errorHandler;
@@ -16,6 +18,9 @@ class NftRepo {
   String token = '/api/v2/tokens/';
   String exchange = '/api/v2/tokens/exchange/';
 
+  /// get token(NFT) list that own by the user.
+  /// will return list of NFT token.
+  /// "status" parameter is an optional
   Future<Resource<ApiListResponse<Nft>>> getOwnedToken({
     required String walletAddress,
     required int page,
@@ -40,6 +45,7 @@ class NftRepo {
     return res.toResourceSuccess();
   }
 
+  /// get token(NFT) detail data by ID
   Future<Resource<Nft>> getTokenDetail({
     required String? id,
   }) async {
@@ -53,6 +59,8 @@ class NftRepo {
     return Nft.fromJson(apiResonses.data).toResourceSuccess();
   }
 
+  /// Exchange code from QR code scanned to NFT
+  /// will return NFT response
   Future<Resource<Nft>> exchangeCodeToNft({
     required String? code,
     required String? walletAddress,

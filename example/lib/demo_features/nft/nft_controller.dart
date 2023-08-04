@@ -6,7 +6,7 @@ import 'package:peppermint_sdk/peppermint_sdk.dart';
 
 class NftController extends BaseListController {
   final GetNftListUseCase _getNftListUseCase;
-  final TokenDetailUsecase _launchNftUseCase;
+  final TokenDetailUsecase _tokenDetailUsecase;
 
   final WalletManager _manager;
 
@@ -15,13 +15,15 @@ class NftController extends BaseListController {
       required WalletManager walletManager,
       required TokenDetailUsecase launchNftUseCase})
       : _getNftListUseCase = getNftListUseCase,
-        _launchNftUseCase = launchNftUseCase,
+        _tokenDetailUsecase = launchNftUseCase,
         _manager = walletManager;
 
   List<Nft> listNft = [];
   String? walletAddress;
   Nft? detailData;
 
+  /// get user wallet address by key
+  /// before use it to get NFT list data.
   init() async {
     loading = true;
     await _manager.initWallet(
@@ -59,9 +61,10 @@ class NftController extends BaseListController {
     super.getData();
   }
 
-  void launchNft(String id) async {
+  /// get token(NFT) detail data by ID
+  void getTokenDetail(String id) async {
     Popup.loading();
-    final resource = await _launchNftUseCase.invoke(
+    final resource = await _tokenDetailUsecase.invoke(
       id: id,
     );
     Popup.pop();

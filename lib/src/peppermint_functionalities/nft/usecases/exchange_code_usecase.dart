@@ -7,6 +7,9 @@ class ExchangeCodeUseCase {
 
   ExchangeCodeUseCase(this._nftRepo);
 
+  /// exchangeCode usecase, will convert
+  /// the code from scanned qr before send it for
+  /// minting the token.
   Future<Resource<Nft>> invoke({
     required String code,
     required String walletAddress,
