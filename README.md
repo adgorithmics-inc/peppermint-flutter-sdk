@@ -258,23 +258,22 @@ import 'package:peppermint_sdk/peppermint_sdk.dart';
 
 // Get the data from the repository through the Peppermint SDK.
 final resource = await _tokenDetailUsecase.invoke(
-      id: id,
-    );
+  id: id,
+);
 
 // Determine the next step after the resource above return success or fail.
 // The onSuccess below will return a define-class-model of the usecase.
 // See more detail of this usecase example on this path:
 // lib/src/peppermint_functionalities/nft/usecases/token_detail_usecase.dart
 resource.when(onSuccess: (onSuccess) {
-      detailData = onSuccess;
-      Get.toNamed(
-        Routes.nftViewDetail,
-      );
-    }, onFailure: (onFailure) {
-      Popup.error(onFailure);
-      return;
-    });
-
+  detailData = onSuccess;
+    Get.toNamed(
+      Routes.nftViewDetail,
+    );
+  }, onFailure: (onFailure) {
+    Popup.error(onFailure);
+    return;
+  });
 
 ```
 
