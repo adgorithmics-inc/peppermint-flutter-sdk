@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
+/// this class contains the example of
+/// NFT list that received from GetNftListUseCase class.
 class NftViewList extends GetView<NftController> {
   const NftViewList({super.key});
 
@@ -29,7 +31,7 @@ class NftViewList extends GetView<NftController> {
                       text: "Launch Nft",
                       onTap: () {
                         nftController
-                            .launchNft(nftController.listNft[index].id!);
+                            .getTokenDetail(nftController.listNft[index].id!);
                       },
                     )
                   ],

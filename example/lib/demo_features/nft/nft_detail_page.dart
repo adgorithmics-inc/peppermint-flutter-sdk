@@ -2,6 +2,8 @@ import 'package:example/demo_features/nft/nft_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+/// this class contains the example of
+/// NFT list that received from TokenDetailUsecase class.
 class NftDetailPage extends StatelessWidget {
   const NftDetailPage({super.key});
 

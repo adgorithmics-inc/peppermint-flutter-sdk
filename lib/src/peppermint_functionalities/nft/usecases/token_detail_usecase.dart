@@ -7,6 +7,7 @@ class TokenDetailUsecase {
 
   TokenDetailUsecase(this._nftRepo);
 
+  /// get token(NFT) detail data by ID
   Future<Resource<Nft>> invoke({
     required String? id,
   }) async {
