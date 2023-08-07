@@ -44,7 +44,7 @@ class NftController extends BaseListController {
     error = '';
     final resource = await _getNftListUseCase.invoke(
       page: page,
-      walletAddress: '0x93cd916bA08c905f4c05b6D3C71432F59205a787',
+      walletAddress: walletAddress!,
       status: 'minted, pending',
     );
 
