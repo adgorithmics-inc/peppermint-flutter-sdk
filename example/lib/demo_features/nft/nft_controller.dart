@@ -36,8 +36,8 @@ class NftController extends BaseListController {
     getData();
   }
 
-  /// Wallet address is marked as not nullable because the condition is handled
-  /// beforehand.
+  /// Wallet address is marked as not nullable,
+  /// because the condition is handled beforehand.
   @override
   void getData() async {
     loading = true;
