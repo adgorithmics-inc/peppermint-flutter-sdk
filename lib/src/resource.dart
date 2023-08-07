@@ -2,7 +2,7 @@
 /// two states are possible: success or failure.
 /// ResourceSuccess is a wrapper over the data returned by the backend.
 /// ResourceFailure is a wrapper over the exception thrown by the mobile backend.
-abstract class Resource<T1> {
+abstract class PeppermintResource<T1> {
   /// helper method to process a resource.
   /// [onSuccess] called when the Resource is a ResourceSuccess.
   /// Exposes the wrapped data.
@@ -78,7 +78,7 @@ abstract class Resource<T1> {
 
   /// casts a ResourceFailure to another type to overcome Dart type inference
   /// limitations.
-  Resource<OtherType> castFailure<OtherType>() {
+  PeppermintResource<OtherType> castFailure<OtherType>() {
     if (this is ResourceFailure<T1>) {
       return getErrorOrThrow().toResourceFailure<OtherType>();
     }
@@ -88,7 +88,7 @@ abstract class Resource<T1> {
 
 /// A wrapper over the data returned by the mobile backend. Signifies a successful
 /// scenario.
-class ResourceSuccess<T1> extends Resource<T1> {
+class ResourceSuccess<T1> extends PeppermintResource<T1> {
   @override
   final T1 data;
 
@@ -97,18 +97,18 @@ class ResourceSuccess<T1> extends Resource<T1> {
 
 /// A wrapper over an error thrown by the mobile backend. Signifies that something
 /// went wrong when executing the operation.
-class ResourceFailure<T1> extends Resource<T1> {
+class ResourceFailure<T1> extends PeppermintResource<T1> {
   @override
   final String error;
 
   ResourceFailure(this.error);
 }
 
-extension ResourceExtensions<T1> on Resource<T1> {}
+extension ResourceExtensions<T1> on PeppermintResource<T1> {}
 
 extension ResourceDataExtensions<T1> on T1 {
   /// helper method to convert data to a ResourceSuccess.
-  Resource<T1> toResourceSuccess() {
+  PeppermintResource<T1> toResourceSuccess() {
     if (this is Error) {
       throw "Cannot convert Error to ResourceSuccess; convert to ResourceFailure instead";
     }
@@ -123,7 +123,7 @@ extension ResourceDataExtensions<T1> on T1 {
 
 extension ResourceErrorExtensions on String {
   /// helper method to convert an exception to a ResourceFailure.
-  Resource<T1> toResourceFailure<T1>() {
+  PeppermintResource<T1> toResourceFailure<T1>() {
     return ResourceFailure(this);
   }
 }
