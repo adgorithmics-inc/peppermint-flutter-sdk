@@ -21,7 +21,7 @@ class NftRepo {
   /// get token(NFT) list that own by the user.
   /// will return list of NFT token.
   /// "status" parameter is an optional
-  Future<Resource<ApiListResponse<Nft>>> getOwnedToken({
+  Future<PeppermintResource<ApiListResponse<Nft>>> getOwnedToken({
     required String walletAddress,
     required int page,
     String? status,
@@ -46,7 +46,7 @@ class NftRepo {
   }
 
   /// get token(NFT) detail data by ID
-  Future<Resource<Nft>> getTokenDetail({
+  Future<PeppermintResource<Nft>> getTokenDetail({
     required String? id,
   }) async {
     Response response = await _getClient.get(
@@ -61,7 +61,7 @@ class NftRepo {
 
   /// Exchange code from QR code scanned to NFT
   /// will return NFT response
-  Future<Resource<Nft>> exchangeCodeToNft({
+  Future<PeppermintResource<Nft>> exchangeCodeToNft({
     required String? code,
     required String? walletAddress,
   }) async {

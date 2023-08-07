@@ -10,7 +10,7 @@ class ExchangeCodeUseCase {
   /// exchangeCode usecase, will convert
   /// the code from scanned qr before send it for
   /// minting the token.
-  Future<Resource<Nft>> invoke({
+  Future<PeppermintResource<Nft>> invoke({
     required String code,
     required String walletAddress,
   }) async {

@@ -9,7 +9,7 @@ class GetNftListUseCase {
   GetNftListUseCase(this._nftRepo);
 
   /// Get the list NFT token that own by the user
-  Future<Resource<ApiListResponse<Nft>>> invoke({
+  Future<PeppermintResource<ApiListResponse<Nft>>> invoke({
     required String walletAddress,
     required int page,
     String? status,
