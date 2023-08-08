@@ -1,4 +1,4 @@
-import 'package:example/api/api.dart';
+import 'package:example/api_v2/dio_client.dart';
 import 'package:example/demo_features/nft/nft_controller.dart';
 import 'package:get/get.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
@@ -8,7 +8,7 @@ class NftBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<NftRepo>(
       () => NftRepo(
-        walletClient: Get.put(WalletClient()),
+        walletClient: Get.put(DioClient()),
         errorHandler: ErrorHandlers(
             wrong: 'Something went wrong',
             forbidden: 'Forbidden request',
