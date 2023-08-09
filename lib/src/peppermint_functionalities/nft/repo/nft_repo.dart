@@ -1,19 +1,17 @@
-import 'package:get/get.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
-import 'package:peppermint_sdk/src/api/api_list_response.dart';
-import 'package:peppermint_sdk/src/api/api_response.dart';
+import 'package:dio/dio.dart';
 
 /// This class contains all the function
 /// to get data from the API.
 class NftRepo {
-  final GetConnect _getClient;
-  final ErrorHandlers _errorHandler;
+  final Dio _getClient;
+  final ErrorHandlers _errorHandlers;
 
   NftRepo({
     required walletClient,
     required errorHandler,
   })  : _getClient = walletClient,
-        _errorHandler = errorHandler;
+        _errorHandlers = errorHandler;
 
   String token = '/api/v2/tokens/';
   String exchange = '/api/v2/tokens/exchange/';
@@ -22,41 +20,39 @@ class NftRepo {
   /// will return list of NFT token.
   /// "status" parameter is an optional
   Future<PeppermintResource<ApiListResponse<Nft>>> getOwnedToken({
-    required String walletAddress,
+    required String? walletAddress,
     required int page,
     String? status,
   }) async {
-    Response response = await _getClient.get(
-      token,
-      query: {
-        'owner': walletAddress,
-        'page': '$page',
-        'status': status,
-      },
-    );
-    if (response.status.hasError) {
-      return _errorHandler.errorHandler(response).toResourceFailure();
+    try {
+      Response response = await _getClient.get(
+        token,
+        queryParameters: {
+          'owner': walletAddress,
+          'page': '$page',
+          'status': status,
+        },
+      );
+      ApiListResponse<Nft> res =
+          ApiListResponse.fromJson(response, (json) => Nft.fromJson(json));
+      return res.toResourceSuccess();
+    } on DioException catch (e) {
+      /// API Error
+      return _errorHandlers.errorHandler(e.response).toResourceFailure();
+    } catch (e) {
+      /// Model parsing error because API changed without notice.
+      return e.toString().toResourceFailure();
     }
-    ApiListResponse responses = ApiListResponse.fromResponse(response);
-    ApiListResponse<Nft> res = ApiListResponse.castResult(
-      responses,
-      responses.results.map((e) => Nft.fromJson(e)).toList(),
-    );
-    return res.toResourceSuccess();
   }
 
   /// get token(NFT) detail data by ID
-  Future<PeppermintResource<Nft>> getTokenDetail({
-    required String? id,
-  }) async {
-    Response response = await _getClient.get(
-      '$token$id/',
-    );
-    if (response.status.hasError) {
-      return _errorHandler.errorHandler(response).toResourceFailure();
+  Future<PeppermintResource<Nft>> getTokenDetail({String? id}) async {
+    try {
+      Response response = await _getClient.get('$token$id/');
+      return Nft.fromJson(response.data).toResourceSuccess();
+    } on DioException catch (e) {
+      return _errorHandlers.errorHandler(e.response).toResourceFailure();
     }
-    ApiResponse apiResonses = ApiResponse.fromResponse(response);
-    return Nft.fromJson(apiResonses.data).toResourceSuccess();
   }
 
   /// Exchange code from QR code scanned to NFT
@@ -65,17 +61,15 @@ class NftRepo {
     required String? code,
     required String? walletAddress,
   }) async {
-    Response response = await _getClient.post(
-      exchange,
-      {
+    try {
+      Response response = await _getClient.post(exchange, queryParameters: {
         'code': code,
         'owner': walletAddress,
-      },
-    );
-    if (response.status.hasError) {
-      return _errorHandler.errorHandler(response).toResourceFailure();
+      });
+      ApiResponse apiResonses = ApiResponse.fromResponse(response);
+      return Nft.fromJson(apiResonses.data).toResourceSuccess();
+    } on DioException catch (e) {
+      return _errorHandlers.errorHandler(e.response).toResourceFailure();
     }
-    ApiResponse apiResonses = ApiResponse.fromResponse(response);
-    return Nft.fromJson(apiResonses.data).toResourceSuccess();
   }
 }

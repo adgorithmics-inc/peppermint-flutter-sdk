@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:dio/dio.dart';
 
 class ApiResponse<T> {
   T? data;
@@ -13,10 +13,10 @@ class ApiResponse<T> {
 
   factory ApiResponse.fromResponse(Response res) {
     dynamic data;
-    if (res.body == null) {
+    if (res.data == null) {
       data = {};
     } else {
-      data = res.body;
+      data = res.data;
     }
 
     return ApiResponse(
@@ -32,5 +32,18 @@ class ApiResponse<T> {
       errorMsg: res.errorMsg,
       response: res.response,
     );
+  }
+
+  void setData(Response res) {
+    dynamic data;
+    if (res.data == null || res.data.isEmpty) {
+      data = {};
+    } else {
+      data = res.data;
+    }
+
+    this.data = data;
+    errorMsg = '';
+    response = res;
   }
 }

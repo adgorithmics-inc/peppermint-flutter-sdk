@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:dio/dio.dart';
 
 class ApiListResponse<T> {
   /// total data count wihout pagination
@@ -24,30 +24,21 @@ class ApiListResponse<T> {
     required this.response,
   });
 
-  factory ApiListResponse.fromResponse(Response res) {
+  factory ApiListResponse.fromJson(
+      Response res, T Function(dynamic json) fromJsonData) {
     dynamic data;
-    if (res.body == null) {
+    if (res.data == null) {
       data = {};
     } else {
-      data = res.body;
+      data = res.data;
     }
-
     return ApiListResponse(
       count: data['count'],
       hasNext: data['next'] != null,
-      results: data['results'],
+      results: (data['results'] as List<dynamic>)
+          .map((item) => fromJsonData(item))
+          .toList(),
       response: res,
-    );
-  }
-
-  /// shouldn't be called unless result success
-  factory ApiListResponse.castResult(ApiListResponse res, List<T> data) {
-    return ApiListResponse(
-      count: res.count,
-      hasNext: res.hasNext,
-      errorMsg: res.errorMsg,
-      results: data,
-      response: res.response,
     );
   }
 }

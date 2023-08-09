@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:dio/dio.dart';
 
 class ErrorHandlers {
   final String _wrong;
@@ -24,7 +24,7 @@ class ErrorHandlers {
     switch (response.statusCode) {
       case 400:
         final stringBuffer = StringBuffer();
-        var data = response.body;
+        var data = response.data;
         data.forEach((key, value) {
           if (key == 'non_field_errors') {
             stringBuffer.writeln(value[0]);
