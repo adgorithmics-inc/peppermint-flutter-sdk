@@ -5,13 +5,10 @@ import 'package:dio/dio.dart';
 /// to get data from the API.
 class NftRepo {
   final Dio _getClient;
-  final ErrorHandlers _errorHandlers;
 
   NftRepo({
     required walletClient,
-    required errorHandler,
-  })  : _getClient = walletClient,
-        _errorHandlers = errorHandler;
+  }) : _getClient = walletClient;
 
   String token = '/api/v2/tokens/';
   String exchange = '/api/v2/tokens/exchange/';
@@ -38,7 +35,7 @@ class NftRepo {
       return res.toResourceSuccess();
     } on DioException catch (e) {
       /// API Error
-      return _errorHandlers.errorHandler(e.response).toResourceFailure();
+      return e.errorMessage.toResourceFailure();
     } catch (e) {
       /// Model parsing error because API changed without notice.
       return e.toString().toResourceFailure();
@@ -51,7 +48,7 @@ class NftRepo {
       Response response = await _getClient.get('$token$id/');
       return Nft.fromJson(response.data).toResourceSuccess();
     } on DioException catch (e) {
-      return _errorHandlers.errorHandler(e.response).toResourceFailure();
+      return e.errorMessage.toResourceFailure();
     }
   }
 
@@ -69,7 +66,7 @@ class NftRepo {
       ApiResponse apiResonses = ApiResponse.fromResponse(response);
       return Nft.fromJson(apiResonses.data).toResourceSuccess();
     } on DioException catch (e) {
-      return _errorHandlers.errorHandler(e.response).toResourceFailure();
+      return e.errorMessage.toResourceFailure();
     }
   }
 }

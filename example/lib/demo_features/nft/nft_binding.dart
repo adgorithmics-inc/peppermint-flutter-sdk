@@ -9,11 +9,6 @@ class NftBinding extends Bindings {
     Get.lazyPut<NftRepo>(
       () => NftRepo(
         walletClient: DioClient(),
-        errorHandler: ErrorHandlers(
-            wrong: 'Something went wrong',
-            forbidden: 'Forbidden request',
-            doesntExist: 'Page does not exist',
-            underMaintenance: 'Feature is under maintenance'),
       ),
     );
     Get.lazyPut(() => GetNftListUseCase(Get.find()));
