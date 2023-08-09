@@ -1,46 +1,36 @@
 import 'package:dio/dio.dart';
 
-class ErrorHandlers {
-  final String _wrong;
-  final String _forbidden;
-  final String _doesntExist;
-  final String _underMaintenance;
-
-  ErrorHandlers(
-      {required String wrong,
-      required String forbidden,
-      required String doesntExist,
-      required String underMaintenance})
-      : _underMaintenance = underMaintenance,
-        _doesntExist = doesntExist,
-        _forbidden = forbidden,
-        _wrong = wrong;
-
-  String errorHandler(Response? response) {
-    if (response == null) {
-      return _wrong;
+extension ResponseExtension on DioException {
+  String get errorMessage {
+    String result = '';
+    if (type == DioExceptionType.connectionError) {
+      return "Connection error";
+    } else if (response != null) {
+      switch (response!.statusCode) {
+        case 400:
+          final stringBuffer = StringBuffer();
+          var data = response!.data;
+          data.forEach((key, value) {
+            if (key == 'non_field_errors') {
+              stringBuffer.writeln(value[0]);
+            } else {
+              stringBuffer.writeln('$value');
+            }
+          });
+          return stringBuffer.toString();
+        case 403:
+          return 'Forbidden request';
+        case 404:
+          return 'Seems like that page doesn\'t exist anymore';
+        case 500:
+          return 'Sorry, this service is under maintenance. You can try again later';
+        default:
+          return 'Something went wrong :( please try again later.';
+      }
+    } else {
+      /// Something happened in setting up or sending the request that triggered an Error
+      result = 'ERROR\n${requestOptions.uri.path.toString()}\n${toString()}';
     }
-
-    switch (response.statusCode) {
-      case 400:
-        final stringBuffer = StringBuffer();
-        var data = response.data;
-        data.forEach((key, value) {
-          if (key == 'non_field_errors') {
-            stringBuffer.writeln(value[0]);
-          } else {
-            stringBuffer.writeln('$value');
-          }
-        });
-        return stringBuffer.toString();
-      case 403:
-        return _forbidden;
-      case 404:
-        return _doesntExist;
-      case 500:
-        return _underMaintenance;
-      default:
-        return _wrong;
-    }
+    return result;
   }
 }
