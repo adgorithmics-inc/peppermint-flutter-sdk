@@ -8,7 +8,7 @@ class NftBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<NftRepo>(
       () => NftRepo(
-        walletClient: Get.put(DioClient()),
+        walletClient: DioClient(),
         errorHandler: ErrorHandlers(
             wrong: 'Something went wrong',
             forbidden: 'Forbidden request',
