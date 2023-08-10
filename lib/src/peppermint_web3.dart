@@ -92,8 +92,8 @@ class WalletManager {
     bool hasWallet = (await getPublicKey(key: key)) != null;
 
     if (!hasWallet) {
-      WalletKeys _walletKeys = await createWallet(key: key);
-      final walletAddress = _walletKeys.publicKey;
+      WalletKeys walletKeys = await createWallet(key: key);
+      final walletAddress = walletKeys.publicKey;
       onWalletCreated(walletAddress);
       if (!walletExist) onFirstWallet();
     } else {
@@ -132,5 +132,4 @@ class WalletManager {
   }
 
   /// Migrate null-key wallet to desired-key wallet and remove null-key wallet
-
 }

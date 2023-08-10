@@ -1,8 +1,13 @@
-import 'package:example/utilities_page.dart';
-import 'package:example/wallet_page.dart';
+import 'package:example/demo_features/nft/nft_binding.dart';
+import 'package:example/demo_features/nft/nft_detail_page.dart';
+import 'package:example/demo_features/nft/nft_list_view.dart';
+import 'package:example/demo_utilities/utilities_page.dart';
+import 'package:example/wallet_connect_page.dart';
+import 'package:example/demo_utilities/wallet_page.dart';
+import 'package:example/routes.dart';
 import 'package:example/widget/button.dart';
 import 'package:flutter/material.dart';
-import 'package:peppermint_sdk/peppermint_sdk.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +24,29 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const CreateWalletPage(),
+      getPages: [
+        GetPage(
+          name: Routes.main,
+          page: () => const CreateWalletPage(),
+        ),
+        GetPage(
+          name: Routes.utilities,
+          page: () => const UtilitiesPage(),
+        ),
+        GetPage(
+          name: Routes.widgets,
+          page: () => const WalletPage(),
+        ),
+        GetPage(
+          name: Routes.nftView,
+          page: () => const NftViewList(),
+          binding: NftBinding(),
+        ),
+        GetPage(
+          name: Routes.nftViewDetail,
+          page: () => const NftDetailPage(),
+        ),
+      ],
     );
   }
 }
@@ -48,19 +75,32 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             MyButton(
                 text: 'Utility Example Page',
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const UtilitiesPage()));
+                  Get.toNamed(Routes.utilities);
                 }),
             const SizedBox(height: 16.0),
             MyButton(
                 text: 'Wallet Example Page',
                 onTap: () {
+                  Get.toNamed(Routes.widgets);
+                }),
+            const SizedBox(height: 16.0),
+            MyButton(
+                text: 'Chatbot Example Page',
+                onTap: () {
+                  Get.toNamed(Routes.chatbot);
+                }),
+            MyButton(
+                text: 'Nft View Example Page',
+                onTap: () {
+                  Get.toNamed(Routes.nftView);
+                }),
+            MyButton(
+                text: 'Wallet Connect Example Page',
+                onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const WalletPage()));
+                          builder: (context) => const WalletConnectPage()));
                 }),
             const SizedBox(height: 16.0),
           ],

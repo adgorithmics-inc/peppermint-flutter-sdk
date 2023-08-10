@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:peppermint_sdk/src/widgets/loading.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -137,7 +140,8 @@ class ImageGram extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: SvgPicture.asset(
                   'assets/icons/cube.svg',
-                  color: Colors.white,
+                  colorFilter:
+                      const ColorFilter.mode(Colors.white, BlendMode.color),
                   width: isLeaderBoard3D ? 7.0 : 24.0,
                 ),
               ),
@@ -165,7 +169,7 @@ class VideoGram extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _VideoGramState createState() => _VideoGramState();
+  State<VideoGram> createState() => _VideoGramState();
 }
 
 class _VideoGramState extends State<VideoGram> {
@@ -186,7 +190,7 @@ class _VideoGramState extends State<VideoGram> {
       _controller = file != null
           ? VideoPlayerController.file(file!,
               videoPlayerOptions: VideoPlayerOptions(mixWithOthers: widget.mix))
-          : VideoPlayerController.network(widget.url!);
+          : VideoPlayerController.networkUrl(Uri.parse(widget.url!));
       _controller.setLooping(true);
       _initializeVideoPlayerFuture = _controller.initialize().then((_) async {
         await _controller.setVolume(mediaController.mute.value ? 0.0 : 100.0);
@@ -310,7 +314,7 @@ class AudioWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AudioWidgetState createState() => _AudioWidgetState();
+  State<AudioWidget> createState() => _AudioWidgetState();
 }
 
 class _AudioWidgetState extends State<AudioWidget> {

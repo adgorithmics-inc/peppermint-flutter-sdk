@@ -1,5 +1,5 @@
 import 'package:clipboard/clipboard.dart';
-import 'package:example/nft_view.dart';
+import 'package:example/demo_widgets/nft_view.dart';
 import 'package:example/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
