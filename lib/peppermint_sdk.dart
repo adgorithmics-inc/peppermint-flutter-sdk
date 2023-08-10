@@ -21,4 +21,3 @@ export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/excha
 export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/token_detail_usecase.dart';
 export 'package:peppermint_sdk/src/api/error_handler.dart';
 export 'package:peppermint_sdk/src/api/api_list_response.dart';
-export 'package:peppermint_sdk/src/api/api_response.dart';
