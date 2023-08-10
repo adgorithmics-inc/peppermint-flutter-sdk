@@ -16,7 +16,7 @@ class NftRepo {
   /// get token(NFT) list that own by the user.
   /// will return list of NFT token.
   /// "status" parameter is an optional
-  Future<PeppermintResource<ApiListResponse<Nft>>> getOwnedToken({
+  Future<PeppermintResource<PepperApiListResponse<Nft>>> getOwnedToken({
     required String? walletAddress,
     required int page,
     String? status,
@@ -30,8 +30,8 @@ class NftRepo {
           'status': status,
         },
       );
-      ApiListResponse<Nft> res =
-          ApiListResponse.fromJson(response, (json) => Nft.fromJson(json));
+      PepperApiListResponse<Nft> res = PepperApiListResponse.fromJson(
+          response, (json) => Nft.fromJson(json));
       return res.toResourceSuccess();
     } on DioException catch (e) {
       /// API Error
@@ -63,8 +63,7 @@ class NftRepo {
         'code': code,
         'owner': walletAddress,
       });
-      ApiResponse apiResonses = ApiResponse.fromResponse(response);
-      return Nft.fromJson(apiResonses.data).toResourceSuccess();
+      return Nft.fromJson(response.data).toResourceSuccess();
     } on DioException catch (e) {
       return e.errorMessage.toResourceFailure();
     }
