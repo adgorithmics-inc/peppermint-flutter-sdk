@@ -376,20 +376,6 @@ class _WalletConnectPageState extends State<WalletConnectPage> {
                 ),
                 label: 'Disconnect',
               ),
-            MenuItem(
-              onTap: () async {
-                String result =
-                    await Get.to(() => const WalletConnectScanView());
-                _attributes =
-                    _wcManager.connectNewSession(result, _attributes!);
-              },
-              image: const Icon(
-                Icons.qr_code_rounded,
-                color: Colors.blue,
-                size: 20.0,
-              ),
-              label: 'Connect via QR',
-            ),
           ],
         ),
       ),
@@ -435,35 +421,6 @@ class MenuItem extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class WalletConnectScanView extends StatefulWidget {
-  const WalletConnectScanView({Key? key}) : super(key: key);
-
-  @override
-  State<WalletConnectScanView> createState() => _WalletConnectScanViewState();
-}
-
-class _WalletConnectScanViewState extends State<WalletConnectScanView> {
-  String result = '';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Scanner')),
-      body: Center(
-        child: NFTScanner(onDetect: (barcode) async {
-          String value = '';
-          for (final item in barcode.barcodes) {
-            value = item.rawValue ?? '';
-          }
-          if (result == value) return;
-          result = value;
-          Get.back(result: result);
-        }),
       ),
     );
   }

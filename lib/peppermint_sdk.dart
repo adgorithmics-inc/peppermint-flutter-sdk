@@ -12,7 +12,6 @@ export 'src/peppermint_utility.dart';
 export 'src/peppermint_connect.dart';
 export 'src/widgets/image_loader.dart';
 export 'src/widgets/media/media_gram.dart';
-export 'src/widgets/nft_scanner.dart';
 export 'src/resource.dart';
 
 export 'package:peppermint_sdk/src/peppermint_functionalities/nft/repo/nft_repo.dart';
