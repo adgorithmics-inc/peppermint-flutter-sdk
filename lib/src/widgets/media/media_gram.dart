@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:peppermint_sdk/src/widgets/loading.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -197,9 +196,7 @@ class _VideoGramState extends State<VideoGram> {
         if (!widget.audible) await _controller.setVolume(0.0);
         setState(() {});
       }).onError((error, stackTrace) {
-        Sentry.captureEvent(SentryEvent(
-            culprit: 'Can not load video file',
-            message: SentryMessage('$error\n$stackTrace')));
+        Get.log(error.toString());
         return;
       });
     } catch (e) {

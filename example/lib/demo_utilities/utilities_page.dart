@@ -1,9 +1,6 @@
 import 'dart:io';
 import 'package:example/widget/button.dart';
-import 'package:example/widget/popup.dart';
-import 'package:example/widget/scanner_view.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
 /// Utilites page.
@@ -22,33 +19,6 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
   File? fileImage;
   File? fileVideo;
   TextEditingController controller = TextEditingController();
-
-  /// Scan QR from image uploaded.
-  _getQRFile() async {
-    QRResult result = await PeppermintUtility.getQRFile();
-    qrCode = result.result;
-    if (!result.success) {
-      Popup.error(result.result!);
-      qrCode = null;
-    }
-    setState(() {});
-  }
-
-  /// Launch Url via browser.
-  _launchBrowser() async {
-    bool result = await PeppermintUtility.launchBrowser(controller.text);
-    if (result != true) {
-      Popup.error('Could not launch ${controller.text}');
-    }
-  }
-
-  /// Scan QR using device camera.
-  /// for scan QR, try to call NFTScanner
-  /// you can open ScannerView to see the example
-  _scanQR() async {
-    scanResult = await Get.to(() => const ScannerView());
-    setState(() {});
-  }
 
   /// Upload image from camera
   /// You can set edit to false or true to apply the editor
@@ -100,11 +70,7 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              MyButton(text: 'Select QR', onTap: _getQRFile),
-              const SizedBox(height: 16.0),
               Text('Code of your QR file ${qrCode ?? ''}'),
-              const SizedBox(height: 16.0),
-              MyButton(text: 'Scan QR', onTap: _scanQR),
               const SizedBox(height: 16.0),
               Text('Scanner result ${scanResult ?? ''}'),
               const SizedBox(height: 16.0),
@@ -114,8 +80,6 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
                   hintText: 'insert url to launch here',
                 ),
               ),
-              const SizedBox(height: 16.0),
-              MyButton(text: 'Launch Url', onTap: _launchBrowser),
               const SizedBox(height: 16.0),
               Container(
                 padding: const EdgeInsets.all(8),

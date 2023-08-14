@@ -7,10 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:path/path.dart' as path;
-import 'package:peppermint_sdk/peppermint_sdk.dart';
 import 'package:peppermint_sdk/src/peppermint_constants.dart';
-import 'package:scan/scan.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'widgets/camera_view.dart';
 import 'widgets/photo_filters/image_editor.dart';
 
@@ -111,45 +108,6 @@ class PeppermintUtility {
       }
     }
     return file;
-  }
-
-  /// Scan QR from image uploaded.
-  static Future<QRResult> getQRFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.image,
-    );
-    if (result != null) {
-      String? value = await Scan.parse(result.files.single.path!);
-      if (value == null) {
-        return QRResult(
-            success: false,
-            result: 'We could not detect your QR in this image');
-      }
-      return QRResult(success: true, result: value);
-    }
-    return QRResult(success: true);
-  }
-
-  /// launch url via browser.
-  static launchBrowser(String url) async {
-    bool success = true;
-    if (!url.contains('http')) {
-      url = 'http://$url';
-    }
-    if (url.contains('facebook.com')) {
-      url = 'fb://facewebmodal/f?href=$url';
-    }
-    if (await canLaunchUrl(Uri.parse(url))) {
-      if (!await launchUrl(
-        Uri.parse(url),
-        mode: LaunchMode.externalApplication,
-      )) {
-        success = false;
-      }
-    } else {
-      success = false;
-    }
-    return success;
   }
 
   /// Generate random name for new contract.
