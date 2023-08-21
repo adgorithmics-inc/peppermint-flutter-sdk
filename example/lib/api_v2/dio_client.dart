@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 
 import 'package:dio/io.dart';
 import 'package:get/get.dart' as getx;
-import 'package:sentry_flutter/sentry_flutter.dart';
 // If in browser, import 'package:dio/browser.dart'.
 
 class DioClient extends DioForNative {
@@ -15,7 +14,6 @@ class DioClient extends DioForNative {
     interceptors.add(
       InterceptorsWrapper(
         onError: (DioException e, ErrorInterceptorHandler handler) {
-          reportError(e);
           return handler.next(e);
         },
         onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
@@ -26,16 +24,6 @@ class DioClient extends DioForNative {
               '${response.statusMessage}\n');
           return handler.next(response);
         },
-      ),
-    );
-  }
-
-  void reportError(DioException e) {
-    Sentry.captureEvent(
-      SentryEvent(
-        culprit:
-            'API ${e.requestOptions.uri.toString()}: ${e.response?.statusCode}',
-        message: SentryMessage('message: ${e.message}'),
       ),
     );
   }

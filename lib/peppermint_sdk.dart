@@ -12,7 +12,6 @@ export 'src/peppermint_utility.dart';
 export 'src/peppermint_connect.dart';
 export 'src/widgets/image_loader.dart';
 export 'src/widgets/media/media_gram.dart';
-export 'src/widgets/nft_scanner.dart';
 export 'src/resource.dart';
 
 export 'package:peppermint_sdk/src/peppermint_functionalities/nft/repo/nft_repo.dart';
@@ -21,4 +20,3 @@ export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/excha
 export 'package:peppermint_sdk/src/peppermint_functionalities/nft/usecases/token_detail_usecase.dart';
 export 'package:peppermint_sdk/src/api/error_handler.dart';
 export 'package:peppermint_sdk/src/api/api_list_response.dart';
-export 'package:peppermint_sdk/src/api/api_response.dart';

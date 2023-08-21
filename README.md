@@ -106,16 +106,6 @@ Utilities function:
 
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 
-// Scan QR from image uploaded.
-QRResult result = await PeppermintUtility.getQRFile();
-qrCode = result.result;
-
-//Launch Url via browser.
-bool result = await PeppermintUtility.launchBrowser('https://peppermintwallet.com/');
-
-// Scan QR using device camera.
-String? scanResult = await Get.to(() => const ScannerView());
-
 // Upload image from camera.
 // You can set edit to false or true to apply the editor
 File? file = await PeppermintUtility.getImageFromCamera(edit: true);

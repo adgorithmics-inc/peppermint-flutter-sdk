@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class ApiListResponse<T> {
+class PepperApiListResponse<T> {
   /// total data count wihout pagination
   int count;
 
@@ -15,7 +15,7 @@ class ApiListResponse<T> {
   /// original API response
   late Response response;
 
-  ApiListResponse({
+  PepperApiListResponse({
     this.count = 0,
     this.hasNext = false,
     haveError,
@@ -24,7 +24,7 @@ class ApiListResponse<T> {
     required this.response,
   });
 
-  factory ApiListResponse.fromJson(
+  factory PepperApiListResponse.fromJson(
       Response res, T Function(dynamic json) fromJsonData) {
     dynamic data;
     if (res.data == null) {
@@ -32,7 +32,7 @@ class ApiListResponse<T> {
     } else {
       data = res.data;
     }
-    return ApiListResponse(
+    return PepperApiListResponse(
       count: data['count'],
       hasNext: data['next'] != null,
       results: (data['results'] as List<dynamic>)
