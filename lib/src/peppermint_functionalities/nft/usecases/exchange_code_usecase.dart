@@ -22,11 +22,11 @@ class ExchangeCodeUseCase {
     );
 
     if (exchangeResult.hasError) {
-      return exchangeResult.error.toResourceFailure();
+      return exchangeResult.error.toPepperResourceFailure();
     }
     Nft data = exchangeResult.data;
     await _checkMintingStatus(data);
-    return data.toResourceSuccess();
+    return data.toPepperSourceSuccess();
   }
 
   Future<Nft> _checkMintingStatus(Nft data) async {
