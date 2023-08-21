@@ -106,7 +106,7 @@ class PepperSourceFailure<T1> extends PeppermintResource<T1> {
 
 extension ResourceExtensions<T1> on PeppermintResource<T1> {}
 
-extension ResourceDataExtensions<T1> on T1 {
+extension PepperSourceDataExtensions<T1> on T1 {
   /// helper method to convert data to a ResourceSuccess.
   PeppermintResource<T1> toResourceSuccess() {
     if (this is Error) {
