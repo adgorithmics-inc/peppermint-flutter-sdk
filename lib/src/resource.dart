@@ -80,7 +80,7 @@ abstract class PeppermintResource<T1> {
   /// limitations.
   PeppermintResource<OtherType> castFailure<OtherType>() {
     if (this is PepperSourceFailure<T1>) {
-      return getErrorOrThrow().toResourceFailure<OtherType>();
+      return getErrorOrThrow().toPepperResourceFailure<OtherType>();
     }
     throw "Cannot cast ResourceSuccess to another type";
   }
@@ -106,9 +106,9 @@ class PepperSourceFailure<T1> extends PeppermintResource<T1> {
 
 extension ResourceExtensions<T1> on PeppermintResource<T1> {}
 
-extension ResourceDataExtensions<T1> on T1 {
+extension PepperSourceDataExtensions<T1> on T1 {
   /// helper method to convert data to a ResourceSuccess.
-  PeppermintResource<T1> toResourceSuccess() {
+  PeppermintResource<T1> toPepperSourceSuccess() {
     if (this is Error) {
       throw "Cannot convert Error to ResourceSuccess; convert to ResourceFailure instead";
     }
@@ -123,7 +123,7 @@ extension ResourceDataExtensions<T1> on T1 {
 
 extension ResourceErrorExtensions on String {
   /// helper method to convert an exception to a ResourceFailure.
-  PeppermintResource<T1> toResourceFailure<T1>() {
+  PeppermintResource<T1> toPepperResourceFailure<T1>() {
     return PepperSourceFailure(this);
   }
 }

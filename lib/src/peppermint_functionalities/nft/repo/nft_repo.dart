@@ -32,13 +32,13 @@ class NftRepo {
       );
       PepperApiListResponse<Nft> res = PepperApiListResponse.fromJson(
           response, (json) => Nft.fromJson(json));
-      return res.toResourceSuccess();
+      return res.toPepperSourceSuccess();
     } on DioException catch (e) {
       /// API Error
-      return e.errorMessage.toResourceFailure();
+      return e.errorMessage.toPepperResourceFailure();
     } catch (e) {
       /// Model parsing error because API changed without notice.
-      return e.toString().toResourceFailure();
+      return e.toString().toPepperResourceFailure();
     }
   }
 
@@ -46,9 +46,9 @@ class NftRepo {
   Future<PeppermintResource<Nft>> getTokenDetail({String? id}) async {
     try {
       Response response = await _getClient.get('$token$id/');
-      return Nft.fromJson(response.data).toResourceSuccess();
+      return Nft.fromJson(response.data).toPepperSourceSuccess();
     } on DioException catch (e) {
-      return e.errorMessage.toResourceFailure();
+      return e.errorMessage.toPepperResourceFailure();
     }
   }
 
@@ -65,9 +65,9 @@ class NftRepo {
         'owner': walletAddress,
         'provenance': provenance,
       });
-      return Nft.fromJson(response.data).toResourceSuccess();
+      return Nft.fromJson(response.data).toPepperSourceSuccess();
     } on DioException catch (e) {
-      return e.errorMessage.toResourceFailure();
+      return e.errorMessage.toPepperResourceFailure();
     }
   }
 }
