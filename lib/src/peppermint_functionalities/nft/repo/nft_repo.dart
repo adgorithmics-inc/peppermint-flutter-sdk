@@ -1,5 +1,6 @@
 import 'package:peppermint_sdk/peppermint_sdk.dart';
 import 'package:dio/dio.dart';
+import 'package:peppermint_sdk/src/api/error_handler.dart';
 
 /// This class contains all the function
 /// to get data from the API.
