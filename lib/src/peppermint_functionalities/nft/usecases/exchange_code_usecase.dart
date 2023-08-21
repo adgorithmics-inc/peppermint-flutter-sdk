@@ -13,10 +13,12 @@ class ExchangeCodeUseCase {
   Future<PeppermintResource<Nft>> invoke({
     required String code,
     required String walletAddress,
+    required String? provenance,
   }) async {
     final exchangeResult = await _nftRepo.exchangeCodeToNft(
       code: code,
       walletAddress: walletAddress,
+      provenance: provenance,
     );
 
     if (exchangeResult.hasError) {

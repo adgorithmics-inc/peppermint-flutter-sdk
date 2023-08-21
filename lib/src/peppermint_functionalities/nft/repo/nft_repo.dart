@@ -57,11 +57,13 @@ class NftRepo {
   Future<PeppermintResource<Nft>> exchangeCodeToNft({
     required String? code,
     required String? walletAddress,
+    required String? provenance,
   }) async {
     try {
       Response response = await _getClient.post(exchange, queryParameters: {
         'code': code,
         'owner': walletAddress,
+        'provenance': provenance,
       });
       return Nft.fromJson(response.data).toResourceSuccess();
     } on DioException catch (e) {
