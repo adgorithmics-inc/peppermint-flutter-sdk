@@ -1,3 +1,10 @@
+## 2.0.3
+* Update contract & network model
+## 2.0.2
+
+* Rename toResourceSuccess into toPepperSourceSuccess.
+* Remove export ResponseExtension export from sdk.
+
 ## 2.0.1
 
 * Add provenance parameter in the exchange function on the nft repo and exchange use case.
