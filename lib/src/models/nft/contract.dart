@@ -1,28 +1,53 @@
+import 'network.dart';
+
 class Contract {
   Contract({
-    this.id,
-    this.address,
     this.name,
+    this.network,
+    this.address,
+    this.id,
+    this.status,
+    this.createdOn,
+    this.updatedOn,
+    this.thumbnail,
     this.type,
   });
 
   Contract.fromJson(dynamic json) {
-    id = json['id'];
-    address = json['address'];
     name = json['name'];
+    network =
+        json['network'] != null ? Network.fromJson(json['network']) : null;
+    address = json['address'];
+    id = json['id'];
+    status = json['status'];
+    createdOn = json['created_on'];
+    updatedOn = json['updated_on'];
+    thumbnail = json['thumbnail'];
     type = json['type'];
   }
-  String? id;
-  String? address;
+
   String? name;
+  Network? network;
+  String? address;
+  String? id;
+  String? status;
+  String? createdOn;
+  String? updatedOn;
   String? type;
+  dynamic thumbnail;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = id;
-    map['address'] = address;
     map['name'] = name;
-    map['type'] = type;
+    if (network != null) {
+      map['network'] = network?.toJson();
+    }
+    map['address'] = address;
+    map['id'] = id;
+    map['status'] = status;
+    map['created_on'] = createdOn;
+    map['updated_on'] = updatedOn;
+    map['thumbnail'] = thumbnail;
     return map;
   }
 }

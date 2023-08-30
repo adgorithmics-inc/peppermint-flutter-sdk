@@ -2,6 +2,7 @@ class Network {
   Network({
     this.id,
     this.name,
+    this.thumbnail,
   });
 
   Network.fromJson(dynamic json) {
@@ -9,6 +10,7 @@ class Network {
     name = json['name'];
     thumbnail = json['thumbnail'];
   }
+
   String? id;
   String? name;
   String? thumbnail;
@@ -17,6 +19,7 @@ class Network {
     final map = <String, dynamic>{};
     map['id'] = id;
     map['name'] = name;
+    map['thumbnail'] = thumbnail;
     return map;
   }
 }

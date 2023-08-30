@@ -1,3 +1,5 @@
+## 2.0.3
+* Update contract & network model
 ## 2.0.2
 
 * Rename toResourceSuccess into toPepperSourceSuccess.
