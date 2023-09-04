@@ -14,7 +14,12 @@ class NftViewList extends GetView<NftController> {
     return Scaffold(
       appBar: AppBar(),
       body: GetBuilder(
-        builder: (NftController nftController) {
+        builder: (NftController controller) {
+          if (controller.loading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           return Padding(
             padding: const EdgeInsets.all(20),
             child: ListView.separated(
@@ -23,15 +28,15 @@ class NftViewList extends GetView<NftController> {
               itemBuilder: (context, index) {
                 return Column(
                   children: [
-                    MediaGram(data: nftController.listNft[index]),
+                    MediaGram(data: controller.listNft[index]),
                     const SizedBox(
                       height: 10,
                     ),
                     MyButton(
                       text: "Launch Nft",
                       onTap: () {
-                        nftController
-                            .getTokenDetail(nftController.listNft[index].id!);
+                        controller
+                            .getTokenDetail(controller.listNft[index].id!);
                       },
                     )
                   ],

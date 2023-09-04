@@ -1,3 +1,6 @@
+## 2.0.4
+* Null safety on MediaGram
+
 ## 2.0.3
 * Update contract & network model
 ## 2.0.2

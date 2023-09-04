@@ -49,17 +49,18 @@ class MediaGram extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(MediaController());
-    if (grid) {
+    if (grid || data?.media == null) {
       String? url =
           data?.media?.thumbnail != null && data?.media?.thumbnail != ''
               ? data?.media?.thumbnail
               : data?.render;
       return ImageGram(
         url,
-        (data?.media!.fileType == '3d' || fileType == '3d'),
+        (data?.media?.fileType == '3d' || fileType == '3d'),
         isLeaderBoard3D: isLeaderBoard,
       );
     }
+
     if (data?.media!.fileType == 'video' || fileType == 'video') {
       return VideoGram(
         url: data?.media?.fileUrl,
@@ -142,6 +143,7 @@ class ImageGram extends StatelessWidget {
                   colorFilter:
                       const ColorFilter.mode(Colors.white, BlendMode.color),
                   width: isLeaderBoard3D ? 7.0 : 24.0,
+                  package: 'peppermint_sdk',
                 ),
               ),
             ),
@@ -172,8 +174,8 @@ class VideoGram extends StatefulWidget {
 }
 
 class _VideoGramState extends State<VideoGram> {
-  late VideoPlayerController _controller;
-  late Future<void> _initializeVideoPlayerFuture;
+  VideoPlayerController? _controller;
+  Future<void>? _initializeVideoPlayerFuture;
   MediaController mediaController = Get.find<MediaController>();
   File? file;
 
@@ -190,11 +192,11 @@ class _VideoGramState extends State<VideoGram> {
           ? VideoPlayerController.file(file!,
               videoPlayerOptions: VideoPlayerOptions(mixWithOthers: widget.mix))
           : VideoPlayerController.networkUrl(Uri.parse(widget.url!));
-      _controller.setLooping(true);
-      _initializeVideoPlayerFuture = _controller.initialize().then((_) async {
-        await _controller.setVolume(mediaController.mute.value ? 0.0 : 100.0);
-        if (!widget.audible) await _controller.setVolume(0.0);
-        setState(() {});
+      _controller?.setLooping(true);
+      _initializeVideoPlayerFuture = _controller?.initialize().then((_) async {
+        await _controller?.setVolume(mediaController.mute.value ? 0.0 : 100.0);
+        if (!widget.audible) await _controller?.setVolume(0.0);
+        if (mounted) setState(() {});
       }).onError((error, stackTrace) {
         Get.log(error.toString());
         return;
@@ -206,13 +208,13 @@ class _VideoGramState extends State<VideoGram> {
   }
 
   muteUnmute() async {
-    await _controller.setVolume(mediaController.mute.value ? 0.0 : 100.0);
-    if (!widget.audible) await _controller.setVolume(0.0);
+    await _controller?.setVolume(mediaController.mute.value ? 0.0 : 100.0);
+    if (!widget.audible) await _controller?.setVolume(0.0);
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -221,17 +223,25 @@ class _VideoGramState extends State<VideoGram> {
     return FutureBuilder(
       future: _initializeVideoPlayerFuture,
       builder: (context, snapshot) {
-        double ratio =
-            _controller.value.size.width / _controller.value.size.height;
+        if (snapshot.connectionState == ConnectionState.none) {
+          return const VImageLoader();
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
         if (snapshot.connectionState == ConnectionState.done) {
+          double ratio =
+              _controller!.value.size.width / _controller!.value.size.height;
+
           return VisibilityDetector(
             key: ObjectKey(_controller),
             onVisibilityChanged: (visiblityInfo) {
               if (visiblityInfo.visibleFraction >= 0.85) {
-                _controller.play();
+                _controller?.play();
               }
               if (visiblityInfo.visibleFraction < 0.85 && mounted) {
-                _controller.pause();
+                _controller?.pause();
               }
             },
             child: Container(
@@ -245,11 +255,14 @@ class _VideoGramState extends State<VideoGram> {
                     child: ratio.isNaN
                         ? AspectRatio(
                             aspectRatio: 1.0,
-                            child: Lottie.asset('assets/lottie/music.json'),
+                            child: Lottie.asset(
+                              'assets/lottie/music.json',
+                              package: 'peppermint_sdk',
+                            ),
                           )
                         : AspectRatio(
                             aspectRatio: ratio,
-                            child: VideoPlayer(_controller),
+                            child: VideoPlayer(_controller!),
                           ),
                   ),
                   if (widget.audible)
@@ -258,7 +271,7 @@ class _VideoGramState extends State<VideoGram> {
                       child: InkWell(
                         onTap: () async {
                           mediaController.toggleMute(callback: () async {
-                            await _controller.setVolume(
+                            await _controller?.setVolume(
                                 mediaController.mute.value ? 0.0 : 100.0);
                           });
                         },
@@ -326,21 +339,27 @@ class _AudioWidgetState extends State<AudioWidget> {
     mute = controller.mute.value;
     _controller = AudioPlayer();
     if (widget.audible) {
-      widget.file != null
-          ? _controller.setSourceDeviceFile(widget.file!.path)
-          : _controller.setSourceUrl(widget.data!.media!.fileUrl!);
+      if (widget.file != null) {
+        _controller.setSourceDeviceFile(widget.file!.path);
+      } else if (widget.data?.media?.fileUrl != null) {
+        _controller.setSourceUrl(widget.data!.media!.fileUrl!);
+      }
       _controller.setVolume(controller.mute.value ? 0.0 : 1.0);
     }
     _controller.setReleaseMode(ReleaseMode.loop);
     _controller.onPositionChanged.listen((event) {
-      setState(() {
-        _seek = event;
-      });
+      if (mounted) {
+        setState(() {
+          _seek = event;
+        });
+      }
     });
     _controller.onDurationChanged.listen((event) {
-      setState(() {
-        _seek = event;
-      });
+      if (mounted) {
+        setState(() {
+          _seek = event;
+        });
+      }
     });
   }
 
@@ -353,7 +372,7 @@ class _AudioWidgetState extends State<AudioWidget> {
   muteUnmute() async {
     _controller.setVolume(controller.mute.value ? 0.0 : 1.0);
     mute = controller.mute.value;
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   @override
