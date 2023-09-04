@@ -54,6 +54,7 @@ class VImageLoader extends StatelessWidget {
                 fit: BoxFit.fitHeight,
                 width: width,
                 height: height,
+                package: 'peppermint_sdk',
               ),
               if (errorText != null)
                 Center(
@@ -84,6 +85,7 @@ class VImageLoader extends StatelessWidget {
         fit: boxFit,
         height: height,
         width: width,
+        package: 'peppermint_sdk',
       );
     }
     return returnImg;

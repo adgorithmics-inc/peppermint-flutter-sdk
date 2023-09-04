@@ -89,11 +89,13 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
                 onTap: () {
                   Get.toNamed(Routes.chatbot);
                 }),
+            const SizedBox(height: 16.0),
             MyButton(
                 text: 'Nft View Example Page',
                 onTap: () {
                   Get.toNamed(Routes.nftView);
                 }),
+            const SizedBox(height: 16.0),
             MyButton(
                 text: 'Wallet Connect Example Page',
                 onTap: () {
