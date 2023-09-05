@@ -8,43 +8,23 @@ class NftController extends BaseListController {
   final GetNftListUseCase _getNftListUseCase;
   final TokenDetailUsecase _tokenDetailUsecase;
 
-  final WalletManager _manager;
-
   NftController(
       {required GetNftListUseCase getNftListUseCase,
       required WalletManager walletManager,
       required TokenDetailUsecase launchNftUseCase})
       : _getNftListUseCase = getNftListUseCase,
-        _tokenDetailUsecase = launchNftUseCase,
-        _manager = walletManager;
+        _tokenDetailUsecase = launchNftUseCase;
 
   List<Nft> listNft = [];
-  String? walletAddress;
   Nft? detailData;
 
-  /// get user wallet address by key
-  /// before use it to get NFT list data.
-  init() async {
-    loading = true;
-    await _manager.initWallet(
-      (addressWallet) {
-        walletAddress = addressWallet;
-      },
-      key: 'test1@example.com',
-      onFirstWallet: () {},
-    );
-    getData();
-  }
-
-  /// Wallet address is marked as not nullable,
-  /// because the condition is handled beforehand.
   @override
   void getData() async {
     loading = true;
     error = '';
     final resource = await _getNftListUseCase.invoke(
       page: page,
-      walletAddress: walletAddress!,
+      walletAddress: '0x9A999E71C7F430bfE5b970326C200540ab25d525',
       status: 'minted, pending',
     );
 
@@ -81,7 +61,7 @@ class NftController extends BaseListController {
 
   @override
   void onInit() {
-    init();
+    getData();
     super.onInit();
   }
 }
